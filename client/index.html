@@ -78,10 +78,13 @@
       <script src="bower_components/lodash/dist/lodash.compat.js"></script>
       <script src="bower_components/angular-socket-io/socket.js"></script>
       <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+      <script src="bower_components/angular-gettext/dist/angular-gettext.js"></script>
       <!-- endbower -->
     <!-- endbuild -->
     <!-- build:js({.tmp,client}) app/app.js -->
       <script src="app/app.js"></script>
+      <script src="components/translation/sg.translation.module.js"></script>
+      <script src="components/translation/sg.translation.js"></script>
       <!-- injector:js -->
       <script src="app/account/account.js"></script>
       <script src="app/account/login/login.controller.js"></script>
@@ -100,6 +103,7 @@
       <script src="components/auth/user.service.js"></script>
       <script src="components/mongoose-error/mongoose-error.directive.js"></script>
       <script src="components/navbar/navbar.controller.js"></script>
+      <script src="components/sgHttpInterceptor/sgHttpInterceptor.factory.js"></script>
       <script src="components/socket/socket.service.js"></script>
       <!-- endinjector -->
     <!-- endbuild -->

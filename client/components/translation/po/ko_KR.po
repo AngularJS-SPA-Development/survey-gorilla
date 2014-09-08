@@ -1,0 +1,61 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: SurvyeGorilla\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ko_KR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.6.9\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: client/app/main/main.html
+msgid "'Allo, 'Allo!"
+msgstr "하이루, 하이루"
+
+#: client/app/main/main.html
+msgid "Add New"
+msgstr "신규 추가"
+
+#: client/app/main/main.html
+msgid "Add a new thing here."
+msgstr "새로운 것을 여기에 추가하세요."
+
+#: client/components/navbar/navbar.html
+msgid "Admin"
+msgstr "관리자"
+
+#: client/app/main/main.html
+msgid "Features:"
+msgstr "제공기능:"
+
+#: client/app/main/main.html
+msgid "I am Yeoman"
+msgstr "나는 요맨이다"
+
+#: client/app/main/main.html
+msgid "Kick-start your next web app with Angular Fullstack"
+msgstr "Angular Fullstack으로 차세대 애플리케이션을 시작해 보자"
+
+#: client/components/navbar/navbar.html
+msgid "Login"
+msgstr "로그인"
+
+#: client/components/navbar/navbar.html
+msgid "Logout"
+msgstr "로그아웃"
+
+#: client/components/navbar/navbar.html
+msgid "Sign up"
+msgstr "사용자 등록"
+
+#: client/app/main/main.html
+msgid "Syncs in realtime across clients"
+msgstr "클라이언트간에 실시간 업데이트 수행"
+
+#: client/components/navbar/navbar.html
+msgid "survey-gorilla"
+msgstr "서베이 고릴라"

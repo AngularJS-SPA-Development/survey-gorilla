@@ -15,7 +15,9 @@ module.exports = function (grunt) {
     ngtemplates: 'grunt-angular-templates',
     cdnify: 'grunt-google-cdn',
     protractor: 'grunt-protractor-runner',
-    injector: 'grunt-asset-injector'
+    injector: 'grunt-asset-injector',
+    nggettext_extract: 'grunt-angular-gettext',
+    nggettext_compile: 'grunt-angular-gettext'
   });
 
   // Time how long tasks take. Can help when optimizing build times
@@ -55,6 +57,7 @@ module.exports = function (grunt) {
       injectJS: {
         files: [
           '<%= yeoman.client %>/{app,components}/**/*.js',
+          '!<%= yeoman.client %>/components/translation/*.js',
           '!<%= yeoman.client %>/{app,components}/**/*.spec.js',
           '!<%= yeoman.client %>/{app,components}/**/*.mock.js',
           '!<%= yeoman.client %>/app/app.js'],
@@ -434,6 +437,7 @@ module.exports = function (grunt) {
         files: {
           '<%= yeoman.client %>/index.html': [
               ['{.tmp,<%= yeoman.client %>}/{app,components}/**/*.js',
+               '!<%= yeoman.client %>/components/translation/*.js',
                '!{.tmp,<%= yeoman.client %>}/app/app.js',
                '!{.tmp,<%= yeoman.client %>}/{app,components}/**/*.spec.js',
                '!{.tmp,<%= yeoman.client %>}/{app,components}/**/*.mock.js']
@@ -459,7 +463,30 @@ module.exports = function (grunt) {
           ]
         }
       }
+    }, 
+
+    // angular-gettext to extract pot, compile po
+    nggettext_extract: {
+      pot: {
+        files: {
+          'client/components/translation/po/origin_template.pot': [
+            'client/index.html',
+            'client/app/**/*.html',
+            'client/components/navbar/*.html'
+          ]
+        }
+      },
     },
+    nggettext_compile: {
+      all: {
+        options: {
+          module: 'sg.translation'
+        },
+        files: {
+          'client/components/translation/sg.translation.js': ['client/components/translation/po/*.po']
+        }
+      },
+    }
   });
 
   // Used for delaying livereload until after server has restarted

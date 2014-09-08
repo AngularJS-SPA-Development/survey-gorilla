@@ -1,0 +1,52 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: client/app/main/main.html
+msgid "'Allo, 'Allo!"
+msgstr ""
+
+#: client/app/main/main.html
+msgid "Add New"
+msgstr ""
+
+#: client/app/main/main.html
+msgid "Add a new thing here."
+msgstr ""
+
+#: client/components/navbar/navbar.html
+msgid "Admin"
+msgstr ""
+
+#: client/app/main/main.html
+msgid "Features:"
+msgstr ""
+
+#: client/app/main/main.html
+msgid "I am Yeoman"
+msgstr ""
+
+#: client/app/main/main.html
+msgid "Kick-start your next web app with Angular Fullstack"
+msgstr ""
+
+#: client/components/navbar/navbar.html
+msgid "Login"
+msgstr ""
+
+#: client/components/navbar/navbar.html
+msgid "Logout"
+msgstr ""
+
+#: client/components/navbar/navbar.html
+msgid "Sign up"
+msgstr ""
+
+#: client/app/main/main.html
+msgid "Syncs in realtime across clients"
+msgstr ""
+
+#: client/components/navbar/navbar.html
+msgid "survey-gorilla"
+msgstr ""
