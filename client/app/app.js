@@ -11,7 +11,8 @@
 		  'ui.router',
 		  'ui.bootstrap',
       'gettext',
-      'sg.translation'
+      'sg.translation',
+      'sg.message'
 		])
     .config(config)
     .factory('authInterceptor', authInterceptor)
