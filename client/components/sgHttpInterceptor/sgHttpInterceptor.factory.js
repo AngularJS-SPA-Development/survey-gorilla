@@ -6,7 +6,7 @@
     .factory('sgHttpInterceptor', Sghttpinterceptor);
 
   /* @ngInject */
-  function Sghttpinterceptor($q) {
+  function Sghttpinterceptor($q, sgAlert) {
     
     return {
       'request': request,
@@ -29,8 +29,8 @@
 
     function responseError(rejection) {
       var msg = httpType(rejection.status);
-      // popup messeage window like noty
-      // multi-language setup
+      sgAlert.error(msg.value, msg.code);
+
       return $q.reject(rejection);
     }
 
@@ -39,27 +39,27 @@
       if(status === 400) {
         msg = { 
           code : 'BAD_REQUEST',
-          txt : 'You send a Bad Request. send the right thing.'
+          value : 'You send a Bad Request. send the right thing.'
         };
       } else if(status === 401) {
         msg = { 
           code : 'UNAUTHORIZED',
-          txt : 'Login Required. Or Your login info is expired.'
+          value : 'Login Required. Or Your login info is expired.'
         };
       } else if(status === 403) {
         msg = { 
           code : 'FORBIDDEN',
-          txt : 'Your Authorized is forbidden. Request the autorization to administrator.'
+          value : 'Your Authorized is forbidden. Request the autorization to administrator.'
         };
       } else if(status === 404) {
         msg = { 
           code : 'NOT_FOUND',
-          txt : 'Not found the content.'
+          value : 'Not found the content.'
         };
       } else if(status === 500) {
         msg = { 
           code : 'SERVER_ERROR',
-          txt : 'Internal Server Error'
+          value : 'Internal Server Error'
         };
       }
 

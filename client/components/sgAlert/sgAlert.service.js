@@ -23,10 +23,10 @@
       alerting('error', msg, err);
     };
 
-    function getMessage(type, msg, err) {
+    function alerting(type, msg, err) {
       msg = gettextCatalog.getString(msg);
 
-      var nt = $.noty({
+      var nt = noty({
           text: msg
         , type: type
         , layout: 'top'
@@ -35,7 +35,7 @@
       if(nt) {
         $timeout(function() {
           nt.close();
-        }, 2000);
+        }, 200000);
       }
 
       if(err) {

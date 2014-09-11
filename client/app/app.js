@@ -24,6 +24,7 @@
       .otherwise('/');
 
     $httpProvider.interceptors.push('authInterceptor');
+    $httpProvider.interceptors.push('sgHttpInterceptor');
   }
 
   /* @ngInject */
