@@ -17,7 +17,10 @@
     "font-awesome": ">=4.1.0",
     "lodash": "~2.4.1",
     "angular-socket-io": "~0.6.0",
-    "angular-ui-router": "~0.2.10"
+    "angular-ui-router": "~0.2.10",
+    "angular-gettext": "~1.1.0",
+    "noty": "2.2.6",
+    "bowser": "~0.7.1"
   },
   "devDependencies": {
     "angular-mocks": ">=1.2.*",
