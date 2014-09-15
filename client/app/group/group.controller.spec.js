@@ -1,18 +1,18 @@
 'use strict';
 
-describe('Controller: GroupCtrl', function () {
+describe('Controller: GroupListCtrl', function () {
 
   // load the controller's module
   beforeEach(module('surveyGorillaApp'));
 
-  var GroupCtrl, scope;
+  var GroupListCtrl, scope;
 
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope) {
     scope = $rootScope.$new();
-    GroupCtrl = $controller('GroupCtrl', {
-      $scope: scope
-    });
+    // GroupListCtrl = $controller('GroupListCtrl', {
+    //   $scope: scope
+    // });
   }));
 
   it('should ...', function () {

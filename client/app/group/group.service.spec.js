@@ -7,8 +7,8 @@ describe('Service: group', function () {
 
   // instantiate service
   var group;
-  beforeEach(inject(function (_group_) {
-    group = _group_;
+  beforeEach(inject(function (_groupSvc_) {
+    group = _groupSvc_;
   }));
 
   it('should do something', function () {
