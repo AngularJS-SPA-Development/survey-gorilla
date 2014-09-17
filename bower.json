@@ -21,7 +21,9 @@
     "noty": "2.2.6",
     "bowser": "~0.7.1",
     "angular-gettext-sg": "~0.0.2",
-    "jstorage": "~0.4.12"
+    "jstorage": "~0.4.12",
+    "numeral": "~1.5.3",
+    "moment": "~2.8.3"
   },
   "devDependencies": {
     "angular-mocks": ">=1.2.*",
