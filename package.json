@@ -69,7 +69,7 @@
     "karma-firefox-launcher": "~0.1.3",
     "karma-html2js-preprocessor": "~0.1.0",
     "karma-jade-preprocessor": "0.0.11",
-    "karma-jasmine": "~0.1.5",
+    "karma-jasmine": "^0.2.2",
     "karma-ng-html2js-preprocessor": "~0.1.0",
     "karma-ng-jade2js-preprocessor": "^0.1.2",
     "karma-ng-scenario": "~0.1.0",
