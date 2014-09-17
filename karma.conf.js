@@ -26,6 +26,8 @@ module.exports = function(config) {
       'client/bower_components/noty/js/noty/jquery.noty.js',
       'client/bower_components/jstorage/jstorage.js',
       'client/bower_components/bowser/bowser.js',
+      'client/bower_components/numeral/numeral.js',
+      'client/bower_components/moment/moment.js',
       'client/components/message/sg.message.module.js',
       'client/components/translation/sg.translation.module.js',
       'client/app/app.js',
