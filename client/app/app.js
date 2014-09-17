@@ -9,7 +9,10 @@
 		  'ngSanitize',
 		  'btford.socket-io',
 		  'ui.router',
-		  'ui.bootstrap'
+		  'ui.bootstrap',
+      'gettext',
+      'sg.translation',
+      'sg.message'
 		])
     .config(config)
     .factory('authInterceptor', authInterceptor)
@@ -21,10 +24,22 @@
       .otherwise('/');
 
     $httpProvider.interceptors.push('authInterceptor');
+    $httpProvider.interceptors.push('sgHttpInterceptor');
   }
 
   /* @ngInject */
-  function run($rootScope, $location, Auth) {
+  function run($rootScope, $location, Auth, gettextCatalog) {
+    // gettext
+    $rootScope.setLang = function(lang) {
+      if(lang) {
+        gettextCatalog.currentLanguage = lang;
+      } else {
+        gettextCatalog.currentLanguage = 'ko_KR';
+      }
+    }
+
+    $rootScope.setLang();
+
     // Redirect to login if route requires auth and you're not logged in
     $rootScope.$on('$stateChangeStart', function (event, next) {
       Auth.isLoggedInAsync(function(loggedIn) {

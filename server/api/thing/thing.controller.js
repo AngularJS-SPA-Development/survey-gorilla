@@ -17,6 +17,7 @@ exports.index = function(req, res) {
   Thing.find(function (err, things) {
     if(err) { return handleError(res, err); }
     return res.json(200, things);
+    //return res.send(404);
   });
 };
 

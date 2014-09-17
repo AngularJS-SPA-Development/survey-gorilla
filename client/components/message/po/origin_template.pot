@@ -1,0 +1,44 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: client/components/message/message.html
+msgid "Internal Server Error"
+msgstr ""
+
+#: client/components/message/message.html
+msgid "Login Fail"
+msgstr ""
+
+#: client/components/message/message.html
+msgid "Login Required. Or Your login info is expired."
+msgstr ""
+
+#: client/components/message/message.html
+msgid "Login Success"
+msgstr ""
+
+#: client/components/message/message.html
+msgid "Not found the content."
+msgstr ""
+
+#: client/components/message/message.html
+msgid "Signup Fail"
+msgstr ""
+
+#: client/components/message/message.html
+msgid "Signup Success"
+msgstr ""
+
+#: client/components/message/message.html
+msgid "User Email Duplicated"
+msgstr ""
+
+#: client/components/message/message.html
+msgid "You send a Bad Request. send the right thing."
+msgstr ""
+
+#: client/components/message/message.html
+msgid "Your Authorized is forbidden. Request the autorization to administrator."
+msgstr ""
