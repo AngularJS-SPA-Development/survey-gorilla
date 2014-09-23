@@ -22,11 +22,10 @@
           password: $scope.user.password
         })
         .then( function() {
-          // Logged in, redirect to home
           $location.path('/');
         })
         .catch( function(err) {
-          $scope.errors.other = err.message;
+          console.log('login.controller.js : login error is ', err.message);
         });
       }
     };

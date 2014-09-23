@@ -7,9 +7,9 @@
     .factory('Auth', Auth);
 
   /* @ngInject */
-  function Auth($location, $rootScope, $http, User, $cookieStore, $q) {
+  function Auth($location, $rootScope, $http, User, storageService, $q) {
     var currentUser = {};
-    if($cookieStore.get('token')) {
+    if(storageService.get('token')) {
       currentUser = User.get();
     }
 
@@ -90,7 +90,13 @@
         password: user.password
       }).
       success(function(data) {
-        $cookieStore.put('token', data.token);
+        // 기존 코드 
+        // $cookieStore.put('token', data.token);
+
+        // 변경 코드 
+        storageService.put('token', data.token);
+
+        // 사용자 정보 가져와 currentUser에 저장 
         currentUser = User.get();
         deferred.resolve(data);
         return cb();
@@ -105,7 +111,7 @@
     };
 
     function logout() {
-      $cookieStore.remove('token');
+      storageService.remove('token');
       currentUser = {};
     };
 
@@ -114,7 +120,7 @@
 
       return User.save(user,
         function(data) {
-          $cookieStore.put('token', data.token);
+          storageService.put('token', data.token);
           currentUser = User.get();
           return cb(user);
         },
@@ -164,7 +170,7 @@
     }
 
     function getToken() {
-      return $cookieStore.get('token');
+      return storageService.get('token');
     }
 
   }
