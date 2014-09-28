@@ -29,6 +29,9 @@
 
     function responseError(rejection) {
       var msg = httpType(rejection.status);
+      if(rejection.data.message) {
+        msg.value = rejection.data.message;
+      }
       sgAlert.error(msg.value, msg.code);
 
       return $q.reject(rejection);

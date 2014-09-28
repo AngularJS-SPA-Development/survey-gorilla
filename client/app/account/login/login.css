@@ -1,23 +1,77 @@
-.btn-facebook {
-  color: #fff;
-  background-color: #3B5998;
-  border-color: #133783;
+.form-signin {
+  max-width: 400px; 
+  display:block;
+  background-color: #f7f7f7;
+  -moz-box-shadow: 0 0 3px 3px #888;
+    -webkit-box-shadow: 0 0 3px 3px #888;
+  box-shadow: 0 0 3px 3px #888;
+  border-radius:2px;
 }
-
-.btn-twitter {
-  color: #fff;
-  background-color: #2daddc;
-  border-color: #0271bf;
+.main{
+  padding-top: 28px;
+  padding-right: 28px;
+  padding-left: 28px;
+  padding-bottom: 20px;
 }
-
-.btn-google-plus {
-  color: #fff;
-  background-color: #dd4b39;
-  border-color: #c53727;
+.social-box{
+  margin: 0 auto;
+  padding: 28px;
+  border-bottom:1px #ccc solid;
 }
-
-.btn-github {
-  color: #fff;
-  background-color: #fafafa;
-  border-color: #ccc;
+.social-box a{
+  font-weight:bold;
+  font-size:18px;
+  padding:8px;
+}
+.social-box a i{
+  font-weight:bold;
+  font-size:20px;
+}
+.heading-desc{
+  font-size:20px;
+  font-weight:bold;
+  padding:38px 38px 0px 38px;
+  
+}
+.form-signin .form-signin-heading,
+.form-signin .checkbox {
+  margin-bottom: 10px;
+}
+.form-signin .checkbox {
+  font-weight: normal;
+}
+.form-signin .form-control {
+  position: relative;
+  font-size: 16px;
+  height: 20px;
+  padding: 20px;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+.form-signin .form-control:focus {
+  z-index: 2;
+}
+.form-signin input[type="text"] {
+  margin-bottom: 10px;
+  border-radius: 5px;
+  
+}
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+.login-footer{
+  background:#f0f0f0;
+  margin: 0 auto;
+  border-top: 1px solid #dadada;
+  padding:20px;
+}
+.login-footer .left-section a{
+  font-weight:bold;
+  color:#8a8a8a;
+  line-height:19px;
+}
+.mg-btm{
+  margin-bottom:20px;
 }
