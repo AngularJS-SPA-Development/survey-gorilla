@@ -17,21 +17,25 @@
         <div class="social-box">
           <div class="row mg-btm">
             <div class="col-md-12">
-              <a href="/auth/facebook" class="btn btn-primary btn-block">
+              <a href="" 
+                 ng-click="loginOauth('facebook')"
+                 class="btn btn-info btn-block">
                 <i class="icon-facebook"></i>  Login with Facebook
               </a>
             </div>
           </div>
           <div class="row">
             <div class="col-md-12">
-              <a href="/auth/twitter" class="btn btn-info btn-block" >
+              <a ref="" 
+                 ng-click="loginOauth('twitter')"
+                 class="btn btn-primary btn-block" >
                 <i class="icon-twitter"></i>  Login with Twitter
               </a>
             </div>
           </div>
         </div>
 
-        <div class="main">  
+        <div class="main">
           <div class="form-group" 
                ng-class="{'has-error': form.email.$invalid 
                                     && !form.email.$pristine}">
@@ -40,8 +44,8 @@
                    class="form-control" 
                    ng-model="user.email" 
                    placeholder="Email" 
-                   required 
-                   autofocus>
+                   required
+                   mongoose-error>
           </div>
 
           <div class="form-group" 
@@ -63,7 +67,7 @@
 
             <div class="col-xs-6 col-md-6">
               <div class="left-section">
-                <a href="">Sign up with Email</a>
+                <a href="" ui-sref="signup">Sign up</a>
               </div>
             </div>
 

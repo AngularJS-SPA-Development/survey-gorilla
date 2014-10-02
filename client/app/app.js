@@ -6,6 +6,7 @@
     .module('surveyGorillaApp', [
 		  'ngResource',
 		  'ngSanitize',
+      'ngCookies',
 		  'btford.socket-io',
 		  'ui.router',
 		  'ui.bootstrap',
@@ -19,8 +20,7 @@
 
   /* @ngInject */
   function config($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
-    $urlRouterProvider
-      .otherwise('/');
+    $urlRouterProvider.otherwise('/');
 
     $httpProvider.interceptors.push('authInterceptor');
     $httpProvider.interceptors.push('sgHttpInterceptor');
@@ -58,6 +58,7 @@
         if (storageService.get('token')) {
           config.headers.Authorization = 'Bearer ' + storageService.get('token');
         }
+        
         return config;
       },
 
