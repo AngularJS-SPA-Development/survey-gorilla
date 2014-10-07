@@ -24,6 +24,10 @@
         templateUrl: 'app/account/settings/settings.html',
         controller: 'SettingsCtrl',
         authenticate: true
+      })
+      .state('oauth', {
+        url: '/oauth',
+        controller: 'AuthCtrl'
       });
   }
 })();

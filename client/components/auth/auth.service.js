@@ -7,7 +7,7 @@
     .factory('Auth', Auth);
 
   /* @ngInject */
-  function Auth($location, $rootScope, $http, User, storageService, $q) {
+  function Auth($location, $rootScope, $http, $cookies, User, storageService, $q) {
     var currentUser = {};
     if(storageService.get('token')) {
       currentUser = User.get();
@@ -22,6 +22,12 @@
        * @return {Promise}
        */
       login: login,
+
+      /**
+       * authenticate with OAuth in facebook, twitter
+       * @type {[type]}
+       */
+      loginOAuth: loginOAuth,
 
       /**
        * Delete access token and user info
@@ -109,6 +115,16 @@
 
       return deferred.promise;
     };
+
+    function loginOAuth(callback) {
+      var cb = callback || angular.noop;
+      var token = $cookies.token;
+      if(token) {
+        storageService.put('token', token);
+        currentUser = User.get();
+        return cb();
+      }
+    }
 
     function logout() {
       storageService.remove('token');

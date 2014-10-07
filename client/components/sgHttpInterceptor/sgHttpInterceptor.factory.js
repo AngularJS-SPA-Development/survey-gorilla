@@ -29,10 +29,12 @@
 
     function responseError(rejection) {
       var msg = httpType(rejection.status);
-      if(rejection.data.message) {
-        msg.value = rejection.data.message;
+      if(msg) {
+        if(rejection.data.message) {
+          msg.value = rejection.data.message;
+        }
+        sgAlert.error(msg.value, msg.code);
       }
-      sgAlert.error(msg.value, msg.code);
 
       return $q.reject(rejection);
     }
@@ -58,6 +60,11 @@
         msg = { 
           code : 'NOT_FOUND',
           value : 'Not found the content.'
+        };
+      } else if(status === 422) {
+        msg = { 
+          code : 'SYMANTIC ERROR',
+          value : 'Check your email because it maybe duplicated.'
         };
       } else if(status === 500) {
         msg = { 
