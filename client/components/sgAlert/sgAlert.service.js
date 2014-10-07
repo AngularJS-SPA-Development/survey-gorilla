@@ -35,7 +35,7 @@
       if(nt) {
         $timeout(function() {
           nt.close();
-        }, 2000);
+        }, 5000);
       }
 
       if(err) {

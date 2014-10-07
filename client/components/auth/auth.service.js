@@ -7,9 +7,9 @@
     .factory('Auth', Auth);
 
   /* @ngInject */
-  function Auth($location, $rootScope, $http, User, $cookieStore, $q) {
+  function Auth($location, $rootScope, $http, $cookies, User, storageService, $q) {
     var currentUser = {};
-    if($cookieStore.get('token')) {
+    if(storageService.get('token')) {
       currentUser = User.get();
     }
 
@@ -22,6 +22,12 @@
        * @return {Promise}
        */
       login: login,
+
+      /**
+       * authenticate with OAuth in facebook, twitter
+       * @type {[type]}
+       */
+      loginOAuth: loginOAuth,
 
       /**
        * Delete access token and user info
@@ -90,7 +96,13 @@
         password: user.password
       }).
       success(function(data) {
-        $cookieStore.put('token', data.token);
+        // 기존 코드 
+        // $cookieStore.put('token', data.token);
+
+        // 변경 코드 
+        storageService.put('token', data.token);
+
+        // 사용자 정보 가져와 currentUser에 저장 
         currentUser = User.get();
         deferred.resolve(data);
         return cb();
@@ -104,8 +116,18 @@
       return deferred.promise;
     };
 
+    function loginOAuth(callback) {
+      var cb = callback || angular.noop;
+      var token = $cookies.token;
+      if(token) {
+        storageService.put('token', token);
+        currentUser = User.get();
+        return cb();
+      }
+    }
+
     function logout() {
-      $cookieStore.remove('token');
+      storageService.remove('token');
       currentUser = {};
     };
 
@@ -114,7 +136,7 @@
 
       return User.save(user,
         function(data) {
-          $cookieStore.put('token', data.token);
+          storageService.put('token', data.token);
           currentUser = User.get();
           return cb(user);
         },
@@ -164,7 +186,7 @@
     }
 
     function getToken() {
-      return $cookieStore.get('token');
+      return storageService.get('token');
     }
 
   }

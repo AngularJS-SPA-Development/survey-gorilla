@@ -4,9 +4,9 @@
 
   angular
     .module('surveyGorillaApp', [
-		  'ngCookies',
 		  'ngResource',
 		  'ngSanitize',
+      'ngCookies',
 		  'btford.socket-io',
 		  'ui.router',
 		  'ui.bootstrap',
@@ -20,8 +20,7 @@
 
   /* @ngInject */
   function config($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
-    $urlRouterProvider
-      .otherwise('/');
+    $urlRouterProvider.otherwise('/');
 
     $httpProvider.interceptors.push('authInterceptor');
     $httpProvider.interceptors.push('sgHttpInterceptor');
@@ -51,14 +50,15 @@
   }
 
   /* @ngInject */
-  function authInterceptor($rootScope, $q, $cookieStore, $location) {
+  function authInterceptor($rootScope, $q, storageService, $location) {
     return {
       // Add authorization token to headers
       request: function (config) {
         config.headers = config.headers || {};
-        if ($cookieStore.get('token')) {
-          config.headers.Authorization = 'Bearer ' + $cookieStore.get('token');
+        if (storageService.get('token')) {
+          config.headers.Authorization = 'Bearer ' + storageService.get('token');
         }
+        
         return config;
       },
 
@@ -67,7 +67,7 @@
         if(response.status === 401) {
           $location.path('/login');
           // remove any stale tokens
-          $cookieStore.remove('token');
+          storageService.remove('token');
           return $q.reject(response);
         }
         else {
