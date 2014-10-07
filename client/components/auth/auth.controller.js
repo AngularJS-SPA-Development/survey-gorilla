@@ -7,8 +7,9 @@
     .controller('AuthCtrl', AuthCtrl);
 
   /* @ngInject */
-  function AuthCtrl($location, Auth) {
+  function AuthCtrl($rootScope, $location, Auth) {
     Auth.loginOAuth(function() {
+      $rootScope.isOAuthLogin = true;
       $location.path('/');
     });
   }
