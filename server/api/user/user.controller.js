@@ -1,9 +1,7 @@
 'use strict';
 
-var User = require('./user.model');
-var passport = require('passport');
-var config = require('../../config/environment');
-var jwt = require('jsonwebtoken');
+var UserService = require('./user.service'),
+    config = require('../../config/environment');
 
 var validationError = function(res, err) {
   return res.json(422, err);
@@ -14,37 +12,45 @@ var validationError = function(res, err) {
  * restriction: 'admin'
  */
 exports.index = function(req, res) {
-  User.find({}, '-salt -hashedPassword', function (err, users) {
-    if(err) return res.send(500, err);
-    res.json(200, users);
-  });
+  UserService
+    .index()
+    .then(function(users) {
+      res.json(200, users);
+    })
+    .catch(function(err) {
+      res.send(500, err);
+    });
 };
 
 /**
  * Creates a new user
  */
 exports.create = function (req, res, next) {
-  var newUser = new User(req.body);
-  newUser.provider = 'local';
-  newUser.role = 'user';
-  newUser.save(function(err, user) {
-    if (err) return validationError(res, err);
-    var token = jwt.sign({_id: user._id }, config.secrets.session, { expiresInMinutes: 60*5 });
-    res.json({ token: token });
-  });
+  UserService
+    .create(req.body)
+    .then(function(token) {
+      res.json({ token: token });
+    })
+    .catch(function(err) {
+      return validationError(res, err);
+    });
 };
 
 /**
  * Get a single user
  */
 exports.show = function (req, res, next) {
-  var userId = req.params.id;
-
-  User.findById(userId, function (err, user) {
-    if (err) return next(err);
-    if (!user) return res.send(401);
-    res.json(user.profile);
-  });
+  UserService
+    .create(req.params.id)
+    .then(function(profile) {
+      res.json(profile);
+    })
+    .catch(function(err) {
+      if(err && err.code && err.code === 'USER_NOT_FOUND') {
+        return res.send(401);
+      } 
+      if (err) return next(err);
+    });
 };
 
 /**
@@ -52,10 +58,14 @@ exports.show = function (req, res, next) {
  * restriction: 'admin'
  */
 exports.destroy = function(req, res) {
-  User.findByIdAndRemove(req.params.id, function(err, user) {
-    if(err) return res.send(500, err);
-    return res.send(204);
-  });
+  UserService
+    .destroy(req.params.id)
+    .then(function() {
+      res.send(204);
+    })
+    .catch(function(err) {
+      if (err) return res.send(500, err);
+    });
 };
 
 /**
@@ -66,31 +76,34 @@ exports.changePassword = function(req, res, next) {
   var oldPass = String(req.body.oldPassword);
   var newPass = String(req.body.newPassword);
 
-  User.findById(userId, function (err, user) {
-    if(user.authenticate(oldPass)) {
-      user.password = newPass;
-      user.save(function(err) {
-        if (err) return validationError(res, err);
-        res.send(200);
-      });
-    } else {
-      res.send(403);
-    }
-  });
+  UserService
+    .changePassword(userId, oldPass, newPass)
+    .then(function() {
+      res.send(200);
+    })
+    .catch(function(err) {
+      if(err && err.code && err.code === 'FORBIDDEN') {
+        return res.send(403);
+      } 
+      return validationError(res, err);
+    });
 };
 
 /**
  * Get my info
  */
 exports.me = function(req, res, next) {
-  var userId = req.user._id;
-  User.findOne({
-    _id: userId
-  }, '-salt -hashedPassword', function(err, user) { // don't ever give out the password or salt
-    if (err) return next(err);
-    if (!user) return res.json(401);
-    res.json(user);
-  });
+  UserService
+    .me(req.user._id)
+    .then(function(user) {
+      res.json(user);
+    })
+    .catch(function(err) {
+      if(err && err.code && err.code === 'USER_NOT_FOUND') {
+        return res.send(401);
+      } 
+      if (err) return next(err);
+    });
 };
 
 /**
