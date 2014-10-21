@@ -3,7 +3,7 @@
 var Q = require('q'),
     User = require('./user.model'),
     passport = require('passport'),
-    config = require('../../config/environment'),
+    config = require('../../../config/environment'),
     jwt = require('jsonwebtoken');
 
 

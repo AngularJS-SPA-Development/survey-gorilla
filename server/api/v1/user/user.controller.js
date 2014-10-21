@@ -48,7 +48,7 @@ function create(req, res, next) {
  */
 function show(req, res, next) {
   UserService
-    .create(req.params.id)
+    .show(req.params.id)
     .then(function(profile) {
       res.json(profile);
     })

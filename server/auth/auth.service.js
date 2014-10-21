@@ -9,6 +9,11 @@ var compose = require('composable-middleware');
 var User = require('../api/user/user.model');
 var validateJwt = expressJwt({ secret: config.secrets.session });
 
+exports.isAuthenticated = isAuthenticated;
+exports.hasRole = hasRole;
+exports.signToken = signToken;
+exports.setTokenCookie = setTokenCookie;
+
 /**
  * Attaches the user object to the request if authenticated
  * Otherwise returns 403
@@ -71,8 +76,3 @@ function setTokenCookie(req, res) {
   res.cookie('token', token);
   res.redirect('/#/oauth');
 }
-
-exports.isAuthenticated = isAuthenticated;
-exports.hasRole = hasRole;
-exports.signToken = signToken;
-exports.setTokenCookie = setTokenCookie;

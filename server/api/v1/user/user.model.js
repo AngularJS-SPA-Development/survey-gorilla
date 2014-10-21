@@ -19,6 +19,17 @@ var UserSchema = new Schema({
   twitter: {},
   google: {},
   github: {}
+}, {
+  toJSON: {
+    transform: function(doc, ret) {
+      delete ret.__v;
+      delete ret._id;
+      delete ret.hashedPassword;
+      delete ret.salt;
+      
+      return ret;
+    }
+  }
 });
 
 /**
