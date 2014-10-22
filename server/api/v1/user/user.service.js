@@ -2,6 +2,7 @@
 
 var Q = require('q'),
     User = require('./user.model'),
+    Group = require('../group/group.model'),
     passport = require('passport'),
     config = require('../../../config/environment'),
     jwt = require('jsonwebtoken');
@@ -64,7 +65,21 @@ function show(userId) {
       })
     );
 
-    deferred.resolve(user.profile);
+    // Reads the groups of this user
+    Group.find({
+      'members.member': userId,
+      deleted_at: { $exists: false }
+    })
+    .populate('owner')
+    .exec(function(err, groups) {
+      if (err) return deferred.reject(err);
+
+      // Adds 'groups' property for json rendering
+      user.groups = groups;
+
+      deferred.resolve(user);
+    });
+    // not used : deferred.resolve(user.profile);
   });
   return deferred.promise;
 };

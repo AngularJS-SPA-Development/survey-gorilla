@@ -1,8 +1,8 @@
 'use strict';
 
-var _ = require('lodash');
-var Q = require('q');
-var Group = require('./group.model');
+var _ = require('lodash'),
+    Q = require('q'),
+    Group = require('./group.model');
 
 exports.index = index;
 exports.show = show;
@@ -53,7 +53,7 @@ function create(params, user) {
   Group.create(params, function (err, group) {
     if(err) return deferred.reject(err);
 
-    group.populate('owner', function(err, group) {
+    group.populate('owner members.member', function(err, group) {
       if (err) return deferred.reject(err);
       deferred.resolve(group);
     });
