@@ -56,16 +56,16 @@ var create = function() {
         });
         res.body.data.owner.should.be.containEql({
           id: user,
-          email: 'test@test.com',
           name: 'Test User',
+          email: 'test@test.com',
           has_photo: false,
           role: 'OWNER'
         });
         res.body.data.members.should.have.lengthOf(1);
         res.body.data.members[0].should.be.containEql({
           id: user,
-          email: 'test@test.com',
           name: 'Test User',
+          email: 'test@test.com',
           has_photo: false,
           role: 'OWNER'
         });

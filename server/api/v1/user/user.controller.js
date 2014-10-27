@@ -22,10 +22,11 @@ function index(req, res) {
   UserService
     .index()
     .then(function(users) {
-      res.json(200, users);
+      res.finish(200, users);
     })
     .catch(function(err) {
-      res.send(500, err);
+      //res.send(500, err);
+      next(err);
     });
 };
 
@@ -37,10 +38,11 @@ function create(req, res, next) {
     .create(req.body)
     .then(function(user) {
       res.setToken(user.authToken);
-      res.json(201, user);
+      res.finish(201, user);
     })
     .catch(function(err) {
-      return validationError(res, err);
+      //return validationError(res, err);
+      next(err);
     });
 };
 
@@ -51,13 +53,14 @@ function show(req, res, next) {
   UserService
     .show(req.params.id)
     .then(function(user) {
-      res.json(user);
+      res.finish(user);
     })
     .catch(function(err) {
-      if(err && err.code && err.code === 'USER_NOT_FOUND') {
-        return res.send(401);
-      } 
-      if (err) return next(err);
+      // if(err && err.code && err.code === 'USER_NOT_FOUND') {
+      //   return res.send(401);
+      // } 
+      // if (err) return next(err);
+      next(err);
     });
 };
 
@@ -69,10 +72,11 @@ function destroy(req, res) {
   UserService
     .destroy(req.params.id)
     .then(function() {
-      res.send(204);
+      res.finish(204);
     })
     .catch(function(err) {
-      if (err) return res.send(500, err);
+      //if (err) return res.send(500, err);
+      next(err);
     });
 };
 
@@ -87,13 +91,14 @@ function changePassword(req, res, next) {
   UserService
     .changePassword(userId, oldPass, newPass)
     .then(function() {
-      res.send(200);
+      res.finish(200);
     })
     .catch(function(err) {
-      if(err && err.code && err.code === 'FORBIDDEN') {
-        return res.send(403);
-      } 
-      return validationError(res, err);
+      // if(err && err.code && err.code === 'FORBIDDEN') {
+      //   return res.send(403);
+      // } 
+      // return validationError(res, err);
+      next(err);
     });
 };
 
@@ -104,13 +109,14 @@ function me(req, res, next) {
   UserService
     .me(req.user._id)
     .then(function(user) {
-      res.json(user);
+      res.finish(user);
     })
     .catch(function(err) {
-      if(err && err.code && err.code === 'USER_NOT_FOUND') {
-        return res.send(401);
-      } 
-      if (err) return next(err);
+      // if(err && err.code && err.code === 'USER_NOT_FOUND') {
+      //   return res.send(401);
+      // } 
+      // if (err) return next(err);
+      next(err);
     });
 };
 
