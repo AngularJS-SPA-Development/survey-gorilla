@@ -35,8 +35,9 @@ function index(req, res) {
 function create(req, res, next) {
   UserService
     .create(req.body)
-    .then(function(token) {
-      res.json({ token: token });
+    .then(function(user) {
+      res.setToken(user.authToken);
+      res.json(201, user);
     })
     .catch(function(err) {
       return validationError(res, err);
@@ -49,8 +50,8 @@ function create(req, res, next) {
 function show(req, res, next) {
   UserService
     .show(req.params.id)
-    .then(function(profile) {
-      res.json(profile);
+    .then(function(user) {
+      res.json(user);
     })
     .catch(function(err) {
       if(err && err.code && err.code === 'USER_NOT_FOUND') {

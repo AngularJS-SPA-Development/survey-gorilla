@@ -9,77 +9,79 @@ exports.update = update;
 exports.destroy = destroy;
 
 // Get list of group
-function index(req, res) {
+function index(req, res, next) {
   GroupService
     .index()
-
     .then(function(groups) {
-      res.json(200, groups);
+      res.finish(200, groups);
     })
     .catch(function(err) {
-      res.send(500, err);
+      next(err);
     });
 };
 
 // Get a single group
-function show(req, res) {
+function show(req, res, next) {
   GroupService
     .show(req.params.id)
 
     .then(function(group) {
-      res.json(group);
+      res.finish(group);
     })
     .catch(function(err) {
-      if(err.code === 'NOT_FOUND') {
-        return res.send(404);
-      } 
-      res.send(500, err);
+      // if(err.code === 'GROUP_NOT_FOUND') {
+      //   return res.send(404);
+      // } 
+      // res.send(500, err);
+      next(err);
     });
 };
 
 // Creates a new group in the DB.
-function create(req, res) {
+function create(req, res, next) {
   GroupService
     .create(req.body, req.user)
 
     .then(function(group) {
-      res.json(201, group);
+      res.finish(201, group);
     })
     .catch(function(err) {
-      res.send(500, err);
+      next(err);
     });
 };
 
 // Updates an existing group in the DB.
-function update(req, res) {
+function update(req, res, next) {
   if(req.body._id) { delete req.body._id; }
 
   GroupService
     .update(req.params.id, req.body)
 
     .then(function(group) {
-      res.json(201, group);
+      res.finish(201, group);
     })
     .catch(function(err) {
-      if(err.code === 'NOT_FOUND') {
-        return res.send(404);
-      } 
-      res.send(500, err);
+      // if(err.code === 'GROUP_NOT_FOUND') {
+      //   return res.send(404);
+      // } 
+      // res.send(500, err);
+      next(err);
     });
 };
 
 // Deletes a group from the DB.
-function destroy(req, res) {
+function destroy(req, res, next) {
   GroupService
     .destroy(req.params.id)
 
     .then(function(group) {
-      res.send(204);
+      res.finish(204);
     })
     .catch(function(err) {
-      if(err.code === 'NOT_FOUND') {
-        return res.send(404);
-      } 
-      res.send(500, err);
+      // if(err.code === 'GROUP_NOT_FOUND') {
+      //   return res.send(404);
+      // } 
+      // res.send(500, err);
+      next(err);
     });
 };

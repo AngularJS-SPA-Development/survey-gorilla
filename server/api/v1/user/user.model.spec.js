@@ -1,8 +1,8 @@
 'use strict';
 
-var should = require('should');
-var app = require('../../../app');
-var User = require('./user.model');
+var should = require('should'),
+    app = localrequire.app(), //('../../../app');
+    User = require('./user.model');
 
 var user = new User({
   provider: 'local',
@@ -11,7 +11,7 @@ var user = new User({
   password: 'password'
 });
 
-describe('User Model', function() {
+describe('>> User Model', function() {
   before(function(done) {
     // Clear users before testing
     User.remove().exec().then(function() {

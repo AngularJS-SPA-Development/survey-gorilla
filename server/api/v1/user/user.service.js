@@ -4,7 +4,7 @@ var Q = require('q'),
     User = require('./user.model'),
     Group = require('../group/group.model'),
     passport = require('passport'),
-    config = require('../../../config/environment'),
+    config = localrequire.config(), //('../../../config/environment'),
     jwt = require('jsonwebtoken');
 
 
@@ -44,8 +44,9 @@ function create(params) {
   newUser.role = 'user';
   newUser.save(function(err, user) {
     if (err) return deferred.reject(err);
-    var token = jwt.sign({_id: user._id }, config.secrets.session, { expiresInMinutes: 60*5 });
-    deferred.resolve(token);
+    var token = jwt.sign({_id: user._id }, config.secrets.session, { expiresInMinutes: 60*24*365 });
+    user.authToken = token;
+    deferred.resolve(user);
   });
   return deferred.promise;
 };

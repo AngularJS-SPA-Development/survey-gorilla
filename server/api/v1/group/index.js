@@ -2,7 +2,7 @@
 
 var express = require('express'),
     controller = require('./group.controller'),
-    auth = require('../../../auth/auth.service.js');
+    auth = localrequire.AuthService(); //('../../../auth/auth.service.js');
 
 var router = express.Router();
 

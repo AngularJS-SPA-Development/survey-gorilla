@@ -4,7 +4,7 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema,
     crypto = require('crypto'),
     _ = require('lodash'),
-    common = require('../../../components/utilities/common'),
+    common = localrequire.common(), //('../../../components/utilities/common'),
     authTypes = ['github', 'twitter', 'facebook', 'google'];
 
 var UserSchema = new Schema({

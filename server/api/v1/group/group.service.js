@@ -29,7 +29,7 @@ function show(id) {
     if(err) return deferred.reject(err);
     if (!group) return deferred.reject(
       Error.new({
-        code: 'NOT_FOUND',
+        code: 'GROUP_NOT_FOUND',
         message: 'Group: ' + id + ' is not found.'
       })
     );
@@ -69,7 +69,7 @@ function update(id, params) {
     if(err) return deferred.reject(err);
     if (!group) return deferred.reject(
       Error.new({
-        code: 'NOT_FOUND',
+        code: 'GROUP_NOT_FOUND',
         message: 'Group: ' + id + ' is not found.'
       })
     );
@@ -91,7 +91,7 @@ function destroy(id) {
     if(err) return deferred.reject(err);
     if (!group) return deferred.reject(
       Error.new({
-        code: 'NOT_FOUND',
+        code: 'GROUP_NOT_FOUND',
         message: 'Group: ' + id + ' is not found.'
       })
     );

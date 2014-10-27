@@ -91,7 +91,7 @@
       var cb = callback || angular.noop;
       var deferred = $q.defer();
 
-      $http.post('/auth/local', {
+      $http.post('/api/auth/local', {
         email: user.email,
         password: user.password
       }).

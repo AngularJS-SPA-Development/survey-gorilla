@@ -3,7 +3,7 @@
 var mongoose = require('mongoose'),
     Schema = mongoose.Schema,
     _ = require('lodash'),
-    common = require('../../../components/utilities/common');
+    common = localrequire.common(); //('../../../components/utilities/common');
 
 var MemberSchema = new Schema({
   member: {
