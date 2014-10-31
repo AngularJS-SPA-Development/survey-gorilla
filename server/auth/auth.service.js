@@ -2,11 +2,11 @@
 
 var mongoose = require('mongoose');
 var passport = require('passport');
-var config = require('../config/environment');
+var config = localrequire.config(); //('../config/environment');
 var jwt = require('jsonwebtoken');
 var expressJwt = require('express-jwt');
 var compose = require('composable-middleware');
-var User = require('../api/v1/user/user.model');
+var User = localrequire.User(); //('../api/v1/user/user.model');
 var validateJwt = expressJwt({ secret: config.secrets.session });
 
 exports.isAuthenticated = isAuthenticated;
@@ -62,7 +62,7 @@ function hasRole(roleRequired) {
  * Returns a jwt token signed by the app secret
  */
 function signToken(id) {
-  return jwt.sign({ _id: id }, config.secrets.session, { expiresInMinutes: 60*5 });
+  return jwt.sign({ _id: id }, config.secrets.session, { expiresInMinutes: 60*24*365 });
 }
 
 /**

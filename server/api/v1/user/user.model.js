@@ -1,9 +1,11 @@
 'use strict';
 
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
-var crypto = require('crypto');
-var authTypes = ['github', 'twitter', 'facebook', 'google'];
+var mongoose = require('mongoose'),
+    Schema = mongoose.Schema,
+    crypto = require('crypto'),
+    _ = require('lodash'),
+    common = localrequire.common(), //('../../../components/utilities/common'),
+    authTypes = ['github', 'twitter', 'facebook', 'google'];
 
 var UserSchema = new Schema({
   name: String,
@@ -21,12 +23,33 @@ var UserSchema = new Schema({
   github: {}
 }, {
   toJSON: {
+    virtuals: true,
+    getters: true,
     transform: function(doc, ret) {
       delete ret.__v;
       delete ret._id;
       delete ret.hashedPassword;
       delete ret.salt;
       
+      // when call show(id) method of user.model, set user.groups = group
+      if (doc.groups) {
+        ret.groups = _.chain(doc.groups).map(function(group) {
+          var me = _.find(group.members, function(member) {
+            return member.member.equals(ret.id);
+          });
+
+          return {
+            id: group.id,
+            name: group.name,
+            description: group.description,
+            has_photo: group.has_photo,
+            photo: common.getGroupPhoto(group.id, group.has_photo),
+            owner: group.owner,
+            member_count: group.members.length,
+            role: me ? me.role : 'UNKNOWN'
+          };
+        }).sortBy(common.sortByRole).value();
+      }
       return ret;
     }
   }

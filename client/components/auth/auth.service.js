@@ -10,7 +10,9 @@
   function Auth($location, $rootScope, $http, $cookies, User, storageService, $q) {
     var currentUser = {};
     if(storageService.get('token')) {
-      currentUser = User.get();
+      User.get({}, function(result) {
+        currentUser = result.data;
+      });
     }
 
     return {
@@ -91,7 +93,7 @@
       var cb = callback || angular.noop;
       var deferred = $q.defer();
 
-      $http.post('/auth/local', {
+      $http.post('/api/auth/local', {
         email: user.email,
         password: user.password
       }).
@@ -103,7 +105,10 @@
         storageService.put('token', data.token);
 
         // 사용자 정보 가져와 currentUser에 저장 
-        currentUser = User.get();
+        User.get({}, function(result) {
+          currentUser = result.data;
+        });
+
         deferred.resolve(data);
         return cb();
       }).
@@ -121,7 +126,9 @@
       var token = $cookies.token;
       if(token) {
         storageService.put('token', token);
-        currentUser = User.get();
+        User.get({}, function(result) {
+          currentUser = result.data;
+        });
         return cb();
       }
     }
@@ -137,7 +144,9 @@
       return User.save(user,
         function(data) {
           storageService.put('token', data.token);
-          currentUser = User.get();
+          User.get({}, function(result) {
+            currentUser = result.data;
+          });
           return cb(user);
         },
         function(err) {
