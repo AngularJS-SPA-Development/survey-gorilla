@@ -3,7 +3,7 @@
 var mongoose = require('mongoose'),
     Schema = mongoose.Schema,
     _ = require('lodash'),
-    common = require('../../../components/utilities/common');
+    common = localrequire.common(); //('../../../components/utilities/common');
 
 var MemberSchema = new Schema({
   member: {
@@ -68,8 +68,8 @@ var GroupSchema = new Schema({
 
       if (doc.populated('members.member')) {
         ret.members = _.sortBy(ret.members, common.sortByRole);
-        ret.member_count = ret.members.length;
       } else {
+        ret.member_count = ret.members.length;
         delete ret.members;
       }
 

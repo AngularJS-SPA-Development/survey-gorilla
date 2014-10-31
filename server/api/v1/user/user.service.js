@@ -2,8 +2,9 @@
 
 var Q = require('q'),
     User = require('./user.model'),
+    Group = require('../group/group.model'),
     passport = require('passport'),
-    config = require('../../../config/environment'),
+    config = localrequire.config(), //('../../../config/environment'),
     jwt = require('jsonwebtoken');
 
 
@@ -40,11 +41,16 @@ function create(params) {
 
   var newUser = new User(params);
   newUser.provider = 'local';
-  newUser.role = 'user';
+  if(params.role) {
+    newUser.role = params.role;
+  } else {
+    newUser.role = 'user';
+  }
   newUser.save(function(err, user) {
     if (err) return deferred.reject(err);
-    var token = jwt.sign({_id: user._id }, config.secrets.session, { expiresInMinutes: 60*5 });
-    deferred.resolve(token);
+    var token = jwt.sign({_id: user._id }, config.secrets.session, { expiresInMinutes: 60*24*365 });
+    user.authToken = token;
+    deferred.resolve(user);
   });
   return deferred.promise;
 };
@@ -64,7 +70,21 @@ function show(userId) {
       })
     );
 
-    deferred.resolve(user.profile);
+    // Reads the groups of this user
+    Group.find({
+      'members.member': userId,
+      deleted_at: { $exists: false }
+    })
+    .populate('owner')
+    .exec(function(err, groups) {
+      if (err) return deferred.reject(err);
+
+      // Adds 'groups' property for json rendering
+      user.groups = groups;
+
+      deferred.resolve(user);
+    });
+    // not used : deferred.resolve(user.profile);
   });
   return deferred.promise;
 };

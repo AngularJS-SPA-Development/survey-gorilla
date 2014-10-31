@@ -7,6 +7,10 @@
 // Set default node environment to development
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
+// Setup components error & GLOBAL by peter yun
+require('./components/errors/error');
+require('./components/utilities/requires');
+
 var express = require('express');
 var mongoose = require('mongoose');
 var config = require('./config/environment');
@@ -25,8 +29,6 @@ require('./config/socketio')(socketio);
 require('./config/express')(app);
 require('./routes')(app);
 
-// Setup components by peter yun
-require('./components/errors/error');
 
 // Start server
 server.listen(config.port, config.ip, function () {
