@@ -7,7 +7,7 @@ var should = require('should'),
     GroupService = require('./group.service');
 
 /**
- * Test 항목 
+ * Test 항목
  *   exports.create = create;
  *   exports.index = index;
  *   exports.show = show;
@@ -66,7 +66,7 @@ describe('>> Group Service', function() {
         done(err);
       });
     });
-  }); // create 
+  }); // create
 
   describe('list:', function() {
     it('should get an empty array when there is no group', function(done) {
@@ -110,9 +110,10 @@ describe('>> Group Service', function() {
       .spread(function(user, groups) {
         should.exist(groups);
         groups.should.be.an.instanceOf(Array).and.have.lengthOf(2);
+
         groups[0].id.should.be.an.instanceOf(String).and.not.be.empty;
         groups[0].created_at.should.be.an.instanceOf(Date);
-        groups[0].owner.toString().should.be.eql(user.id);
+        groups[0].owner.id.should.be.eql(user.id);
         groups[0].members.should.be.an.instanceOf(Array).and.have.lengthOf(1);
         groups[0].members[0].member.toString().should.be.eql(user.id);
         groups[0].members[0].role.should.be.eql('OWNER');
@@ -121,9 +122,10 @@ describe('>> Group Service', function() {
           description: 'Test Group Description',
           has_photo: false
         });
+        
         groups[1].id.should.be.an.instanceOf(String).and.not.be.empty;
         groups[1].created_at.should.be.an.instanceOf(Date);
-        groups[1].owner.toString().should.be.eql(user.id);
+        groups[1].owner.id.should.be.eql(user.id);
         groups[1].members.should.be.an.instanceOf(Array).and.have.lengthOf(1);
         groups[1].members[0].member.toString().should.be.eql(user.id);
         groups[1].members[0].role.should.be.eql('OWNER');

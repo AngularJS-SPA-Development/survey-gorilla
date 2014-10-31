@@ -10,8 +10,28 @@ exports.destroy = destroy;
 
 // Get list of group
 function index(req, res, next) {
+  var userid = undefined;
+  if(req.user) {
+    userid = req.user.id;
+  }
+  var options = {
+    name: req.query.name,
+    member: {
+      id: userid,
+      inverse: req.query.inverse
+    },
+    sort: {
+      by: req.query.sort,
+      lt: req.query.lt,
+      lte: req.query.lte,
+      gt: req.query.gt,
+      gte: req.query.gte
+    },
+    limit: req.query.limit
+  };
+
   GroupService
-    .index()
+    .index(options)
     .then(function(groups) {
       res.finish(200, groups);
     })

@@ -68,8 +68,8 @@ var GroupSchema = new Schema({
 
       if (doc.populated('members.member')) {
         ret.members = _.sortBy(ret.members, common.sortByRole);
-        ret.member_count = ret.members.length;
       } else {
+        ret.member_count = ret.members.length;
         delete ret.members;
       }
 

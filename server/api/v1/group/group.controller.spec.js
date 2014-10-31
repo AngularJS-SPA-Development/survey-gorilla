@@ -17,9 +17,9 @@ var create = function() {
       .post(apiv('/users'))
       .send({
         name: 'Test User',
-        email: 'test@test.com',
-        password: 'test',
-        role: 'user'
+        email: 'admin@admin.com',
+        password: 'admin',
+        role: 'admin'
       }).expect(201)
       .expect('Content-Type', /json/)
       .expect('Auth-Token', /^.+$/)
@@ -45,6 +45,7 @@ var create = function() {
       .end(function(err, res) {
         if (err) return done(err);
         should.exist(res.body.data);
+
         res.body.data.should.have.property('id');
         res.body.data.should.have.property('created_at');
         res.body.data.should.not.have.property('__v');
@@ -54,19 +55,19 @@ var create = function() {
           description: 'Test Group Description',
           has_photo: false
         });
+
         res.body.data.owner.should.be.containEql({
           id: user,
           name: 'Test User',
-          email: 'test@test.com',
-          has_photo: false,
+          email: 'admin@admin.com',
           role: 'OWNER'
         });
+
         res.body.data.members.should.have.lengthOf(1);
         res.body.data.members[0].should.be.containEql({
           id: user,
           name: 'Test User',
-          email: 'test@test.com',
-          has_photo: false,
+          email: 'admin@admin.com',
           role: 'OWNER'
         });
         group = res.body.data.id;
@@ -81,8 +82,7 @@ var remove = function() {
     request(app)
       .del(apiv('/groups/' + group))
       .set('Authorization', 'Bearer ' + token)
-      .expect(200)
-      .expect('Content-Type', /json/)
+      .expect(204)
       .end(function(err) {
         if (err) return done(err);
         done();
@@ -93,8 +93,7 @@ var remove = function() {
     request(app)
       .del(apiv('/users/' + user))
       .set('Authorization', 'Bearer ' + token)
-      .expect(200)
-      .expect('Content-Type', /json/)
+      .expect(204)
       .end(function(err) {
         if (err) return done(err);
         done();
@@ -103,10 +102,48 @@ var remove = function() {
 };
 
 // start test 
-describe('>> Group APIs', function() {
+describe('>> Group Controller', function() {
   after(test.clear);
 
-  describe('POST:', function() {
+  describe('list:', function() {
+    before(test.clear);
+    create();
+
+    it('should be able to get groups', function(done) {
+      request(app)
+        .get(apiv('/groups'))
+        .set('Authorization', 'Bearer ' + token)
+        .expect(200)
+        .expect('Content-Type', /json/)
+        .end(function(err, res) {
+          if (err) return done(err);
+          should.exist(res.body.data);
+          res.body.data.should.have.lengthOf(1);
+
+          res.body.data[0].should.not.have.property('__v');
+          res.body.data[0].should.not.have.property('_id');
+          res.body.data[0].should.be.containEql({
+            id: group,
+            name: 'Test Group',
+            description: 'Test Group Description',
+            has_photo: false,
+            member_count: 1
+          });
+
+          res.body.data[0].owner.should.be.containEql({
+            id: user,
+            name: 'Test User',
+            email: 'admin@admin.com',
+            role: 'OWNER'
+          });
+          done();
+        });
+    })
+
+    remove();
+  });
+
+  describe('user:', function() {
     before(test.clear);
 
     create();
@@ -122,10 +159,8 @@ describe('>> Group APIs', function() {
           should.exist(res.body.data);
           res.body.data.should.be.containEql({
             id: user,
-            email: 'test@test.com',
-            name: 'Test User',
-            description: 'Test User Description',
-            has_photo: false
+             name: 'Test User',
+            email: 'admin@admin.com',
           });
           res.body.data.groups.should.have.lengthOf(1);
           res.body.data.groups[0].should.be.containEql({

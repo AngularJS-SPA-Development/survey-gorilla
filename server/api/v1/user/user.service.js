@@ -41,7 +41,11 @@ function create(params) {
 
   var newUser = new User(params);
   newUser.provider = 'local';
-  newUser.role = 'user';
+  if(params.role) {
+    newUser.role = params.role;
+  } else {
+    newUser.role = 'user';
+  }
   newUser.save(function(err, user) {
     if (err) return deferred.reject(err);
     var token = jwt.sign({_id: user._id }, config.secrets.session, { expiresInMinutes: 60*24*365 });
