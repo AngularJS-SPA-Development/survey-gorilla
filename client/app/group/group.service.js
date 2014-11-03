@@ -16,7 +16,7 @@
     this.updateGroup = updateGroup;
 
     function getGroups() {
-      return Group.query();
+      return Group.load();
     }
 
     function deleteGroup(group) {
@@ -24,7 +24,7 @@
     }
 
     function getGroup(_id) {
-      Group.get({ id: _id });
+      return Group.load({ id: _id });
     }
 
     function newGroup() {
