@@ -11,6 +11,7 @@
 
   /* @ngInject */
   function GroupListCtrl($scope, $window, groupSvc) {
+
     // 전체 groups 받기. GET 메소드 /api/v1/groups 요청
     groupSvc.getGroups().then(function(groups) {
       $scope.groups = groups;

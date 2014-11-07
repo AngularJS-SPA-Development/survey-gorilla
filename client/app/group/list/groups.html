@@ -2,16 +2,18 @@
 
   <div class="panel-heading" style="height:50px; background-color:#F5F5F5;">
       <div class="col-lg-6 col-md-6 col-sm-7 input-group-sm pull-left" style="padding-left:0px;">
-        <input type="text" class="form-control" placeholder="Search My Group">
+        <input type="text" class="form-control" placeholder="Search {{groupType}} Group">
       </div>
 
-      <button type="button" class="pull-right btn btn-default btn-sm">
+      <button type="button" 
+              class="pull-right btn btn-default btn-sm"
+              ng-if="groupType === 'My'">
         <i class="fa fa-users"></i> Create Group
       </button>
   </div>
 
   <div class="panel-body">
-    My Groups content 
+    {{groupType}} Groups content 
   </div>
 
 </div>

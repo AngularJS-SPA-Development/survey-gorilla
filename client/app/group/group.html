@@ -3,10 +3,10 @@
 <div class="col-lg-12 col-md-12 col-sm-12">
 
   <tabset>
-    <tab  select="groups('my')" heading="My Groups">
+    <tab  select="groupType = 'My'" heading="My Groups">
       <div ng-include="'app/group/list/groups.html'" style="margin-top:5px;"></div>
     </tab>
-    <tab select="groups('other')" heading="Other Groups">
+    <tab select="groupType = 'Other'" heading="Other Groups">
       <div ng-include="'app/group/list/groups.html'" style="margin-top:5px;"></div>
     </tab>
   </tabset>
