@@ -61,7 +61,6 @@ function show(req, res, next) {
 function create(req, res, next) {
   GroupService
     .create(req.body, req.user)
-
     .then(function(group) {
       res.finish(201, group);
     })
@@ -76,7 +75,6 @@ function update(req, res, next) {
 
   GroupService
     .update(req.params.id, req.body)
-
     .then(function(group) {
       res.finish(201, group);
     })
@@ -93,7 +91,6 @@ function update(req, res, next) {
 function destroy(req, res, next) {
   GroupService
     .destroy(req.params.id)
-
     .then(function(group) {
       res.finish(204);
     })

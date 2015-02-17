@@ -36,7 +36,7 @@ module.exports = function (grunt) {
     },
     express: {
       options: {
-        port: process.env.PORT || 9000
+        port: 9100 //process.env.PORT || 9000
       },
       dev: {
         options: {
@@ -59,8 +59,9 @@ module.exports = function (grunt) {
       injectJS: {
         files: [
           '<%= yeoman.client %>/{app,components}/**/*.js',
-          '!<%= yeoman.client %>/components/translation/*.js',
-          '!<%= yeoman.client %>/components/message/*.js',
+          '!<%= yeoman.client %>/components/base/sg.base.js',
+          '!<%= yeoman.client %>/components/app/translation/sg.translation.module.js',
+          '!<%= yeoman.client %>/components/app/message/sg.message.module.js',
           '!<%= yeoman.client %>/{app,components}/**/*.spec.js',
           '!<%= yeoman.client %>/{app,components}/**/*.mock.js',
           '!<%= yeoman.client %>/app/app.js'],
@@ -91,7 +92,7 @@ module.exports = function (grunt) {
           '{.tmp,<%= yeoman.client %>}/{app,components}/**/*.css',
           '{.tmp,<%= yeoman.client %>}/{app,components}/**/*.html',
           '{.tmp,<%= yeoman.client %>}/{app,components}/**/*.js',
-          '!{.tmp,<%= yeoman.client %>}{app,components}/**/*.spec.js',
+          '!{.tmp,<%= yeoman.client %>}/{app,components}/**/*.spec.js',
           '!{.tmp,<%= yeoman.client %>}/{app,components}/**/*.mock.js',
           '<%= yeoman.client %>/assets/images/{,*//*}*.{png,jpg,jpeg,gif,webp,svg}'
         ],
@@ -184,7 +185,7 @@ module.exports = function (grunt) {
         options: {
           nodeArgs: ['--debug-brk'],
           env: {
-            PORT: process.env.PORT || 9000
+            PORT: 9100 //process.env.PORT || 9000
           },
           callback: function (nodemon) {
             nodemon.on('log', function (event) {
@@ -235,7 +236,7 @@ module.exports = function (grunt) {
       }
     },
 
-    // Performs rewrites based on rev and the useminPrepare configuration
+    // Performs rewrites appd on rev and the useminPrepare configuration
     usemin: {
       html: ['<%= yeoman.dist %>/public/{,*/}*.html'],
       css: ['<%= yeoman.dist %>/public/{,*/}*.css'],
@@ -440,8 +441,9 @@ module.exports = function (grunt) {
         files: {
           '<%= yeoman.client %>/index.html': [
               ['{.tmp,<%= yeoman.client %>}/{app,components}/**/*.js',
-               '!<%= yeoman.client %>/components/translation/*.js',
-               '!<%= yeoman.client %>/components/message/*.js',
+               '!<%= yeoman.client %>/components/base/sg.base.js',
+               '!<%= yeoman.client %>/components/app/translation/sg.translation.module.js',
+               '!<%= yeoman.client %>/components/app/message/sg.message.module.js',
                '!{.tmp,<%= yeoman.client %>}/app/app.js',
                '!{.tmp,<%= yeoman.client %>}/{app,components}/**/*.spec.js',
                '!{.tmp,<%= yeoman.client %>}/{app,components}/**/*.mock.js']
@@ -463,7 +465,8 @@ module.exports = function (grunt) {
         files: {
           '<%= yeoman.client %>/index.html': [
             '<%= yeoman.client %>/{app,components}/**/*.css',
-            '!<%= yeoman.client %>/app/app.css'
+            '!<%= yeoman.client %>/app/app.css',
+            '!<%= yeoman.client %>/components/app/bootstrap-theme/bootwatch-simplex.css'
           ]
         }
       }
@@ -473,7 +476,7 @@ module.exports = function (grunt) {
     nggettext_extract: {
       pot: {
         files: {
-          'client/components/translation/po/origin_template.pot': [
+          'client/components/app/translation/po/origin_template.pot': [
             'client/index.html',
             'client/app/**/*.html',
             'client/components/navbar/*.html'
@@ -487,7 +490,7 @@ module.exports = function (grunt) {
           module: 'sg.translation'
         },
         files: {
-          'client/components/translation/sg.translation.js': ['client/components/translation/po/*.po']
+          'client/components/app/translation/sg.translation.js': ['client/components/app/translation/po/*.po']
         }
       },
     },
@@ -495,8 +498,8 @@ module.exports = function (grunt) {
     nggettext_msg_extract: {
       pot: {
         files: {
-          'client/components/message/po/origin_template.pot': [
-            'client/components/message/message.html'
+          'client/components/app/message/po/origin_template.pot': [
+            'client/components/app/message/message.html'
           ]
         }
       },
@@ -507,7 +510,7 @@ module.exports = function (grunt) {
           module: 'sg.message'
         },
         files: {
-          'client/components/message/sg.message.js': ['client/components/message/po/*.po']
+          'client/components/app/message/sg.message.js': ['client/components/app/message/po/*.po']
         }
       },
     }
