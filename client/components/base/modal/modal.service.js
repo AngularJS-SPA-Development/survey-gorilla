@@ -9,6 +9,9 @@
   function modal($modal, $q) {
     this.open = open;
 
+    /**
+     * size : '', 'lg', 'sm'
+     */
     function open(size, templateId, controller, params) {
       var modalInstance = $modal.open({
         templateUrl: templateId, //'myModalContent.html',

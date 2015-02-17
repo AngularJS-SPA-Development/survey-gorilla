@@ -3,7 +3,7 @@
 describe('Service: sgAlert', function () {
 
   // load the service's module
-  beforeEach(module('sg.base'));
+  beforeEach(module('sg.app'));
 
   // instantiate service
   var sgAlert;

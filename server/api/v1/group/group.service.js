@@ -4,14 +4,14 @@ var _ = require('lodash'),
     Q = require('q'),
     Group = require('./group.model');
 
-exports.index = index;
-exports.show = show;
+exports.list = list;
+exports.read = read;
 exports.create = create;
 exports.update = update;
 exports.destroy = destroy;
 
 // Get list of group
-function index(options) {
+function list(options) {
   var deferred = Q.defer();
 
   // Old Code 
@@ -62,7 +62,7 @@ function index(options) {
 };
 
 // Get a single group
-function show(id) {
+function read(id) {
   var deferred = Q.defer();
 
   Group.findById(id, function (err, group) {

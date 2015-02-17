@@ -2,26 +2,67 @@
 
 var GroupService = require('./group.service');
 
-exports.index = index;
-exports.show = show;
+exports.list = list;
+exports.read = read;
 exports.create = create;
 exports.update = update;
 exports.destroy = destroy;
 
-// Get list of group
-function index(req, res, next) {
-  var userid = undefined;
-  if(req.user) {
-    userid = req.user.id;
+var getMember = function(type, user) {
+  switch (type) {
+    case 'RELATED':
+      return {
+        id: user,
+        inverse: false
+      };
+    case 'UNRELATED':
+      return {
+        id: user,
+        inverse: true
+      };
+    case 'ALL':
+    case undefined:
+      return {};
+    default:
+      throw new errors.ParamInvalidError('type');
   }
+};
+var getSort = function(sort) {
+  switch (sort) {
+    case 'CREATED':
+      return {
+        by: 'created_at',
+        desc: false
+      };
+    case '-CREATED':
+    case undefined:
+      return {
+        by: 'created_at',
+        desc: true
+      };
+    default:
+      throw new errors.ParamInvalidError('sort');
+  }
+};
+
+// Get list of group
+function list(req, res, next) {
+  // user가 존재 하지 않을 경우 
+  if(!req.user) {
+    req.user = {};
+  }
+  var member = getMember(req.query.type, req.user.id); //req.login.id);
+  var sort = getSort(req.query.sort);
+
   var options = {
     name: req.query.name,
     member: {
-      id: userid,
-      inverse: req.query.inverse
+      id: member.id,
+      inverse: member.inverse
     },
     sort: {
-      by: req.query.sort,
+      by: sort.by,
+      desc: sort.desc,
       lt: req.query.lt,
       lte: req.query.lte,
       gt: req.query.gt,
@@ -31,7 +72,7 @@ function index(req, res, next) {
   };
 
   GroupService
-    .index(options)
+    .list(options)
     .then(function(groups) {
       res.finish(200, groups);
     })
@@ -41,10 +82,9 @@ function index(req, res, next) {
 };
 
 // Get a single group
-function show(req, res, next) {
+function read(req, res, next) {
   GroupService
-    .show(req.params.id)
-
+    .read(req.params.id)
     .then(function(group) {
       res.finish(group);
     })

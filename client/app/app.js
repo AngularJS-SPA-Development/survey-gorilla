@@ -43,13 +43,13 @@
   }
 
   /* @ngInject */
-  function authInterceptor($rootScope, $q, storageService, $location) {
+  function authInterceptor($rootScope, $q, storage, $location) {
     return {
       // Add authorization token to headers
       request: function (config) {
         config.headers = config.headers || {};
-        if (storageService.get('token')) {
-          config.headers.Authorization = 'Bearer ' + storageService.get('token');
+        if (storage.get('token')) {
+          config.headers.Authorization = 'Bearer ' + storage.get('token');
         }
         
         return config;
@@ -60,7 +60,7 @@
         if(response.status === 401) {
           $location.path('/login');
           // remove any stale tokens
-          storageService.remove('token');
+          storage.remove('token');
           return $q.reject(response);
         }
         else {

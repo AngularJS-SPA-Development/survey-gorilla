@@ -7,7 +7,7 @@
 
   /* @ngInject */
   function User($resource, config) {
-    return $resource(config.api_version + 'users/:id/:controller', {
+    return $resource(config.api_version + '/users/:id/:controller', {
         id: '@_id'
       },
       {

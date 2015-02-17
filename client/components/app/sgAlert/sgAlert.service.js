@@ -2,11 +2,11 @@
 
   'use strict';
   angular
-    .module('sg.base')
-    .service('sgAlert', Sgalert);
+    .module('sg.app')
+    .service('sgAlert', sgAlert);
 
   /* @ngInject */
-  function Sgalert(gettextCatalog, $timeout) {
+  function sgAlert(gettextCatalog, $timeout) {
     this.success = function(msg) {
       alerting('success', msg);
     };

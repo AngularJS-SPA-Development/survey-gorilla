@@ -6,10 +6,11 @@
       'btford.socket-io',
       'gettext',
       'sg.translation',
-      'sg.message'
+      'sg.message',
+      'restangular'
     ])
     .constant('config', {
-      api_version: 'api/v1/'
+      api_version: 'api/v1'
     });
 
 })();

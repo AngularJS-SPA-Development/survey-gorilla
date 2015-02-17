@@ -1,12 +1,14 @@
 (function() {
-
   'use strict';
 
+  /**
+   * change storageService to storage
+   */
   angular
     .module('sg.base')
-    .service('storageService', storageService);
+    .service('storage', storage);
 
-  function storageService() {
+  function storage() {
     this.setValue = function(key, value, options) {
       angular.element.jStorage.set(key, value, options);
     };
