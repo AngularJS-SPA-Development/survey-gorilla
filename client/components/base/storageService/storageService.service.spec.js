@@ -2,7 +2,7 @@
 
 describe('Service: storageService', function () {
 
-  beforeEach(module('surveyGorillaApp'));
+  beforeEach(module('sg.base'));
 
   var storageService;
   beforeEach(inject(function (_storageService_) {

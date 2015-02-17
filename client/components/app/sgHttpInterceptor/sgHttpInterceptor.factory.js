@@ -1,8 +1,8 @@
 (function() {
-
   'use strict';
+
   angular
-    .module('surveyGorillaApp')
+    .module('sg.app')
     .factory('sgHttpInterceptor', Sghttpinterceptor);
 
   /* @ngInject */

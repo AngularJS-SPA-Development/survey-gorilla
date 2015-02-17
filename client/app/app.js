@@ -4,15 +4,8 @@
 
   angular
     .module('surveyGorillaApp', [
-		  'ngResource',
-		  'ngSanitize',
-      'ngCookies',
-		  'btford.socket-io',
-		  'ui.router',
-		  'ui.bootstrap',
-      'gettext',
-      'sg.translation',
-      'sg.message'
+		  'sg.app',
+      'sg.base'
 		])
     .config(config)
     .factory('authInterceptor', authInterceptor)

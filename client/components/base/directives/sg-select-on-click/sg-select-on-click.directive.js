@@ -1,8 +1,8 @@
 (function() {
-
   'use strict';
+
   angular
-    .module('surveyGorillaApp')
+    .module('sg.base')
     .directive('sgSelectOnClick', SgSelectOnClick);
 
   /* @ngInject */

@@ -3,7 +3,7 @@
   'use strict';
 
   angular
-    .module('surveyGorillaApp')
+    .module('sg.base')
     .service('storageService', storageService);
 
   function storageService() {

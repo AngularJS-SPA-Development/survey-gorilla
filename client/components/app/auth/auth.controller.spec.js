@@ -3,7 +3,7 @@
 describe('Controller: AuthCtrl', function () {
 
   // load the controller's module
-  beforeEach(module('surveyGorillaApp'));
+  beforeEach(module('sg.app'));
 
   var AuthCtrl, scope;
 

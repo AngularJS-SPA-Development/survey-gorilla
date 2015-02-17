@@ -1,12 +1,11 @@
 (function(){
-
   'use strict';
 
   /**
    * Removes server error when user updates input
    */
   angular
-    .module('surveyGorillaApp')
+    .module('sg.app')
     .directive('mongooseError', mongooseError);
 
   function mongooseError() {

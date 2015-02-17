@@ -2,7 +2,7 @@
 
   'use strict';
   angular
-    .module('surveyGorillaApp')
+    .module('sg.base')
     .service('sgFormatter', SgFormatter);
 
   /* @ngInject */

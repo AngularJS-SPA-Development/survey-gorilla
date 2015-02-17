@@ -84,14 +84,16 @@
       <script src="bower_components/jstorage/jstorage.js"></script>
       <script src="bower_components/numeral/numeral.js"></script>
       <script src="bower_components/moment/moment.js"></script>
-      <script src="bower_components/angular-deckgrid/angular-deckgrid.js"></script>
       <!-- endbower -->
+      <script src="bower_components/restangular/dist/restangular.js"></script>
     <!-- endbuild -->
+    
     <!-- build:js({.tmp,client}) app/app.js -->
-      <script src="app/app.js"></script>
       <script src="components/base/sg.base.js"></script>
+      <script src="components/app/sg.app.js"></script>
       <script src="components/app/translation/sg.translation.module.js"></script>
       <script src="components/app/message/sg.message.module.js"></script>
+      <script src="app/app.js"></script>
       <!-- injector:js -->
       <script src="app/account/account.js"></script>
       <script src="app/account/login/login.controller.js"></script>
@@ -113,6 +115,7 @@
       <script src="components/app/auth/auth.service.js"></script>
       <script src="components/app/auth/user.service.js"></script>
       <script src="components/app/message/sg.message.js"></script>
+      <script src="components/app/models/groups.js"></script>
       <script src="components/app/mongoose-error/mongoose-error.directive.js"></script>
       <script src="components/app/navbar/navbar.controller.js"></script>
       <script src="components/app/sgHttpInterceptor/sgHttpInterceptor.factory.js"></script>

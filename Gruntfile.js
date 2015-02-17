@@ -59,6 +59,7 @@ module.exports = function (grunt) {
       injectJS: {
         files: [
           '<%= yeoman.client %>/{app,components}/**/*.js',
+          '!<%= yeoman.client %>/components/app/sg.app.js',
           '!<%= yeoman.client %>/components/base/sg.base.js',
           '!<%= yeoman.client %>/components/app/translation/sg.translation.module.js',
           '!<%= yeoman.client %>/components/app/message/sg.message.module.js',
@@ -441,6 +442,7 @@ module.exports = function (grunt) {
         files: {
           '<%= yeoman.client %>/index.html': [
               ['{.tmp,<%= yeoman.client %>}/{app,components}/**/*.js',
+               '!<%= yeoman.client %>/components/app/sg.app.js',
                '!<%= yeoman.client %>/components/base/sg.base.js',
                '!<%= yeoman.client %>/components/app/translation/sg.translation.module.js',
                '!<%= yeoman.client %>/components/app/message/sg.message.module.js',

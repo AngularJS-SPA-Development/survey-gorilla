@@ -1,14 +1,13 @@
 (function(){
-
   'use strict';
 
   angular
-    .module('surveyGorillaApp')
+    .module('sg.app')
     .factory('User', User);
 
   /* @ngInject */
-  function User($resource) {
-    return $resource('/api/v1/users/:id/:controller', {
+  function User($resource, config) {
+    return $resource(config.api_version + 'users/:id/:controller', {
         id: '@_id'
       },
       {

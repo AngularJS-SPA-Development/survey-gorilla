@@ -1,10 +1,8 @@
 (function() {
-
-  /* global io */
   'use strict';
 
   angular
-    .module('surveyGorillaApp')
+    .module('sg.app')
     .factory('socket', socket);
 
   /* @ngInject */

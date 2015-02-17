@@ -3,7 +3,7 @@
 describe('Directive: sgEnter', function () {
 
   // load the directive's module
-  beforeEach(module('surveyGorillaApp'));
+  beforeEach(module('sg.base'));
 
   var element,
     scope;

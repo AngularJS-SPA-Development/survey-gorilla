@@ -2,6 +2,12 @@
   'use strict';
 
   angular
-    .module('sg.base', []);
+    .module('sg.base', [
+      'ngResource',
+      'ngSanitize',
+      'ngCookies',
+      'ui.router',
+      'ui.bootstrap'
+    ]);
 
 })();
