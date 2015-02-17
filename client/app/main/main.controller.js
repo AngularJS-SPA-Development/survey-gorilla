@@ -12,20 +12,21 @@
     vm.createGroup = createGroup;
     _init(); 
     
-
     function _init() {
-      $scope.onlyMyGroup = true;
-      _groups();
+      _groups(true);
+      _groups(false);
     }
 
-    function _groups() {
+    function _groups(isMyGroup) {
       group 
-        .getGroups($scope.onlyMyGroup)
+        .getGroups(isMyGroup)
         .then(function(response) {
           logger.info('group list: ', response.data);
-          vm.groups = response.data;
-        }, function(error) {
-          sgAlert.error('group list error: ', error);
+          if(isMyGroup) {
+            vm.myGroups = response.data;
+          } else {
+            vm.otherGroups = response.data;
+          }
         });
     }
 
@@ -34,6 +35,7 @@
         .open('sm', 'create-group.html', 'CreateGroupCtrl')
         .then(function(result){
           logger.info('create group result: ', result);
+          vm.myGroups.unshift(result);
         }, function(error) {});
     }
     

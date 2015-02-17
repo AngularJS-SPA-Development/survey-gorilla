@@ -3,40 +3,41 @@
 <div class="col-lg-12 col-md-12 col-sm-12">
 
   <tabset>
-    <tab  select="groupType = 'My'" heading="My Groups" ng-click="onlyMyGroup = true">
+    <tab select="main.groupType = 'My'" heading="My Groups">
       <div style="margin-top:5px;">
         <div class="panel panel-default">
           <div class="panel-heading" style="height:50px; background-color:#F5F5F5;">
               <div class="col-lg-6 col-md-6 col-sm-7 input-group-sm pull-left" style="padding-left:0px;">
-                <input type="text" class="form-control" placeholder="Search {{groupType}} Group">
+                <input type="text" class="form-control" placeholder="Search {{main.groupType}} Group">
               </div>
               <button type="button" 
                       class="pull-right btn btn-default btn-sm"
-                      ng-if="groupType === 'My'">
+                      ng-if="main.groupType === 'My'">
                 <i class="fa fa-users"></i> &nbsp;<a href="#" ng-click="main.createGroup()">Create Group</a>
               </button>
           </div>
           <div class="panel-body">
-            <group-card info="group" ng-repeat="group in main.groups"></group-card>
+            <group-card info="group" ng-repeat="group in main.myGroups"></group-card>
           </div>
         </div>
       </div>
     </tab>
-    <tab select="groupType = 'Other'" heading="Other Groups" ng-click="onlyMyGroup = false">
+
+    <tab select="main.groupType = 'Other'" heading="Other Groups">
       <div style="margin-top:5px;">
         <div class="panel panel-default">
           <div class="panel-heading" style="height:50px; background-color:#F5F5F5;">
               <div class="col-lg-6 col-md-6 col-sm-7 input-group-sm pull-left" style="padding-left:0px;">
-                <input type="text" class="form-control" placeholder="Search {{groupType}} Group">
+                <input type="text" class="form-control" placeholder="Search {{main.groupType}} Group">
               </div>
               <button type="button" 
                       class="pull-right btn btn-default btn-sm"
-                      ng-if="groupType === 'My'">
+                      ng-if="main.groupType === 'My'">
                 <i class="fa fa-users"></i> &nbsp;<a href="#" ng-click="createGroup()">Create Group</a>
               </button>
           </div>
           <div class="panel-body">
-            {{groupType}} Groups content 
+            <group-card info="group" ng-repeat="group in main.otherGroups"></group-card>
           </div>
         </div>
       </div>

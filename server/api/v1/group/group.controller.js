@@ -47,10 +47,6 @@ var getSort = function(sort) {
 
 // Get list of group
 function list(req, res, next) {
-  // user가 존재 하지 않을 경우 
-  if(!req.user) {
-    req.user = {};
-  }
   var member = getMember(req.query.type, req.user.id); //req.login.id);
   var sort = getSort(req.query.sort);
 
