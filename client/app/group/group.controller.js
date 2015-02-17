@@ -1,7 +1,6 @@
-
 (function() {
-
   'use strict';
+
   angular
     .module('surveyGorillaApp')
     .controller('GroupListCtrl', GroupListCtrl)
