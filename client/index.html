@@ -20,14 +20,13 @@
       <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css" />
       <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
       <!-- endbower -->
-      <link rel="stylesheet" href="components/bootstrap-theme/bootwatch-simplex.css" />
+      <!-- not used : <link rel="stylesheet" href="components/app/bootstrap-theme/bootwatch-simplex.css" /> -->
     <!-- endbuild -->
     <!-- build:css({.tmp,client}) app/app.css -->
       <!-- injector:css -->
       <link rel="stylesheet" href="app/account/login/login.css">
       <link rel="stylesheet" href="app/admin/admin.css">
       <link rel="stylesheet" href="app/main/main.css">
-      <link rel="stylesheet" href="components/bootstrap-theme/bootwatch-simplex.css">
       <!-- endinjector -->
       <link rel="stylesheet" href="app/app.css">
     <!-- endbuild -->
@@ -85,14 +84,14 @@
       <script src="bower_components/jstorage/jstorage.js"></script>
       <script src="bower_components/numeral/numeral.js"></script>
       <script src="bower_components/moment/moment.js"></script>
+      <script src="bower_components/angular-deckgrid/angular-deckgrid.js"></script>
       <!-- endbower -->
     <!-- endbuild -->
     <!-- build:js({.tmp,client}) app/app.js -->
       <script src="app/app.js"></script>
-      <script src="components/translation/sg.translation.module.js"></script>
-      <script src="components/translation/sg.translation.js"></script>
-      <script src="components/message/sg.message.module.js"></script>
-      <script src="components/message/sg.message.js"></script>
+      <script src="components/base/sg.base.js"></script>
+      <script src="components/app/translation/sg.translation.module.js"></script>
+      <script src="components/app/message/sg.message.module.js"></script>
       <!-- injector:js -->
       <script src="app/account/account.js"></script>
       <script src="app/account/login/login.controller.js"></script>
@@ -104,23 +103,28 @@
       <script src="app/group/group-manager/group-manager.service.js"></script>
       <script src="app/group/group.controller.js"></script>
       <script src="app/group/group.factory.js"></script>
+      <script src="app/group/group.js"></script>
       <script src="app/group/group.service.js"></script>
+      <script src="app/group/list/group.directive.js"></script>
       <script src="app/main/main.controller.js"></script>
       <script src="app/main/main.js"></script>
       <script src="app/main/main.service.js"></script>
-      <script src="components/auth/auth.controller.js"></script>
-      <script src="components/auth/auth.service.js"></script>
-      <script src="components/auth/user.service.js"></script>
-      <script src="components/mongoose-error/mongoose-error.directive.js"></script>
-      <script src="components/navbar/navbar.controller.js"></script>
-      <script src="components/sgAlert/sgAlert.service.js"></script>
-      <script src="components/sgHttpInterceptor/sgHttpInterceptor.factory.js"></script>
-      <script src="components/socket/socket.service.js"></script>
-      <script src="components/storageService/storageService.service.js"></script>
-      <script src="components/utils/directives/sg-enter/sg-enter.directive.js"></script>
-      <script src="components/utils/directives/sg-select-on-click/sg-select-on-click.directive.js"></script>
-      <script src="components/utils/services/sg-date/sg-date.service.js"></script>
-      <script src="components/utils/services/sg-formatter/sg-formatter.service.js"></script>
+      <script src="components/app/auth/auth.controller.js"></script>
+      <script src="components/app/auth/auth.service.js"></script>
+      <script src="components/app/auth/user.service.js"></script>
+      <script src="components/app/message/sg.message.js"></script>
+      <script src="components/app/mongoose-error/mongoose-error.directive.js"></script>
+      <script src="components/app/navbar/navbar.controller.js"></script>
+      <script src="components/app/sgHttpInterceptor/sgHttpInterceptor.factory.js"></script>
+      <script src="components/app/socket/socket.service.js"></script>
+      <script src="components/app/translation/sg.translation.js"></script>
+      <script src="components/base/directives/sg-enter/sg-enter.directive.js"></script>
+      <script src="components/base/directives/sg-select-on-click/sg-select-on-click.directive.js"></script>
+      <script src="components/base/modal/modal.service.js"></script>
+      <script src="components/base/services/sg-date/sg-date.service.js"></script>
+      <script src="components/base/services/sg-formatter/sg-formatter.service.js"></script>
+      <script src="components/base/sgAlert/sgAlert.service.js"></script>
+      <script src="components/base/storageService/storageService.service.js"></script>
       <!-- endinjector -->
     <!-- endbuild -->
 

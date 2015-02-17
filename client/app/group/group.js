@@ -9,11 +9,11 @@
   /* @ngInject */
   function config($stateProvider) { 
     $stateProvider
-    .state('main', {
-      url: '/things',
-      templateUrl: 'app/main/main.html',
-      controller: 'MainCtrl'
-    });
+      .state('group', {
+        url: '/',
+        templateUrl: 'app/group/group.html',
+        controller: 'GroupListCtrl'
+      });
   }
 
-})();  
+})(); 

@@ -7,17 +7,15 @@
   /* @ngInject */
   function GroupFactory($http, $q) {
 
-    function Group(groupData) {
-      if(groupData) {
-        this.setData(groupData);
-      }
-    }
-
-    Group.prototype = {
+    var group = {
       setData: function(groupData) {
         angular.extend(this, groupData);
       },
       load: function(id) {
+        if(!id) {
+          id = '';
+        } 
+
         var self = this;
         var deferred = $q.defer();
         $http
@@ -46,7 +44,7 @@
       }
     }
 
-    return Group;
+    return group;
   }
 
 })();
