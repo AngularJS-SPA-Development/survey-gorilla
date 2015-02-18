@@ -13,13 +13,14 @@
     _init(); 
     
     function _init() {
-      _groups(true);
-      _groups(false);
+      // change it to $watch
+      //_groups(true);
+      //_groups(false);
     }
 
-    function _groups(isMyGroup) {
+    function _groups(isMyGroup, params) {
       group 
-        .getGroups(isMyGroup)
+        .getGroups(isMyGroup, params)
         .then(function(response) {
           logger.info('group list: ', response.data);
           if(isMyGroup) {
@@ -38,6 +39,14 @@
           vm.myGroups.unshift(result);
         }, function(error) {});
     }
+
+    $scope.$watch(angular.bind(this, function() { return this.myGroupName; }), function(newVal, oldVal) {
+      _groups(true, {name: vm.myGroupName});
+    });
+
+    $scope.$watch(angular.bind(this, function() { return this.otherGroupName; }), function(newVal, oldVal) {
+      _groups(false, {name: vm.otherGroupName});
+    });
     
   }
 

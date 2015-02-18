@@ -8,7 +8,11 @@
         <div class="panel panel-default">
           <div class="panel-heading" style="height:50px; background-color:#F5F5F5;">
               <div class="col-lg-6 col-md-6 col-sm-7 input-group-sm pull-left" style="padding-left:0px;">
-                <input type="text" class="form-control" placeholder="Search {{main.groupType}} Group">
+                <input type="text" 
+                       class="form-control" 
+                       ng-model-options="{ debounce : { 'default' : 300, blur: 0 } }"
+                       ng-model="main.myGroupName"
+                       placeholder="Search {{main.groupType}} Group">
               </div>
               <button type="button" 
                       class="pull-right btn btn-default btn-sm"
@@ -28,7 +32,11 @@
         <div class="panel panel-default">
           <div class="panel-heading" style="height:50px; background-color:#F5F5F5;">
               <div class="col-lg-6 col-md-6 col-sm-7 input-group-sm pull-left" style="padding-left:0px;">
-                <input type="text" class="form-control" placeholder="Search {{main.groupType}} Group">
+                <input type="text" 
+                       class="form-control" 
+                       ng-model-options="{ debounce : { 'default' : 300, blur: 0 } }"
+                       ng-model="main.otherGroupName"
+                       placeholder="Search {{main.groupType}} Group">
               </div>
               <button type="button" 
                       class="pull-right btn btn-default btn-sm"
