@@ -106,6 +106,7 @@
         // 사용자 정보 가져와 currentUser에 저장 
         User.get({}, function(result) {
           currentUser = result.data;
+          storage.put('user', currentUser);
         });
 
         deferred.resolve(data);
@@ -176,6 +177,10 @@
     }
 
     function isLoggedInAsync(cb) {
+      if(!currentUser.hasOwnProperty('role')) {
+        currentUser = storage.get('user');
+      }
+
       if(currentUser.hasOwnProperty('$promise')) {
         currentUser.$promise.then(function() {
           cb(true);

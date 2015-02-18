@@ -17,12 +17,21 @@
       return Groups.one(groupId).get();
     }
 
-    function getGroups(isOnlyMyGroup) {
+    function getGroups(isOnlyMyGroup, params) {
+      var group;
       if(isOnlyMyGroup) {
-        return Groups.customGET('', {type: 'RELATED', sort: '-CREATED'});
+        group = {type: 'RELATED', sort: '-CREATED'};
       } else {
-        return Groups.customGET('', {type: 'UNRELATED', sort: '-CREATED'});
+        group = {type: 'UNRELATED', sort: '-CREATED'}
       }
+
+      if(params) {
+        params = angular.extend(group, params);
+      } else {
+        params = group;
+      }
+
+      return Groups.customGET('', params);
     }
 
     function create(params) {
