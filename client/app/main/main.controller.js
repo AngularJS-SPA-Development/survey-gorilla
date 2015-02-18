@@ -1,5 +1,4 @@
 (function () {
-
   'use strict';
 
   angular
@@ -10,6 +9,7 @@
   function MainCtrl($scope, group, modal, logger, sgAlert) {
     var vm = this;
     vm.createGroup = createGroup;
+    vm.showGroupDetail = showGroupDetail;
     _init(); 
     
     function _init() {
@@ -37,6 +37,14 @@
         .then(function(result){
           logger.info('create group result: ', result);
           vm.myGroups.unshift(result);
+        }, function(error) {});
+    }
+
+    function showGroupDetail(group) {
+      modal
+        .open('', 'read-group.html', 'ReadGroupCtrl', {group: group})
+        .then(function(result){
+          logger.info('read group result: ', result);
         }, function(error) {});
     }
 

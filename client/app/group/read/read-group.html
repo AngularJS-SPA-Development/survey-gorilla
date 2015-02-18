@@ -1,0 +1,32 @@
+<script type="text/ng-template" id="read-group.html">
+  <div>
+    <div class="modal-header">
+        <h3 class="modal-title">Group Info</h3>
+    </div>
+    <div class="modal-body">
+        <div class="row" style="margin-bottom: 20px">
+          <div class="col-md-2">Name: </div>
+          <div class="col-md-8">{{group.name}}</div>
+        </div>
+        <div class="row" style="margin-bottom: 20px">
+          <div class="col-md-2">Photo: </div>
+          <div class="col-md-8">
+            <img class="group_img" ng-src="{{group.photo}}">
+            <div ng-show="isAdmin" class="btn btn-default btn-sm" style="margin-left: 20px" ng-file-select ng-model="file">Select File</div>
+          </div>
+        </div>
+        <div class="row" style="margin-bottom: 20px">
+          <div class="col-md-2">Description: </div>
+          <div class="col-md-8">{{group.description}}</div>
+        </div>
+        <div class="row" style="margin-bottom: 20px">
+          <div class="col-md-2">Member: </div>
+          <div class="col-md-8">{{group.member_count}}</div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="join()">Join</button>
+        <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+    </div>
+  </div>
+</script>

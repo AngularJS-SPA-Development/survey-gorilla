@@ -7,7 +7,8 @@
       'ngSanitize',
       'ngCookies',
       'ui.router',
-      'ui.bootstrap'
+      'ui.bootstrap',
+      'angularFileUpload'
     ]);
 
 })();

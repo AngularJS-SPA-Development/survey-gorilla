@@ -10,7 +10,8 @@
     return {
       restrict: 'EA',
       scope: {
-        group: '=info'
+        group: '=info',
+        showDetail: '&'
       },
       template: '<div class="col-sm-4 col-md-3">' +
                   '<div class="panel panel-default">' + 
@@ -19,18 +20,14 @@
                     '</div>' +
                     '<div class="panel-body">' +
                       '<p class="group_card_desc">{{group.description}}</p> ' +
-                      '<a href="#" ng-click="groupDashboard()" class="btn btn-default btn-xs pull-right" role="button">More Info</a>' +
+                      '<a href="#" ng-click="showDetail({group: group})" class="btn btn-default btn-xs pull-right" role="button">More Info</a>' +
                     '</div>' +
                   '</div>' +
                 '</div>',
       link: link
     };
 
-    function link(scope, element, attrs) {
-      scope.groupDashboard = function() {
-
-      };
-    }
+    function link(scope, element, attrs) {}
   }
 
 })();
