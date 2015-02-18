@@ -1,5 +1,4 @@
 (function () {
-
   'use strict';
 
   angular
@@ -7,36 +6,56 @@
     .controller('MainCtrl', MainCtrl);
 
   /* @ngInject */
-  function MainCtrl($scope, $http, socket, MainSvc) {
-    init(); 
+  function MainCtrl($scope, group, modal, logger, sgAlert) {
+    var vm = this;
+    vm.createGroup = createGroup;
+    vm.showGroupDetail = showGroupDetail;
+    _init(); 
     
-    $scope.addThing = addThing;
-    $scope.deleteThing=  deleteThing;
-
-    function init() {
-      $scope.awesomeThings = [];
-
-      MainSvc.getThings().success(function(awesomeThings) {
-        $scope.awesomeThings = awesomeThings;
-        socket.syncUpdates('thing', $scope.awesomeThings);
-      });
+    function _init() {
+      // change it to $watch
+      //_groups(true);
+      //_groups(false);
     }
-    
-    function addThing() {
-      if($scope.newThing === '') {
-        return;
-      }
-      MainSvc.addThing({ name: $scope.newThing });
-      $scope.newThing = '';
-    };
 
-    function deleteThing(thing) {
-      MainSvc.deleteThing(thing._id);
-    };
+    function _groups(isMyGroup, params) {
+      group 
+        .getGroups(isMyGroup, params)
+        .then(function(response) {
+          logger.info('group list: ', response.data);
+          if(isMyGroup) {
+            vm.myGroups = response.data;
+          } else {
+            vm.otherGroups = response.data;
+          }
+        });
+    }
 
-    $scope.$on('$destroy', function () {
-      socket.unsyncUpdates('thing');
+    function createGroup() {
+      modal
+        .open('sm', 'create-group.html', 'CreateGroupCtrl')
+        .then(function(result){
+          logger.info('create group result: ', result);
+          vm.myGroups.unshift(result);
+        }, function(error) {});
+    }
+
+    function showGroupDetail(group) {
+      modal
+        .open('', 'read-group.html', 'ReadGroupCtrl', {group: group})
+        .then(function(result){
+          logger.info('read group result: ', result);
+        }, function(error) {});
+    }
+
+    $scope.$watch(angular.bind(this, function() { return this.myGroupName; }), function(newVal, oldVal) {
+      _groups(true, {name: vm.myGroupName});
     });
+
+    $scope.$watch(angular.bind(this, function() { return this.otherGroupName; }), function(newVal, oldVal) {
+      _groups(false, {name: vm.otherGroupName});
+    });
+    
   }
 
 })();

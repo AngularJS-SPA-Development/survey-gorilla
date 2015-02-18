@@ -1,0 +1,23 @@
+<script type="text/ng-template" id="create-group.html">
+  <div>
+    <div class="modal-header">
+        <h3 class="modal-title">Create Group</h3>
+    </div>
+    <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="gname">Group Name</label>
+            <input type="text" class="form-control" id="gname" ng-model="group.name" placeholder="Group Name">
+          </div>
+          <div class="form-group">
+            <label for="gdesc">Description</label>
+            <input type="text" class="form-control" id="gdesc" ng-model="group.description" placeholder="Description">
+          </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="create()">Create</button>
+        <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+    </div>
+  </div>
+</script>

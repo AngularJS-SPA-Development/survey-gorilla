@@ -1,12 +1,14 @@
 (function() {
-
   'use strict';
 
+  /**
+   * change storageService to storage
+   */
   angular
-    .module('surveyGorillaApp')
-    .service('storageService', storageService);
+    .module('sg.base')
+    .service('storage', storage);
 
-  function storageService() {
+  function storage() {
     this.setValue = function(key, value, options) {
       angular.element.jStorage.set(key, value, options);
     };

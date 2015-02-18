@@ -1,9 +1,8 @@
 (function() {
-
   'use strict';
 
   angular
-    .module('surveyGorillaApp')
+    .module('sg.app')
     .controller('NavbarCtrl', NavbarCtrl);
 
   /* @ngInject */

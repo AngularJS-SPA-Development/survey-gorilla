@@ -1,20 +1,35 @@
 (function() {
-  'use strict';
+  'use sctrict';
 
   angular
     .module('surveyGorillaApp')
-    .controller('GroupCreateCtrl', GroupCreateCtrl);
-    
+    .controller('CreateGroupCtrl', CreateGroupCtrl);
+
   /* @ngInject */
-  function GroupCreateCtrl($scope, $state, $stateParams, groupSvc) {
-    // group 인스턴스 생성. UI에서 ng-model로 group 인스턴스 속성 설정
-    $scope.group = groupSvc.newGroup();  
-   
-    // group 저장. POST 메소드 /api/v1/groups 요청
-    $scope.addGroup = function() { 
-      groupSvc.addGroup($scope.group).then(function() {
-        $state.go('groups'); // group 관리 화면으로 이동
-      }, function() { /* error */ });
+  function CreateGroupCtrl($scope, $modalInstance, group, sgAlert) {
+    $scope.create = create;
+    $scope.cancel = cancel;
+    _init();
+
+    function _init() {
+      $scope.group = {
+        name: '',
+        description: ''
+      };
+    }
+
+    function create() {
+      group
+        .create($scope.group)
+        .then(function(response) {
+          $modalInstance.close(response.data);
+        }, function(error) {
+          sgAlert.error('create group error', error);
+        });
+    };
+
+    function cancel() {
+      $modalInstance.dismiss('cancel');
     };
   }
 

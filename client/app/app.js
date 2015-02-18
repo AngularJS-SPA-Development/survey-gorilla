@@ -4,15 +4,8 @@
 
   angular
     .module('surveyGorillaApp', [
-		  'ngResource',
-		  'ngSanitize',
-      'ngCookies',
-		  'btford.socket-io',
-		  'ui.router',
-		  'ui.bootstrap',
-      'gettext',
-      'sg.translation',
-      'sg.message'
+		  'sg.app',
+      'sg.base'
 		])
     .config(config)
     .factory('authInterceptor', authInterceptor)
@@ -42,7 +35,7 @@
     // Redirect to login if route requires auth and you're not logged in
     $rootScope.$on('$stateChangeStart', function (event, next) {
       Auth.isLoggedInAsync(function(loggedIn) {
-        if (next.authenticate && !loggedIn) {
+        if (!loggedIn) {
           $location.path('/login');
         }
       });
@@ -50,13 +43,13 @@
   }
 
   /* @ngInject */
-  function authInterceptor($rootScope, $q, storageService, $location) {
+  function authInterceptor($rootScope, $q, storage, $location) {
     return {
       // Add authorization token to headers
       request: function (config) {
         config.headers = config.headers || {};
-        if (storageService.get('token')) {
-          config.headers.Authorization = 'Bearer ' + storageService.get('token');
+        if (storage.get('token')) {
+          config.headers.Authorization = 'Bearer ' + storage.get('token');
         }
         
         return config;
@@ -67,7 +60,7 @@
         if(response.status === 401) {
           $location.path('/login');
           // remove any stale tokens
-          storageService.remove('token');
+          storage.remove('token');
           return $q.reject(response);
         }
         else {

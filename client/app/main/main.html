@@ -1,29 +1,58 @@
-<div ng-include="'components/navbar/navbar.html'"></div>
+<div ng-include="'components/app/navbar/navbar.html'"></div>
 
-<header class="hero-unit" id="banner">
-  <div class="container">
-    <h1 translate>'Allo, 'Allo!</h1>
-    <p class="lead" translate>Kick-start your next web app with Angular Fullstack</p>
-  </div>
-</header>
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 
-<div class="container">
-  <div class="row">
-    <div class="col-lg-12">
-      <h1 class="page-header" translate>Features:</h1>
-      <ul class="nav nav-tabs nav-stacked col-md-4 col-lg-4 col-sm-6" ng-repeat="thing in awesomeThings">
-        <li><a href="#" tooltip="{{thing.info}}">{{thing.name}}<button type="button" class="close" ng-click="deleteThing(thing)">&times;</button></a></li>
-      </ul>
-    </div>
-  </div>
+  <tabset>
+    <tab select="main.groupType = 'My'" heading="My Groups">
+      <div style="margin-top:5px;">
+        <div class="panel panel-default">
+          <div class="panel-heading" style="height:50px; background-color:#F5F5F5;">
+              <div class="col-lg-6 col-md-6 col-sm-7 col-xs-7 input-group-sm pull-left" style="padding-left:0px;">
+                <input type="text" 
+                       class="form-control" 
+                       ng-model-options="{ debounce : { 'default' : 300, blur: 0 } }"
+                       ng-model="main.myGroupName"
+                       placeholder="Search {{main.groupType}} Group">
+              </div>
+              <button type="button" 
+                      class="pull-right btn btn-default btn-sm"
+                      ng-if="main.groupType === 'My'">
+                <i class="fa fa-users"></i> &nbsp;<a href="#" ng-click="main.createGroup()">Create Group</a>
+              </button>
+          </div>
+          <div class="panel-body">
+            <group-card info="group" show-detail="main.showGroupDetail(group)" ng-repeat="group in main.myGroups"></group-card>
+          </div>
+        </div>
+      </div>
+    </tab>
 
-  <form class="thing-form">
-    <label translate>Syncs in realtime across clients</label>
-    <p class="input-group">
-      <input type="text" class="form-control" placeholder="{{'Add a new thing here.'|translate}}" ng-model="newThing">
-      <span class="input-group-btn">
-        <button type="submit" class="btn btn-primary" ng-click="addThing()" translate>Add New</button>
-      </span>
-    </p>
-  </form>
+    <tab select="main.groupType = 'Other'" heading="Other Groups">
+      <div style="margin-top:5px;">
+        <div class="panel panel-default">
+          <div class="panel-heading" style="height:50px; background-color:#F5F5F5;">
+              <div class="col-lg-6 col-md-6 col-sm-7 col-xs-7 input-group-sm pull-left" style="padding-left:0px;">
+                <input type="text" 
+                       class="form-control" 
+                       ng-model-options="{ debounce : { 'default' : 300, blur: 0 } }"
+                       ng-model="main.otherGroupName"
+                       placeholder="Search {{main.groupType}} Group">
+              </div>
+              <button type="button" 
+                      class="pull-right btn btn-default btn-sm"
+                      ng-if="main.groupType === 'My'">
+                <i class="fa fa-users"></i> &nbsp;<a href="#" ng-click="createGroup()">Create Group</a>
+              </button>
+          </div>
+          <div class="panel-body">
+            <group-card info="group" show-detail="main.showGroupDetail(group)" ng-repeat="group in main.otherGroups"></group-card>
+          </div>
+        </div>
+      </div>
+    </tab>
+  </tabset>
+
 </div>
+
+<div ng-include="'app/group/create/create-group.html'"></div>
+<div ng-include="'app/group/read/read-group.html'"></div>
