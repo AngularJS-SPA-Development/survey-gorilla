@@ -11,9 +11,14 @@ process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 require('./components/errors/error');
 require('./components/utilities/requires');
 
-var express = require('express');
-var mongoose = require('mongoose');
-var config = require('./config/environment');
+var express = require('express'),
+    mongoose = require('mongoose'),
+    config = require('./config/environment'),
+    compression = require('compression'),
+    bodyParser = require('body-parser'),
+    multer = require('multer'),
+    methodOverride = require('method-override'),
+    cors = require('cors');
 
 // Connect to database
 mongoose.connect(config.mongo.uri, config.mongo.options);
@@ -27,6 +32,30 @@ var server = require('http').createServer(app);
 var socketio = require('socket.io').listen(server);
 require('./config/socketio')(socketio);
 require('./config/express')(app);
+
+// add multer
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.use(multer({
+  dest: './.tmp/',
+  limits: {
+    files: 1,
+    fileSize: 2 * 1024 * 1024,
+    fields: 1,
+    fieldSize: 1024
+  }
+}));
+app.use(methodOverride());
+// add cors
+app.route('/api/*')
+  .all(cors({
+    origin: true,
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    exposedHeaders: ['Auth-Token'],
+    credentials: true,
+    maxAge: 86400
+  }));
+
 require('./routes')(app);
 
 

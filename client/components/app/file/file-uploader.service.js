@@ -1,23 +1,32 @@
 (function() {
   'use strict';
 
+  /**
+   * maneul : https://github.com/danialfarid/angular-file-upload
+   */
   angular
     .module('sg.base')
     .service('filer', filer);
 
   /* @ngInject */
-  function filer($q, $upload) {
-    this.upload = upload;
+  function filer($q, $upload, config, Auth, logger) {
+    this.uploadPhoto = uploadPhoto;
 
-    function upload(upload_url, params, file, logger) {
+    function uploadPhoto(model, id, file) {
       var deferred = $q.defer();
 
+      var params = {
+        url: config.api_version + '/' + model + '/' + id + '/photo',
+        method: 'PUT',
+        headers: {
+          'Authorization': 'Bearer ' + Auth.getToken()
+        },
+        fileFormDataName: 'photo',
+        file: file[0]
+      };
+
       $upload
-        .upload({
-          url: upload_url,
-          fields: params,
-          file: file
-        })
+        .upload(params)
         .progress(function (evt) {
           var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
           logger.info('progress: ' + progressPercentage + '% ' + evt.config.file.name);

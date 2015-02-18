@@ -9,6 +9,7 @@ exports.read = read;
 exports.create = create;
 exports.update = update;
 exports.destroy = destroy;
+exports.preload = preload;
 
 // Get list of group
 function list(options) {
@@ -76,7 +77,7 @@ function read(id) {
     deferred.resolve(group);
   });
   return deferred.promise;
-};
+}
 
 // Creates a new group in the DB.
 function create(params, user) {
@@ -99,7 +100,7 @@ function create(params, user) {
     });
   });
   return deferred.promise;
-};
+}
 
 // Updates an existing group in the DB.
 function update(id, params) {
@@ -121,7 +122,7 @@ function update(id, params) {
     }); 
   });
   return deferred.promise;
-};
+}
 
 // Deletes a group from the DB.
 function destroy(id) {
@@ -143,4 +144,62 @@ function destroy(id) {
     
   });
   return deferred.promise;
+}
+
+function preload(id) {
+  var deferred = Q.defer();
+
+  Group.findOne({ _id: id, deleted_at: { $exists: false } }).exec(function(err, group) {
+    if (err) {
+      if (err.name === 'CastError' && err.type === 'ObjectId')
+        return deferred.reject(new errors.GroupNotFoundError(id));
+      else return deferred.reject(err);
+    }
+
+    if (!group) return deferred.reject(new errors.GroupNotFoundError(id));
+
+    deferred.resolve(group);
+  });
+
+  return deferred.promise;
+}
+
+exports.photo = {
+  upload: function(group, image) {
+    var deferred = Q.defer();
+
+    group.has_photo = true;
+    group.photo = image;
+
+    group.save(function(err, group) {
+      if (err) return deferred.reject(err);
+
+      deferred.resolve(group);
+    });
+
+    return deferred.promise;
+  },
+
+  download: function(group) {
+    var deferred = Q.defer();
+
+    var id = group.id;
+
+    Group.findOne({ _id: id }).exec(function(err, group) {
+      if (err) {
+        if (err.name === 'CastError' && err.type === 'ObjectId')
+          return deferred.reject(new errors.GroupNotFoundError(id));
+        else return deferred.reject(err);
+      }
+
+      if (!group) return deferred.reject(new errors.GroupNotFoundError(id));
+
+      if (!group.has_photo || !group.photo)
+        return deferred.reject(new errors.PhotoNotFoundError(id, 'Photo for group:' + id + ' is not found.'));
+
+      deferred.resolve(group);
+    });
+
+    return deferred.promise;
+  }
 };

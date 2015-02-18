@@ -13,7 +13,7 @@
         group: '=info',
         showDetail: '&'
       },
-      template: '<div class="col-sm-4 col-md-3">' +
+      template: '<div class="col-md-3 col-sm-4 col-xs-4">' +
                   '<div class="panel panel-default">' + 
                     '<div class="panel-heading">' +
                       '<h3 class="panel-title"><i class="fa fa-users"></i> {{group.name}}</h3>' +

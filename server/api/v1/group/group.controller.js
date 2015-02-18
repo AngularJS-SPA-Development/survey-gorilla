@@ -1,6 +1,8 @@
 'use strict';
 
-var GroupService = require('./group.service');
+var GroupService = require('./group.service'),
+    photoUtils = localrequire.module('photo'),
+    util = localrequire.module('util');
 
 exports.list = list;
 exports.read = read;
@@ -138,3 +140,53 @@ function destroy(req, res, next) {
       next(err);
     });
 };
+
+exports.photo = {
+  upload: function(req, res, next) {
+    var group = req.group;
+    var photo = req.files.photo;
+
+    if (photo && photo.path) {
+      photoUtils.read(photo.path, 128)
+        .then(function(data) {
+          return GroupService.photo.upload(group, data);
+        })
+        .then(function(group) {
+          res.writeHead('200', { 'Content-Type': 'image/png' });
+          res.end(group.photo, 'base64');
+        })
+        .catch(function(err) {
+          next(err);
+        });
+    } else {
+      next(new errors.PhotoRequiredError());
+    }
+  },
+
+  download: function(req, res, next) {
+    GroupService
+      .photo.download(req.group)
+      .then(function(group) {
+        var photo = group.photo;
+        var hash = util.calculateHash(photo);
+
+        if (util.isNotModified(req, hash)) {
+          res.writeHead('304', {
+            'ETag': hash,
+            'Cache-Control': 'public, max-age=86400'
+          });
+          res.end();
+        } else {
+          res.writeHead('200', {
+            'Content-Type': 'image/png',
+            'ETag': hash,
+            'Cache-Control': 'public, max-age=86400'
+          });
+          res.end(photo, 'base64');
+        }
+      }).catch(function(err) {
+        next(err);
+      });
+  }
+};
+
