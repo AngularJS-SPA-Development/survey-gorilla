@@ -147,7 +147,8 @@ exports.photo = {
     var photo = req.files.photo;
 
     if (photo && photo.path) {
-      photoUtils.read(photo.path, 128)
+      // 600 파일의 width 조정 
+      photoUtils.read(photo.path, 600)
         .then(function(data) {
           return GroupService.photo.upload(group, data);
         })

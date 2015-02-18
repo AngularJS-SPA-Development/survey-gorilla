@@ -18,8 +18,8 @@
                     '<div class="panel-heading">' +
                       '<h3 class="panel-title"><i class="fa fa-users"></i> {{group.name}}</h3>' +
                     '</div>' +
-                    '<div class="panel-body">' +
-                      '<p class="group_card_desc">{{group.description}}</p> ' +
+                    '<div class="panel-body" ng-style="backgroundImage">' +
+                      '<p class="group_card_desc" ng-style="descriptionFont">{{group.description}}</p> ' +
                       '<a href="#" ng-click="showDetail({group: group})" class="btn btn-default btn-xs pull-right" role="button">More Info</a>' +
                     '</div>' +
                   '</div>' +
@@ -27,7 +27,20 @@
       link: link
     };
 
-    function link(scope, element, attrs) {}
+    function link(scope, element, attrs) {
+      scope.backgroundImage = {
+        'background-image': 'url(' + scope.group.photo + ')',
+        'background-repeat': 'no-repeat',
+        'background-size': 'cover'
+      };
+
+      scope.descriptionFont = {
+        'color': 'yellow',
+        'text-shadow': '0 0 8px #000',
+        '-moz-text-shadow': '0 0 8px #000',
+        '-webkit-text-shadow': '0 0 8px #000'
+      };
+    }
   }
 
 })();

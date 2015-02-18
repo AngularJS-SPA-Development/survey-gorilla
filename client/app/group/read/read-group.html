@@ -11,11 +11,13 @@
         <div class="row" style="margin-bottom: 20px">
           <div class="col-md-2 col-sm-2 col-xs-2">Photo: </div>
           <div class="col-md-8 col-sm-8 col-xs-8">
-            <img class="group_img" id="_photo" ng-src="{{group.photo}}">
+            <!-- change photo-profile -->
+            <!--img class="group_img" id="_photo" ng-src="{{group.photo}}">
             <div ng-show="isAdmin" 
                  ng-file-select 
                  ng-model="file"
-                 class="btn btn-default btn-sm" style="margin-left: 20px">Select File</div>
+                 class="btn btn-default btn-sm" style="margin-left: 20px">Select File</div-->
+            <photo-profile info="profile"></photo-profile>
           </div>
         </div>
         <div class="row" style="margin-bottom: 20px">
