@@ -31,8 +31,9 @@
           .then(function(response) {
             // change image
             var media = document.getElementById('_photo');
-            media.src = config.api_version + '/' + scope.profile.modelName + '/' + scope.profile.modelId + '/photo';  
-            $rootScope.$broadcast('group:image:change', {id: scope.profile.modelId, photo: media.src});
+            var photo_url = config.api_version + '/' + scope.profile.modelName + '/' + scope.profile.modelId + '/photo';
+            media.src = photo_url;  
+            $rootScope.$broadcast('profile:image:change', {id: scope.profile.modelId, photo: photo_url});
           });
       }
     }

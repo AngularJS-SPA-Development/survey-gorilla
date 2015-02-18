@@ -28,6 +28,16 @@
     };
 
     function link(scope, element, attrs) {
+      scope.$on('profile:image:change', function(evt, data) {
+        if(data.id === scope.group.id) {
+          scope.backgroundImage = {
+            'background-image': 'url(' + data.photo + ')',
+            'background-repeat': 'no-repeat',
+            'background-size': 'cover'
+          };
+        }
+      });
+
       scope.backgroundImage = {
         'background-image': 'url(' + scope.group.photo + ')',
         'background-repeat': 'no-repeat',

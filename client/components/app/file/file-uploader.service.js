@@ -31,10 +31,10 @@
           var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
           logger.info('progress: ' + progressPercentage + '% ' + evt.config.file.name);
         }).success(function (data, status, headers, config) {
-          logger.info('file ' + config.file.name + 'uploaded. success: ' + JSON.stringify(data));
+          //logger.info('file ' + config.file.name + 'uploaded. success: ' + JSON.stringify(data));
           deferred.resolve(data);
         }).error(function (data, status, headers, config) {
-          logger.info('file ' + config.file.name + 'uploaded. error: ' + JSON.stringify(data));
+          //logger.info('file ' + config.file.name + 'uploaded. error: ' + JSON.stringify(data));
           deferred.reject(data);
         });
 
