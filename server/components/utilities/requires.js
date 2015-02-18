@@ -28,4 +28,14 @@ GLOBAL.localrequire = {
   AuthService: function() {
     return require('../../auth/auth.service');
   },
+  // add localrequire
+  domain: function(domain, name) {
+    return require('../../api/v1/' + domain + '/' + name);
+  },
+  middleware: function(name) {
+    return require('../../middlewares/' + name);
+  },
+  module: function(name) {
+    return require('./' + name);
+  }
 };

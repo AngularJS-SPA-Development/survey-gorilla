@@ -49,7 +49,6 @@ module.exports = function(app) {
   // Insert routes below
   app.use(apiv('/groups'), require('./api/v1/group'));
   app.use(apiv('/users'), require('./api/v1/user'));
-  app.use(api('/things'), require('./api/thing'));
 
   app.use(api('/auth'), require('./auth'));
   

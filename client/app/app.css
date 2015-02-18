@@ -37,3 +37,15 @@
     color: #000;
     padding: 0.2em 0;
 }
+
+/**
+ * group Card
+ */
+.group_card_desc {
+  height: 50px;
+}
+
+.group_img {
+  height: 100px;
+  width: 100px;
+}
