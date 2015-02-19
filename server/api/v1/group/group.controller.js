@@ -191,3 +191,25 @@ exports.photo = {
   }
 };
 
+// member auto enroll
+exports.members = {
+  enroll: function (req, res, next) {
+    GroupService.members
+      .enroll(req.group, req.user)
+      .then(function() {
+        res.finish();
+      }).catch(function(err) {
+        next(err);
+      });
+  },
+  leave: function(req, res, next) {
+    GroupService.members
+      .leave(req.group, req.user)
+      .then(function() {
+        res.finish();
+      }).catch(function(err) {
+        next(err);
+      });
+  }
+};
+

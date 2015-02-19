@@ -14,7 +14,7 @@
       },
       template: '<div>' +
                   '<img class="group_img" id="_photo" ng-src="{{profile.modelPhoto}}">' +
-                  '<div ng-show="profile.isAdmin" ng-file-select ng-model="file" class="btn btn-default btn-sm" style="margin-left: 20px">Select File</div>' +
+                  '<div ng-if="profile.isAdmin" ng-file-select ng-model="file" class="btn btn-default btn-sm" style="margin-left: 20px">Select File</div>' +
                 '</div>',
       link: link
     };
