@@ -12,6 +12,8 @@
     this.create = create;
     this.remove = remove;
     this.update = update;
+    this.memberEnroll = memberEnroll;
+    this.memberLeave = memberLeave;
     this.isGroupOwner = isGroupOwner;
 
     function getGroup(groupId) {
@@ -45,6 +47,14 @@
 
     function update(groupId, params) {
       return Groups.one(groupId).customPUT(params);
+    }
+
+    function memberEnroll(groupId) {
+      return Groups.one(groupId).customPOST('', 'members/enroll');
+    }
+
+    function memberLeave(groupId) {
+      return Groups.one(groupId).customPOST('', 'members/leave');
     }
 
     function isGroupOwner(group) {

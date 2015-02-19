@@ -44,4 +44,17 @@ router.put('/:id/photo', [
   controller.photo.upload
 ]);
 
+// enroll
+router.post('/:id/members/enroll', [
+  auth.isAuthenticated(),
+  preloading.requiresGroup,
+  controller.members.enroll
+]);
+
+router.post('/:id/members/leave', [
+  auth.isAuthenticated(),
+  preloading.requiresGroup,
+  controller.members.leave
+]);
+
 module.exports = router;

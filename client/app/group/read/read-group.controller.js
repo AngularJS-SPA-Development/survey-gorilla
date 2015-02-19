@@ -7,7 +7,9 @@
 
   /* @ngInject */
   function ReadGroupCtrl($scope, $modalInstance, params, group, sgAlert, logger) {
-    $scope.join = join;
+    $scope.memberJoin = memberJoin;
+    $scope.memberLeave = memberLeave;
+    $scope.save = save;
     $scope.cancel = cancel;
     _init();
 
@@ -18,8 +20,9 @@
         modelName: 'groups',
         modelId: params.group.id,
         modelPhoto: params.group.photo,
-        isAdmin: group.isGroupOwner(params.group)
-      }
+        isAdmin: group.isGroupOwner(params.group),
+        isMember: params.type === 'myGroup' ? true:false
+      };
 
       // photo-profile directive 로 옮김 
       // 
@@ -43,7 +46,31 @@
     //     });
     // }
 
-    function join() {
+    function memberJoin() {
+      group
+        .memberEnroll($scope.group.id)
+        .then(function(response) {
+          $scope.group.memberEnroll = true;
+          $modalInstance.close($scope.group);
+          sgAlert.success('Successfully join group');
+        }, function(error){
+
+        });
+    }
+
+    function memberLeave() {
+      group
+        .memberLeave($scope.group.id)
+        .then(function(response) {
+          $scope.group.memberLeave = true;
+          $modalInstance.close($scope.group);
+          sgAlert.success('Successfully leave group');
+        }, function(error){
+
+        });
+    }
+
+    function save() {
 
     }
 

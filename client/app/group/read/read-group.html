@@ -1,7 +1,11 @@
 <script type="text/ng-template" id="read-group.html">
   <div>
     <div class="modal-header">
-        <h3 class="modal-title">Group Info</h3>
+        <h3 class="modal-title">
+          Group Info 
+          <button ng-hide="profile.isMember" class="btn btn-primary pull-right" ng-click="memberJoin()">Join Group</button>
+          <button ng-show="profile.isMember && !profile.isAdmin" class="btn btn-primary pull-right" ng-click="memberLeave()">Leave Group</button>
+        </h3>
     </div>
     <div class="modal-body">
         <div class="row" style="margin-bottom: 20px">
@@ -11,13 +15,16 @@
         <div class="row" style="margin-bottom: 20px">
           <div class="col-md-2 col-sm-2 col-xs-2">Photo: </div>
           <div class="col-md-8 col-sm-8 col-xs-8">
-            <!-- change photo-profile -->
+            
+            <!-- change it to photo-profile -->
             <!--img class="group_img" id="_photo" ng-src="{{group.photo}}">
-            <div ng-show="isAdmin" 
+            <div ng-show="isMember" 
                  ng-file-select 
                  ng-model="file"
                  class="btn btn-default btn-sm" style="margin-left: 20px">Select File</div-->
+
             <photo-profile info="profile"></photo-profile>
+
           </div>
         </div>
         <div class="row" style="margin-bottom: 20px">
@@ -30,7 +37,7 @@
         </div>
     </div>
     <div class="modal-footer">
-        <button class="btn btn-primary" ng-click="join()">Join</button>
+        <button ng-show="profile.isAdmin" class="btn btn-primary" ng-click="save()">Save</button>
         <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
     </div>
   </div>

@@ -66,12 +66,12 @@ var GroupSchema = new Schema({
         delete ret.owner;
       }
 
-      if (doc.populated('members.member')) {
+      //if (doc.populated('members.member')) {
         ret.members = _.sortBy(ret.members, common.sortByRole);
-      } else {
+      //} else {
         ret.member_count = ret.members.length;
-        delete ret.members;
-      }
+      //  delete ret.members;
+      //}
 
       return ret;
     }
