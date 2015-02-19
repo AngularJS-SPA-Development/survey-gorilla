@@ -19,13 +19,16 @@
       <!-- bower:css -->
       <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css" />
       <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+      <link rel="stylesheet" href="bower_components/bootcards/dist/css/bootcards.css" />
       <!-- endbower -->
+      <link rel="stylesheet" href="bower_components/bootcards/dist/css/bootcards-desktop.min.css" />
       <!-- not used : <link rel="stylesheet" href="components/app/bootstrap-theme/bootwatch-simplex.css" /> -->
     <!-- endbuild -->
     <!-- build:css({.tmp,client}) app/app.css -->
       <!-- injector:css -->
       <link rel="stylesheet" href="app/account/login/login.css">
       <link rel="stylesheet" href="app/admin/admin.css">
+      <link rel="stylesheet" href="app/dashboard/dashboard.css">
       <!-- endinjector -->
       <link rel="stylesheet" href="app/app.css">
     <!-- endbuild -->
@@ -44,6 +47,7 @@
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
+    <div ng-include="'components/app/navbar/navbar.html'"></div>
     <!-- Add your site or application content here -->
     <div ui-view=""></div>
 
@@ -84,6 +88,8 @@
       <script src="bower_components/numeral/numeral.js"></script>
       <script src="bower_components/moment/moment.js"></script>
       <script src="bower_components/angularjs-file-upload/angular-file-upload.js"></script>
+      <script src="bower_components/fastclick/lib/fastclick.js"></script>
+      <script src="bower_components/bootcards/dist/js/bootcards.js"></script>
       <!-- endbower -->
       <script src="bower_components/noty/js/noty/packaged/jquery.noty.packaged.js"></script>
       <script src="bower_components/restangular/dist/restangular.js"></script>
@@ -102,6 +108,8 @@
       <script src="app/account/signup/signup.controller.js"></script>
       <script src="app/admin/admin.controller.js"></script>
       <script src="app/admin/admin.js"></script>
+      <script src="app/dashboard/dashboard.controller.js"></script>
+      <script src="app/dashboard/dashboard.js"></script>
       <script src="app/group/create/create-group.controller.js"></script>
       <script src="app/group/groups.js"></script>
       <script src="app/group/groups.service.js"></script>
