@@ -66,7 +66,9 @@ function list(options) {
 function read(id) {
   var deferred = Q.defer();
 
-  Group.findById(id, function (err, group) {
+  Group
+    .findOne({ _id: id, deleted_at: { $exists: false } })
+    .populate('owner members.member').exec(function(err, group) {
     if(err) return deferred.reject(err);
     if (!group) return deferred.reject(
       Error.new({
@@ -76,6 +78,7 @@ function read(id) {
     );
     deferred.resolve(group);
   });
+
   return deferred.promise;
 }
 
