@@ -16,7 +16,7 @@
       template: '<div class="col-lg-3 col-md-3 col-sm-4 col-xs-6">' +
                   '<div class="panel panel-default">' + 
                     '<div class="panel-heading">' +
-                      '<h3 class="panel-title"><i class="fa fa-users"></i> {{group.name}}</h3>' +
+                      '<h3 class="panel-title"><i class="fa fa-users"></i> <a ng-href="#/dashboard/{{group.id}}">{{group.name}}</a></h3>' +
                     '</div>' +
                     '<div class="panel-body" ng-style="backgroundImage">' +
                       '<p class="group_card_desc" ng-style="descriptionFont">{{group.description}}</p> ' +
