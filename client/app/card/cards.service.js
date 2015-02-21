@@ -12,21 +12,14 @@
     this.create = create;
     this.remove = remove;
     this.update = update;
-    this.memberEnroll = memberEnroll;
-    this.memberLeave = memberLeave;
     this.isCardOwner = isCardOwner;
 
     function getCard(cardId) {
       return Cards.one(cardId).get();
     }
 
-    function getCards(isOnlyMyCard, params) {
-      var card;
-      if(isOnlyMyCard) {
-        card = {type: 'RELATED', sort: '-CREATED'};
-      } else {
-        card = {type: 'UNRELATED', sort: '-CREATED'}
-      }
+    function getCards(groupId, params) {
+      var card = {group: groupId, type: 'ALL', complete: 'ALL', sort: '-CREATED'};
 
       if(params) {
         params = angular.extend(card, params);

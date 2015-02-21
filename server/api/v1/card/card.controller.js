@@ -125,9 +125,7 @@ function list(req, res, next) {
     },
     limit: req.query.limit
   }, req.user).then(function(groups) {
-    res.finish({
-      data: groups
-    });
+    res.finish(200, groups);
   }).catch(function(err) {
     next(err);
   });
@@ -136,20 +134,16 @@ function list(req, res, next) {
 function read(req, res, next) {
   CardService.read(req.params.card, req.user)
   .then(function(card) {
-    res.finish({
-      data: card
-    });
+    res.finish(200, card);
   }).catch(function(err) {
     next(err);
   });
 };
 
 function create(req, res, next) {
-  CardService.create(req.body, req.me)
+  CardService.create(req.body, req.user)
   .then(function(card) {
-    res.finish({
-      data: card
-    });
+    res.finish(200, card);
   }).catch(function(err) {
     next(err);
   });
@@ -160,9 +154,7 @@ function update(req, res, next) {
 
   CardService.update(req.card, req.body)
   .then(function(card) {
-    res.finish({
-      data: card
-    });
+    res.finish(200, card);
   }).catch(function(err) {
     next(err);
   });
@@ -171,16 +163,14 @@ function update(req, res, next) {
 exports.delete = function(req, res, next) {
   CardService.delete(req.card)
   .then(function(card) {
-    res.finish({
-      data: card
-    });
+    res.finish(200, card);
   }).catch(function(err) {
     next(err);
   });
 };
 
 function respond(req, res, next) {
-  CardService.respond(req.card, req.body, req.me)
+  CardService.respond(req.card, req.body, req.user)
   .then(function() {
     exports.read(req, res, next);
   })

@@ -6,14 +6,16 @@
     .controller('CreateCardCtrl', CreateCardCtrl);
 
   /* @ngInject */
-  function CreateCardCtrl($scope, $modalInstance, card, sgAlert) {
+  function CreateCardCtrl($scope, $modalInstance, params, card, sgAlert) {
     $scope.create = create;
     $scope.cancel = cancel;
     _init();
 
     function _init() {
       $scope.card = {
-        name: '',
+        group: params.id, // params is group object
+        type: 'NOTICE',
+        title: '',
         description: ''
       };
     }

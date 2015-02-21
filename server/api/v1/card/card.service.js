@@ -151,7 +151,7 @@ function create(contents, user) {
     card.populate('group responses.member', function(err, card) {
       if (err) return deferred.reject(err);
 
-      alarm.cardPublished(card, user);
+      //alarm.cardPublished(card, user);
 
       // Adds 'viewer' property for json rendering
       card.viewer = user.id;
@@ -195,7 +195,7 @@ function respond(card, response, user) {
 
     card.populate('group', function(err, card) {
       if (!err) {
-        alarm.cardResponded(card, user);
+        //alarm.cardResponded(card, user);
       }
     });
 
@@ -253,7 +253,7 @@ function complete(card, auto) {
 
     card.populate('group', function(err, card) {
       if (!err) {
-        alarm.cardCompleted(card, auto);
+        //alarm.cardCompleted(card, auto);
       }
     });
 
