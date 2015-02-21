@@ -2,11 +2,11 @@
   'use strict';
 
   angular
-    .module('sg.app')
+    .module('surveyGorillaApp')
     .service('group', group);
 
   /* @ngInject */
-  function group(Groups, config, Auth) {
+  function group(Groups, Auth) {
     this.getGroup = getGroup;
     this.getGroups = getGroups;
     this.create = create;
