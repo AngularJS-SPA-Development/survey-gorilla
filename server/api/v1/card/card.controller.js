@@ -132,7 +132,7 @@ function list(req, res, next) {
 };
 
 function read(req, res, next) {
-  CardService.read(req.params.card, req.user)
+  CardService.read(req.params.id, req.user)
   .then(function(card) {
     res.finish(200, card);
   }).catch(function(err) {

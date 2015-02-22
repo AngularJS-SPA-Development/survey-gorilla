@@ -111,25 +111,6 @@ var CardSchema = new Schema({
         var isCompleted = doc.completed;
         if (isOwner || isResponder || isCompleted) {
           ret.responded = true;
-          /*
-          ret.nonresponders = _.chain(doc.group.members).filter(function(member) {
-            var isOwner = member.member.equals(doc.owner);
-            var isResponder = _.some(doc.responses, function(response) {
-              return member.member.equals(response.member);
-            });
-            return !isOwner && !isResponder;
-          }).map(function(member) {
-            // NOTE member is not populated T_T
-            return {
-              id: member.id,
-              email: member.email,
-              name: member.name,
-              has_photo: member.has_photo,
-              photo: common.getUserPhoto(member.id, member.has_photo),
-              role: member.role
-            };
-          }).value();
-          */
         } else {
           ret.responded = false;
           delete ret.responses;

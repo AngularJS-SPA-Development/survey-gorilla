@@ -19,7 +19,7 @@ exports.requiresMe = function(req, res, next) {
 
 exports.requiresUser = function(req, res, next) {
   UserService
-    .preload(req.params.user)
+    .preload(req.params.id)
     .then(function(user) {
       req.user = user;
       next();
@@ -84,7 +84,7 @@ exports.requiresGroupFromQuery = function(req, res, next) {
 
 exports.requiresCard = function(req, res, next) {
   CardService
-    .preload(req.params.card)
+    .preload(req.params.id)
     .then(function(card) {
       req.card = card;
       next();

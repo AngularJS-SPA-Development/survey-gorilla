@@ -64,7 +64,9 @@
         </div>  
       </div -->
 
-      <card info="card" ng-repeat="card in dashboard.cards"></card>
+      <card info="card" ng-repeat="card in dashboard.cards">
+        <card-type info="card"></card-type>
+      </card>
       
     </div>
 
@@ -72,3 +74,6 @@
 </div>
 
 <div ng-include="'app/card/create/create-card.html'"></div>
+<div ng-include="'app/card/type/notice/notice.html'"></div>
+<div ng-include="'app/card/type/objective/objective.html'"></div>
+<div ng-include="'app/card/type/rating/rating.html'"></div>
