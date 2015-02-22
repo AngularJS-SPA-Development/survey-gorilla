@@ -5,11 +5,16 @@
     .module('surveyGorillaApp')
     .controller('DashboardCtrl', DashboardCtrl);
 
-  function DashboardCtrl($scope, $stateParams, group, logger) {
+  function DashboardCtrl($scope, $stateParams, modal, group, card, logger) {
     var vm = this;
+    vm.addCard = addCard;
     _init();
 
     function _init() {
+      // 카드를 만들어줌 
+      vm.cards = [];
+
+      // 그룹 및 그룹 멤버 조회 
       group
         .getGroup($stateParams.id)
         .then(function(response) {
@@ -25,10 +30,25 @@
             '-moz-text-shadow': '0 0 8px #000',
             '-webkit-text-shadow': '0 0 8px #000'
           };
+          vm.isAdmin = group.isGroupOwner(vm.group);
           logger.info('group dashboard: ', vm.group);
         });
 
-      
+      // 카드 목록 조회 
+      card 
+        .getCards($stateParams.id)
+        .then(function(response) {
+          vm.cards = response.data;
+        });
+    }
+
+    function addCard() {
+      modal
+        .open('', 'create-card.html', 'CreateCardCtrl', vm.group)
+        .then(function(result){
+          logger.info('create card result: ', result);
+          vm.cards.unshift(result);
+        }, function(error) {});
     }
   }
 
