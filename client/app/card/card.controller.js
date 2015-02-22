@@ -6,7 +6,7 @@
     .controller('cardCtrl', cardCtrl);
 
   /* @ngInject */
-  function cardCtrl($scope, pubsub, logger) {
+  function cardCtrl($scope, pubsub, modal, logger) {
     $scope.respondCard = respondCard;
     $scope.respondMember = respondMember;
     var vm = this;
@@ -53,7 +53,9 @@
     }
 
     function respondMember() {
-
+       modal
+        .open('sm', 'show-respond-member.html', 'ShowRespondMemberCtrl', $scope.card)
+        .then(function(result){}, function(error) {});
     }
 
     function _subscribe() {
