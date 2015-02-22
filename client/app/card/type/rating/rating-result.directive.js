@@ -9,7 +9,7 @@
     return {
       restrict: 'EA',
       template: '<div class="rating" ng-cloak>' +
-                  '<div ng-repeat="rate in ratings" class="slide-left">' +
+                  '<div ng-repeat="rate in ratings">' +
                     '<img ng-src="{{rating > $index ? \'/images/rating_active.png\' : \'/images/rating.png\'}}">' +
                   '</div>' + 
                   '<span class="scale-fade">{{rating | number:1}}</span>' + 
