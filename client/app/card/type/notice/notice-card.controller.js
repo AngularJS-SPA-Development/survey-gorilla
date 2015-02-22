@@ -14,18 +14,14 @@
 
     function _subscribe() {
       pubsub.subscribe('response-card:' + $scope.card.id, _response, $scope);
-      
-      // clear pubsub listener
       $scope.$on('$destroy', function() {
         pubsub.clear('response-card:' + $scope.card.id, $scope);
       });
     }
 
-    //----------------------------------------
-    //
-    // Send response card
-    //
-    //----------------------------------------
+    /**
+     * Send response card
+     */
     function _response() {
       cardCondition
         .responseCard($scope.card.id, {})
