@@ -41,7 +41,7 @@
   }
 
   /* @ngInject */
-  function cardType(templateCache) {
+  function cardType(templateCache, $timeout) {
     return {
       restrict: 'EA',
       require: '^card',
@@ -56,7 +56,9 @@
       scope.$watch(function() { return cardCtrl.templateId; }, function(templateId) {
         if(!templateId) { return; } 
         // 템플릿에 따라 카드의 종류가 틀려진다. 
-        $(element).html(templateCache.getTemplate(templateId, scope));
+        $timeout(function() {
+          element.html(templateCache.getTemplate(templateId, scope));
+        });
       });
     }
   }
