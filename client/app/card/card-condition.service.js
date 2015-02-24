@@ -46,7 +46,7 @@
     function _single(card) {
       var results = [];
       angular.forEach(card.survey.options, function(option) {
-        results.push({ 'option': option, 'count': 0, 'rate': 0 });
+        results.push({ 'option': option, 'count': 0, 'rate': 0, 'type': 'danger' });
       });
 
       angular.forEach(card.responses, function(response) {
@@ -59,6 +59,7 @@
       var total = card.responses.length;
       angular.forEach(results, function(result) {
         if(result.count) {
+          result.type = _type((result.count/total) * 100);
           result.rate = sgFormatter.percentFormat((result.count/total) * 100);
         }  
       });
@@ -68,7 +69,7 @@
     function _multiple(card) {
       var results = [];
       angular.forEach(card.survey.options, function(option) {
-        results.push({ 'option': option, 'count': 0, 'rate': 0 });
+        results.push({ 'option': option, 'count': 0, 'rate': 0, 'type': 'danger' });
       });
 
       var total = 0;
@@ -84,9 +85,26 @@
 
       angular.forEach(results, function(result) {
         if(result.count) {
+          result.type = _type((result.count/total) * 100);
           result.rate = sgFormatter.percentFormat((result.count/total) * 100);
         }  
       });
+
+      return results;
+    }
+
+    function _type(value) {
+      var type = 'danger';
+      if (value < 25) {
+        type = 'danger';
+      } else if (value < 50) {
+        type = 'warning';
+      } else if (value < 75) {
+        type = 'info';
+      } else {
+        type = 'success';
+      }
+      return type;
     }
   }
 
