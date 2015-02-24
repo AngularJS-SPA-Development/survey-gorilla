@@ -5,14 +5,20 @@
     .module('surveyGorillaApp')
     .controller('ratingCardTypeCtrl', ratingCardTypeCtrl);
 
+  /* @ngInject */
   function ratingCardTypeCtrl($scope, cardCondition, pubsub, logger) {
     $scope.setRating = setRating;
     _init();
 
     function _init() {
       _subscribe();
-      $scope.response_card = {rating: { rating: 0 }};
       $scope.ratings = [{id:0, status:false}, {id:1, status:false}, {id:2, status:false}, {id:3, status:false}, {id:4, status:false}];
+
+      if($scope.card.responded) {
+        $scope.rating = cardCondition.calcResult($scope.card);
+      } else {
+        $scope.response_card = {rating: { rating: 0 }};
+      }
     }
 
     function setRating(idx) {

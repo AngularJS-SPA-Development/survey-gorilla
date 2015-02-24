@@ -5,7 +5,7 @@
     .module('surveyGorillaApp')
     .directive('ratingsResult', ratingsResult);
 
-  function ratingsResult() {
+  function ratingsResult(cardCondition) {
     return {
       restrict: 'EA',
       template: '<div class="rating" ng-cloak>' +
@@ -18,14 +18,6 @@
     };
 
     function link(scope, element, attrs) {
-      if(!scope.card.responses || scope.card.responses.length <= 0) { return; }
-
-      // 개별적인 응답값을 계산 
-      var total = 0;
-      angular.forEach(scope.card.responses, function(respond) {
-        total += respond.rating.rating;
-      });
-      scope.rating = total/scope.card.responses.length;
     }
   }
 
