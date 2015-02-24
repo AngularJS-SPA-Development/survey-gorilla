@@ -11,9 +11,11 @@
     _init();
 
     function _init() {
-      // 카드를 만들어줌 
-      vm.cards = [];
+      _groupInfo();
+      _searchCards();
+    }
 
+    function _groupInfo() {
       // 그룹 및 그룹 멤버 조회 
       group
         .getGroup($stateParams.id)
@@ -33,10 +35,22 @@
           vm.isAdmin = group.isGroupOwner(vm.group);
           logger.info('group dashboard: ', vm.group);
         });
+    }
 
+    function _searchCards() {
+      $scope.$watch(function() { 
+        return vm.cardTitle; 
+      }, function(newVal, oldVal) {
+        _cards({title: vm.cardTitle});
+      });
+    }
+
+    function _cards(params) {
+      // 카드를 만들어줌 
+      vm.cards = [];
       // 카드 목록 조회 
       card 
-        .getCards($stateParams.id)
+        .getCards($stateParams.id, params)
         .then(function(response) {
           vm.cards = response.data;
           logger.info('dashboard cads: ', vm.cards);
@@ -51,6 +65,8 @@
           vm.cards.unshift(result);
         }, function(error) {});
     }
+
+
   }
 
 })();

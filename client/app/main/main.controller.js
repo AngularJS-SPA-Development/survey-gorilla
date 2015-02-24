@@ -60,11 +60,15 @@
         }, function(error) {});
     }
 
-    $scope.$watch(angular.bind(this, function() { return this.myGroupName; }), function(newVal, oldVal) {
+    $scope.$watch(function() { 
+      return vm.myGroupName; 
+    }, function(newVal, oldVal) {
       _groups(true, {name: vm.myGroupName});
     });
 
-    $scope.$watch(angular.bind(this, function() { return this.otherGroupName; }), function(newVal, oldVal) {
+    $scope.$watch(function() { 
+      return this.otherGroupName; 
+    }, function(newVal, oldVal) {
       _groups(false, {name: vm.otherGroupName});
     });
     
