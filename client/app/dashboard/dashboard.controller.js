@@ -39,6 +39,7 @@
         .getCards($stateParams.id)
         .then(function(response) {
           vm.cards = response.data;
+          logger.info('dashboard cads: ', vm.cards);
         });
     }
 

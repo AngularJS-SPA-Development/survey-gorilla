@@ -38,11 +38,15 @@
         } else {
           templateId = 'rating-card.html';
         }
-      } else if(card.type === 'OBJECTIVE') {
+      } else if(card.type === 'SURVEY') {
         if(card.responded) {
           templateId = 'objective-card-result.html';
         } else {
-          templateId = 'objective-card.html';
+          if(card.survey.type === 'MULTIPLE_OBJECTIVE') {
+            templateId = 'objective-multi-card.html';
+          } else {
+            templateId = 'objective-card.html';
+          }
         }
       }  
       return templateId;

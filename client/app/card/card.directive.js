@@ -21,14 +21,14 @@
                   '</div>' +
                   '<div class="panel-body">' +
                     '<div class="row">' +
-                      '<div class="col-xs-11 col-sm-11">{{::card.description}}</div>' +
+                      '<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">{{::card.description}}</div>' +
                       '<div ng-transclude></div>' +
                     '</div>' +
                   '</div>' +
                   '<div class="panel-footer">' +
                     '<small class="pull-right">' + 
                       '<div ng-if="card.responded" ng-click="respondMember()" class="btn btn-sm btn-default"><i class="fa fa-users"></i> Response {{card.responses.length}}</div>' +
-                      '<div ng-if="!card.responded" ng-click="respondCard()" class="btn btn-sm btn-default"><i class="fa fa-check"></i> Response</div>' +
+                      '<div ng-if="!card.responded" ng-click="respondCard()" class="btn btn-sm btn-default"><i class="fa fa-check"></i> Send</div>' +
                     '</small>' +
                   '</div>' +
                 '</div>',

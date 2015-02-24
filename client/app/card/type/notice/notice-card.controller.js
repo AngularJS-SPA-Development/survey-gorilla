@@ -5,6 +5,7 @@
     .module('surveyGorillaApp')
     .controller('noticeCardTypeCtrl', noticeCardTypeCtrl);
 
+  /* @ngInject */
   function noticeCardTypeCtrl($scope, modal, cardCondition, pubsub, logger) {
     _init();
 
