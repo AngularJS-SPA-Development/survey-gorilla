@@ -7,7 +7,7 @@
 
   /* @ngInject */
   function Auth($location, $rootScope, $http, $cookies, User, storage, $q) {
-    var currentUser = {};
+    var currentUser = undefined;
     if(storage.get('token')) {
       User.get({}, function(result) {
         currentUser = result.data;
@@ -17,56 +17,36 @@
     return {
       /**
        * Authenticate user and save token
-       *
-       * @param  {Object}   user     - login info
-       * @param  {Function} callback - optional
-       * @return {Promise}
        */
       login: login,
 
       /**
        * authenticate with OAuth in facebook, twitter
-       * @type {[type]}
        */
       loginOAuth: loginOAuth,
 
       /**
        * Delete access token and user info
-       *
-       * @param  {Function}
        */
       logout: logout,
 
       /**
        * Create a new user
-       *
-       * @param  {Object}   user     - user info
-       * @param  {Function} callback - optional
-       * @return {Promise}
        */
       createUser: createUser,
 
       /**
        * Change password
-       *
-       * @param  {String}   oldPassword
-       * @param  {String}   newPassword
-       * @param  {Function} callback    - optional
-       * @return {Promise}
        */
       changePassword: changePassword,
 
       /**
        * Gets all available info on authenticated user
-       *
-       * @return {Object} user
        */
       getCurrentUser: getCurrentUser,
 
       /**
        * Check if a user is logged in
-       *
-       * @return {Boolean}
        */
       isLoggedIn: isLoggedIn,
 
@@ -77,8 +57,6 @@
 
       /**
        * Check if a user is an admin
-       *
-       * @return {Boolean}
        */
       isAdmin: isAdmin,
 
@@ -134,8 +112,8 @@
     }
 
     function logout() {
-      storage.remove('token');
-      currentUser = {};
+      storage.flush();
+      currentUser = undefined;
     };
 
     function createUser(user, callback) {
@@ -173,10 +151,17 @@
     }
 
     function isLoggedIn() {
+      if(!currentUser) {
+        return false;
+      }
       return currentUser.hasOwnProperty('role');
     }
 
     function isLoggedInAsync(cb) {
+      if(!currentUser) {
+        return false;
+      }
+
       if(!currentUser.hasOwnProperty('role')) {
         currentUser = storage.get('user');
       }
@@ -195,6 +180,9 @@
     }
 
     function isAdmin() {
+      if(!currentUser) {
+        return false;
+      }
       return currentUser.role === 'admin';
     }
 

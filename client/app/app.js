@@ -4,8 +4,7 @@
 
   angular
     .module('surveyGorillaApp', [
-		  'sg.app',
-      'sg.base'
+		  'sg.app'
 		])
     .config(config)
     .factory('authInterceptor', authInterceptor)
