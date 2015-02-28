@@ -51,6 +51,8 @@
         config.headers = config.headers || {};
         if (storage.get('token')) {
           config.headers.Authorization = 'Bearer ' + storage.get('token');
+        } else {
+          $location.path('/login');
         }
         
         return config;
