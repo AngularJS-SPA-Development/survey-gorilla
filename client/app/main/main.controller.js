@@ -9,7 +9,6 @@
   function MainCtrl($scope, group, modal, logger, sgAlert) {
     var vm = this;
     vm.createGroup = createGroup;
-    vm.showGroupDetail = showGroupDetail;
     _init(); 
     
     function _init() {
@@ -37,26 +36,6 @@
         .then(function(result){
           logger.info('create group result: ', result);
           vm.myGroups.unshift(result);
-        }, function(error) {});
-    }
-
-    function showGroupDetail(group, type) {
-      modal
-        .open('', 'read-group.html', 'ReadGroupCtrl', {group: group, type: type})
-        .then(function(result){
-          if(result && result.memberEnroll) {
-            delete result.memberEnroll;
-            vm.otherGroups = _.without(vm.otherGroups, result);
-            vm.myGroups.unshift(result);
-          }
-
-          if(result && result.memberLeave) {
-            delete result.memberLeave;
-            vm.myGroups = _.without(vm.myGroups, result);
-            vm.otherGroups.unshift(result);
-          }
-
-          logger.info('read group result: ', result);
         }, function(error) {});
     }
 

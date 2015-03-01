@@ -1,7 +1,7 @@
 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 
   <tabset>
-    <tab select="main.groupType = 'My'" heading="My Groups">
+    <tab heading="My Groups">
       <div style="margin-top:5px;">
         <div class="panel panel-default">
           <div class="panel-heading" style="height:50px; background-color:#F5F5F5;">
@@ -10,22 +10,21 @@
                        class="form-control" 
                        ng-model-options="{ debounce : { 'default' : 300, blur: 0 } }"
                        ng-model="main.myGroupName"
-                       placeholder="Search {{main.groupType}} Group">
+                       placeholder="Search My Group">
               </div>
               <button type="button" 
-                      class="pull-right btn btn-default btn-sm"
-                      ng-if="main.groupType === 'My'">
+                      class="pull-right btn btn-default btn-sm">
                 <i class="fa fa-users"></i> &nbsp;<a href="#" ng-click="main.createGroup()">Create Group</a>
               </button>
           </div>
           <div class="panel-body">
-            <group-card info="group" show-detail="main.showGroupDetail(group, 'myGroup')" ng-repeat="group in main.myGroups"></group-card>
+            <group-card info="group" ng-repeat="group in main.myGroups"></group-card>
           </div>
         </div>
       </div>
     </tab>
 
-    <tab select="main.groupType = 'Other'" heading="Other Groups">
+    <tab heading="Other Groups">
       <div style="margin-top:5px;">
         <div class="panel panel-default">
           <div class="panel-heading" style="height:50px; background-color:#F5F5F5;">
@@ -34,16 +33,11 @@
                        class="form-control" 
                        ng-model-options="{ debounce : { 'default' : 300, blur: 0 } }"
                        ng-model="main.otherGroupName"
-                       placeholder="Search {{main.groupType}} Group">
+                       placeholder="Search Other Group">
               </div>
-              <button type="button" 
-                      class="pull-right btn btn-default btn-sm"
-                      ng-if="main.groupType === 'My'">
-                <i class="fa fa-users"></i> &nbsp;<a href="#" ng-click="createGroup()">Create Group</a>
-              </button>
           </div>
           <div class="panel-body">
-            <group-card info="group" show-detail="main.showGroupDetail(group, 'otherGroup')" ng-repeat="group in main.otherGroups"></group-card>
+            <group-card info="group" ng-repeat="group in main.otherGroups"></group-card>
           </div>
         </div>
       </div>
@@ -53,4 +47,3 @@
 </div>
 
 <div ng-include="'app/group/create/create-group.html'"></div>
-<div ng-include="'app/group/read/read-group.html'"></div>
