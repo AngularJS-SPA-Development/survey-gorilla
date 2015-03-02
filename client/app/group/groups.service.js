@@ -10,11 +10,6 @@
     this.getGroup = getGroup;
     this.getGroups = getGroups;
     this.create = create;
-    this.remove = remove;
-    this.update = update;
-    this.memberEnroll = memberEnroll;
-    this.memberLeave = memberLeave;
-    this.isGroupOwner = isGroupOwner;
 
     function getGroup(groupId) {
       return Groups.one(groupId).get();
@@ -41,28 +36,5 @@
       return Groups.customPOST(params);
     }
 
-    function remove(groupId) {
-      return Groups.one(groupId).customDELETE();
-    }
-
-    function update(groupId, params) {
-      return Groups.one(groupId).customPUT(params);
-    }
-
-    function memberEnroll(groupId) {
-      return Groups.one(groupId).customPOST('', 'members/enroll');
-    }
-
-    function memberLeave(groupId) {
-      return Groups.one(groupId).customPOST('', 'members/leave');
-    }
-
-    function isGroupOwner(group) {
-      if(group && group.owner && Auth.isLoggedIn()) {
-        return group.owner.id === Auth.getCurrentUser().id;
-      } else {
-        return false;
-      }
-    }
   }
 })();

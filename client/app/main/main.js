@@ -1,5 +1,4 @@
 (function () {
-
   'use strict';
 
   angular
@@ -13,7 +12,7 @@
         url: '/',
         templateUrl: 'app/main/main.html',
         controller: 'MainCtrl',
-        controllerAs: 'main',
+        controllerAs: 'main'
       });
   }
 
