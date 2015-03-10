@@ -5,7 +5,7 @@
     .module('surveyGorillaApp')
     .controller('DashboardCtrl', DashboardCtrl);
 
-  function DashboardCtrl($scope, $stateParams, modal, group, card, logger) {
+  function DashboardCtrl($scope, $stateParams, modal, group, logger) {
     var vm = this;
     vm.addCard = addCard;
     _init();
@@ -49,24 +49,11 @@
       // 카드를 만들어줌 
       vm.cards = [];
       // 카드 목록 조회 
-      card 
-        .getCards($stateParams.id, params)
-        .then(function(response) {
-          vm.cards = response.data;
-          logger.info('dashboard cads: ', vm.cards);
-        });
     }
 
     function addCard() {
-      modal
-        .open('', 'create-card.html', 'CreateCardCtrl', vm.group)
-        .then(function(result){
-          logger.info('create card result: ', result);
-          vm.cards.unshift(result);
-        }, function(error) {});
+      // 카드 추가 
     }
-
-
   }
 
 })();
