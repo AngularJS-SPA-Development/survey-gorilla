@@ -6,7 +6,7 @@
     .directive('photoProfile', photoProfile);
 
   /* @ngInject */
-  function photoProfile($rootScope, filer, config, logger) {
+  function photoProfile($rootScope, filer, config, pubsub, logger) {
     return {
       restrict: 'EA',
       scope: {
@@ -14,7 +14,7 @@
       },
       template: '<div>' +
                   '<img class="group_img" id="_photo" ng-src="{{profile.modelPhoto}}">' +
-                  '<div ng-if="profile.isAdmin" ng-file-select ng-model="file" class="btn btn-default btn-sm" style="margin-left: 20px">Select File</div>' +
+                  '<div ng-show="profile.isAdmin" ng-file-select ng-model="file" class="btn btn-default btn-sm" style="margin-left: 20px">Select File</div>' +
                 '</div>',
       link: link
     };
@@ -33,7 +33,7 @@
             var media = document.getElementById('_photo');
             var photo_url = config.api_version + '/' + scope.profile.modelName + '/' + scope.profile.modelId + '/photo';
             media.src = photo_url;  
-            $rootScope.$broadcast('profile:image:change', {id: scope.profile.modelId, photo: photo_url});
+            pubsub.publish('profile:image:change', {id: scope.profile.modelId, photo: photo_url});
           });
       }
     }
