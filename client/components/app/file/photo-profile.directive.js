@@ -6,7 +6,7 @@
     .directive('photoProfile', photoProfile);
 
   /* @ngInject */
-  function photoProfile($rootScope, filer, config, logger) {
+  function photoProfile($rootScope, filer, config, pubsub, logger) {
     return {
       restrict: 'EA',
       scope: {
@@ -33,7 +33,7 @@
             var media = document.getElementById('_photo');
             var photo_url = config.api_version + '/' + scope.profile.modelName + '/' + scope.profile.modelId + '/photo';
             media.src = photo_url;  
-            $rootScope.$broadcast('profile:image:change', {id: scope.profile.modelId, photo: photo_url});
+            pubsub.publish('profile:image:change', {id: scope.profile.modelId, photo: photo_url});
           });
       }
     }

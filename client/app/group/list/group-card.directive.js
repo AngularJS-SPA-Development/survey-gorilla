@@ -6,7 +6,7 @@
     .directive('groupCard', groupCard);
 
   /* @ngInject */
-  function groupCard() {
+  function groupCard(pubsub) {
     return {
       restrict: 'EA',
       scope: {
@@ -28,7 +28,7 @@
     };
 
     function link(scope, element, attrs) {
-      scope.$on('profile:image:change', function(evt, data) {
+      pubsub.subscribe('profile:image:change', function(evt, data) {
         if(data.id === scope.group.id) {
           scope.backgroundImage = {
             'background-image': 'url(' + data.photo + ')',
@@ -36,7 +36,7 @@
             'background-size': 'cover'
           };
         }
-      });
+      }, scope);
 
       scope.backgroundImage = {
         'background-image': 'url(' + scope.group.photo + ')',
