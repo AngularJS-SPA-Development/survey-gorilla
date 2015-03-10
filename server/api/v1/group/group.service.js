@@ -118,6 +118,9 @@ function update(id, params) {
       })
     );
 
+    group.owner = params.owner.id;
+    delete params.owner;
+    
     var updated = _.merge(group, params);
     updated.save(function (err) {
       if (err) { return deferred.reject(err); }

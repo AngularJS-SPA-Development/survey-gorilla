@@ -10,7 +10,7 @@
     <div class="modal-body">
         <div class="row" style="margin-bottom: 20px">
           <div class="col-md-2 col-sm-2 col-xs-2">Name: </div>
-          <div class="col-md-8 col-sm-8 col-xs-8">{{group.name}}</div>
+          <input type="text" class="col-md-6 col-sm-6 col-xs-6" ng-model="group.name">
         </div>
         <div class="row" style="margin-bottom: 20px">
           <div class="col-md-2 col-sm-2 col-xs-2">Photo: </div>
@@ -29,7 +29,7 @@
         </div>
         <div class="row" style="margin-bottom: 20px">
           <div class="col-md-2 col-sm-2 col-xs-2">Description: </div>
-          <div class="col-md-8 col-sm-8 col-xs-8">{{group.description}}</div>
+          <input type="text" class="col-md-6 col-sm-6 col-xs-6" ng-model="group.description">
         </div>
         <div class="row" style="margin-bottom: 20px">
           <div class="col-md-2 col-sm-2 col-xs-2">Member: </div>
@@ -37,7 +37,8 @@
         </div>
     </div>
     <div class="modal-footer">
-        <button ng-show="profile.isAdmin" class="btn btn-primary" ng-click="save()">Save</button>
+        <button ng-show="profile.isAdmin" class="btn btn-danger" ng-click="remove()">Delete</button>
+        <button ng-show="profile.isAdmin" class="btn btn-primary" ng-click="update()">Update</button>
         <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
     </div>
   </div>

@@ -9,7 +9,8 @@
   function ReadGroupCtrl($scope, $modalInstance, params, group, sgAlert, logger) {
     $scope.memberJoin = memberJoin;
     $scope.memberLeave = memberLeave;
-    $scope.save = save;
+    $scope.update = update;
+    $scope.remove = remove;
     $scope.cancel = cancel;
     _init();
 
@@ -70,8 +71,22 @@
         });
     }
 
-    function save() {
+    function update() {
+      group
+        .update($scope.group.id, $scope.group)
+        .then(function(response) {
+          $scope.group.update = true;
+          $modalInstance.close(response.data);
+        }, function(error){});
+    }
 
+    function remove() {
+      group
+        .remove($scope.group.id)
+        .then(function(response) {
+          $scope.group.remove = true;
+          $modalInstance.close($scope.group);
+        }, function(error){});
     }
 
     function cancel() {
