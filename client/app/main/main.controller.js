@@ -46,7 +46,7 @@
     });
 
     $scope.$watch(function() { 
-      return this.otherGroupName; 
+      return vm.otherGroupName; 
     }, function(newVal, oldVal) {
       _groups(false, {name: vm.otherGroupName});
     });
