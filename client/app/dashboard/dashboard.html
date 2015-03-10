@@ -10,7 +10,10 @@
         <div class="row">
           <div class="col-xs-11">
             <div class="form-group">
-              <input type="text" ng-model="queryMember" class="form-control" placeholder="Search Member...">
+              <input type="text" 
+                     ng-model="queryMember" 
+                     ng-model-options="{ debounce : { 'default' : 300, blur: 0 } }"
+                     class="form-control" placeholder="Search Member...">
               <i class="fa fa-search"></i>
             </div>
           </div>
@@ -19,12 +22,12 @@
     </div>
 
     <div class="list-group">
-      <a href="#" class="list-group-item"> 
+      <!--a href="#" class="list-group-item"> 
         <img ng-src="{{::member.photo}}" class="img-rounded pull-left"> 
         <h4 class="list-group-item-heading"> 테스트-1</h4> 
         <p class="list-group-item-text"> test@test.com (OWNER)</p> 
-      </a>
-      <!-- <group-member info="member" ng-repeat="member in dashboard.group.members | filter:queryMember"></group-member> -->
+      </a-->
+      <group-member info="member" ng-repeat="member in dashboard.group.members | filter:queryMember"></group-member>
     </div>
 
   </div>
