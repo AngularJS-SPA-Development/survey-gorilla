@@ -65,8 +65,6 @@
           vm.cards.unshift(result);
         }, function(error) {});
     }
-
-
   }
 
 })();
