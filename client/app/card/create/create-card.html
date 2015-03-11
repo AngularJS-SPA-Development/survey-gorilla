@@ -39,16 +39,17 @@
                 <div class="form-inline">
                   <input type="text" 
                          ng-model="option.comment"
+                         ng-model-options="{ debounce : { 'default' : 100, blur: 0 } }"
                          ng-keyup="addOption(option, $index)"
+                         placeholder="Option-{{$index + 1}}"
                          class="form-control" style="width:70%">
                   <div class="btn btn-sm btn-warning" ng-click="deleteOption($index)">delete</div>
                 </div>
               </div>
             </div>
 
-            <textarea 
-                   ng-model="card.description"
-                   class="form-control" style="margin-top:20px" rows="3" placeholder="Write Description"></textarea>
+            <textarea ng-model="card.description"
+                      class="form-control" style="margin-top:20px" rows="3" placeholder="Write Description"></textarea>
           </row>
         </form>
     </div>
