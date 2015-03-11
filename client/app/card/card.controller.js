@@ -13,7 +13,6 @@
     _init();
 
     function _init() {
-      _subscribe();
       _setShow();
     }
 
@@ -27,26 +26,14 @@
     function getTemplateId(card) {
       var templateId = '';
       if(card.type === 'NOTICE') {
-        if(card.responded) {
-          templateId = 'notice-card.html';
-        } else {
-          templateId = 'notice-card.html';
-        }
+        templateId = 'notice-card.html';
       } else if(card.type === 'RATING') {
-        if(card.responded) {
-          templateId = 'rating-card-result.html';
-        } else {
-          templateId = 'rating-card.html';
-        }
+        templateId = 'rating-card.html';
       } else if(card.type === 'SURVEY') {
-        if(card.responded) {
-          templateId = 'objective-card-result.html';
+        if(card.survey.type === 'MULTIPLE_OBJECTIVE') {
+          templateId = 'objective-multi-card.html';
         } else {
-          if(card.survey.type === 'MULTIPLE_OBJECTIVE') {
-            templateId = 'objective-multi-card.html';
-          } else {
-            templateId = 'objective-card.html';
-          }
+          templateId = 'objective-card.html';
         }
       }  
       return templateId;
@@ -60,15 +47,6 @@
        modal
         .open('sm', 'show-respond-member.html', 'ShowRespondMemberCtrl', $scope.card)
         .then(function(result){}, function(error) {});
-    }
-
-    function _subscribe() {
-      pubsub.subscribe('response-card-result:' + $scope.card.id, _respondedCard);
-    }
-
-    function _respondedCard(event, responded_card) {
-      logger.info('response result: ', responded_card);
-      _setShow(responded_card);
     }
   }
 

@@ -6,7 +6,7 @@
     .controller('ratingCardTypeCtrl', ratingCardTypeCtrl);
 
   /* @ngInject */
-  function ratingCardTypeCtrl($scope, cardCondition, pubsub, logger) {
+  function ratingCardTypeCtrl($scope, card, pubsub, logger) {
     $scope.setRating = setRating;
     _init();
 
@@ -14,11 +14,7 @@
       _subscribe();
       $scope.ratings = [{id:0, status:false}, {id:1, status:false}, {id:2, status:false}, {id:3, status:false}, {id:4, status:false}];
 
-      if($scope.card.responded) {
-        $scope.rating = cardCondition.calcResult($scope.card);
-      } else {
-        $scope.response_card = {rating: { rating: 0 }};
-      }
+      $scope.response_card = {rating: { rating: 0 }};
     }
 
     function setRating(idx) {
@@ -41,11 +37,8 @@
       });
     }
 
-    /**
-     * Send response card
-     */
     function _response() {
-      cardCondition
+      card
         .responseCard($scope.card.id, $scope.response_card)
         .then(function(response) {
           _publish(response.data);
@@ -53,7 +46,7 @@
     }
 
     function _publish(responded_card) {
-      pubsub.publish('response-card-result:' + $scope.card.id, responded_card);
+      // 응답 결과 
     }
   }
 

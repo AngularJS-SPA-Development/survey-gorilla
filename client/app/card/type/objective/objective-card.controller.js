@@ -6,20 +6,16 @@
     .controller('objectiveCardTypeCtrl', objectiveCardTypeCtrl);
 
   /* @ngInject */
-  function objectiveCardTypeCtrl($scope, modal, card, cardCondition, pubsub, logger) {
+  function objectiveCardTypeCtrl($scope, modal, card, pubsub, logger) {
     _init();
 
     function _init() {
       _subscribe();
 
-      if($scope.card.responded) {
-        $scope.results = cardCondition.calcResult($scope.card);
-      } else {
-        $scope.results = [];
-        angular.forEach($scope.card.survey.options, function(option) {
-          $scope.results.push( { 'option': option, 'checked': false });
-        });
-      }
+      $scope.results = [];
+      angular.forEach($scope.card.survey.options, function(option) {
+        $scope.results.push( { 'option': option, 'checked': false });
+      });
     }
 
     function _subscribe() {
@@ -29,11 +25,6 @@
       });
     }
 
-    //----------------------------------------
-    //
-    // Send response card
-    //
-    //----------------------------------------
     function _response() {
       var response_card = {
         survey : {
@@ -41,7 +32,7 @@
         }
       };
 
-      cardCondition
+      card
         .responseCard($scope.card.id, response_card)
         .then(function(response) {
           _publish(response.data);
@@ -63,7 +54,7 @@
     }
 
     function _publish(responded_card) {
-      pubsub.publish('response-card-result:' + $scope.card.id, responded_card);
+      // 응답 결과 
     }
   }
 
