@@ -37,9 +37,11 @@
 
               <div style="margin-top: 5px;" ng-repeat="option in options">
                 <div class="form-inline">
-                  <input type="text" 
+                   <input type="text" 
                          ng-model="option.comment"
+                         ng-model-options="{ debounce : { 'default' : 100, blur: 0 } }"
                          ng-keyup="addOption(option, $index)"
+                         placeholder="Option-{{$index + 1}}"
                          class="form-control" style="width:70%">
                   <div class="btn btn-sm btn-warning" ng-click="deleteOption($index)">delete</div>
                 </div>
