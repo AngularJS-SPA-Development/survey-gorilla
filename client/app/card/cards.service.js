@@ -12,6 +12,7 @@
     this.create = create;
     this.remove = remove;
     this.update = update;
+    this.responseCard = responseCard;
 
     function getCard(cardId) {
       return Cards.one(cardId).get();
@@ -39,6 +40,10 @@
 
     function update(cardId, params) {
       return Cards.one(cardId).customPUT(params);
+    }
+    
+    function responseCard(cardId, params) {
+      return Cards.one(cardId).customPOST(params, 'respond');
     }
   }
 })();
