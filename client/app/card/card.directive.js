@@ -27,7 +27,7 @@
                   '</div>' +
                   '<div class="panel-footer">' +
                     '<small class="pull-right">' + 
-                      '<div ng-if="!card.responded" ng-click="respondCard()" class="btn btn-sm btn-default"><i class="fa fa-check"></i> Send</div>' +
+                      '<div ng-click="respondCard()" class="btn btn-sm btn-default"><i class="fa fa-check"></i> Send</div>' +
                     '</small>' +
                   '</div>' +
                 '</div>',

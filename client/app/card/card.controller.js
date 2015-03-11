@@ -8,7 +8,6 @@
   /* @ngInject */
   function cardCtrl($scope, pubsub, modal, logger) {
     $scope.respondCard = respondCard;
-    $scope.respondMember = respondMember;
     var vm = this;
     _init();
 
@@ -40,7 +39,7 @@
     }
 
     function respondCard() {
-      pubsub.publish('response-card:' + $scope.card.id);
+      // 응답하기 
     }
   }
 
