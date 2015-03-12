@@ -1,12 +1,17 @@
 <script type="text/ng-template" id="show-respond-member.html">
   <div>
     <div class="modal-header">
-        <h3 class="modal-title">Create Card</h3>
+        <h3 class="modal-title">Responded Members</h3>
     </div>
     <div class="modal-body">
         <div class="panel panel-default">
           <div class="list-group">
+            <div ng-if="members.length > 0">
             <group-member info="member" ng-repeat="member in members"></group-member>
+            </div>
+            <div ng-if="members.length === 0">
+            Nobody respond...
+            </div>
           </div>
         </div>
     </div>
