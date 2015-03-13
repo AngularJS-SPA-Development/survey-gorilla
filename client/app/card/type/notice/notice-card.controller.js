@@ -20,9 +20,6 @@
       });
     }
 
-    /**
-     * Send response card
-     */
     function _response() {
       card
         .responseCard($scope.card.id, {})
