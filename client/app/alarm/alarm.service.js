@@ -106,17 +106,7 @@ angular.module('sg.app')
         });
 
       } 
-      // for GROUP
-      else if(alarm.type === 'GROUP_UPDATED'
-         || alarm.type === 'GROUP_REMOVED') {
 
-        group.getGroup(alarm.group.id).then(function(response) {
-          pubsub.publish('alarm:group', {'alarm': alarm, 'group': response.data});
-        }, function(error) {
-          logger.error('when query group info in alarm, exception is ', error);
-        });     
-
-      }
     };
 
   });

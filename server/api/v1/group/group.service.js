@@ -121,14 +121,14 @@ function update(id, params) {
     );
 
     group.owner = params.owner.id;
-
-    AlarmService.groupUpdated(group);
-
     delete params.owner;
     
     var updated = _.merge(group, params);
     updated.save(function (err) {
       if (err) { return deferred.reject(err); }
+      
+      //AlarmService.groupUpdated(group);
+      
       return deferred.resolve(group);
     }); 
   });
@@ -148,7 +148,7 @@ function destroy(id) {
       })
     );
 
-    AlarmService.groupRemoved(group);
+    //AlarmService.groupRemoved(group);
 
     group.remove(function(err) {
       if(err) { return deferred.reject(err); }

@@ -5,7 +5,7 @@
     .module('surveyGorillaApp')
     .controller('DashboardCtrl', DashboardCtrl);
 
-  function DashboardCtrl($scope, $stateParams, modal, group, card, logger) {
+  function DashboardCtrl($scope, $stateParams, modal, group, card, pubsub, logger) {
     var vm = this;
     vm.addCard = addCard;
     _init();
@@ -13,6 +13,7 @@
     function _init() {
       _groupInfo();
       _searchCards();
+      _subscribe();
     }
 
     function _groupInfo() {
@@ -66,7 +67,27 @@
         }, function(error) {});
     }
 
+    function _subscribe() {
+      pubsub.subscribe("alarm:card", function(evt, data) {
+        if(data.alarm.group.id !== vm.group.id) {
+          return;
+        }
 
+        if(data.alarm.type === 'CARD_PUBLISHED') {
+          vm.cards.unshift(data.card);
+
+        } else if (   data.alarm.type === 'CARD_RESPONDED'
+                   || data.alarm.type === 'CARD_COMPLETED') {
+          
+          angular.forEach(vm.cards, function(card, idx) {
+            if(card.id === data.card.id) {
+              vm.cards[idx] = data.card;
+              return;
+            }
+          });
+        }
+      });
+    }
   }
 
 })();
