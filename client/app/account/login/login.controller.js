@@ -7,7 +7,7 @@
     .controller('LoginCtrl', LoginCtrl);
 
   /* @ngInject */
-  function LoginCtrl($scope, Auth, $location, $window, alarm) {
+  function LoginCtrl($scope, Auth, $location, $window, pubsub, alarm) {
     $scope.user = {};
     $scope.errors = {};
     $scope.login = login;
@@ -25,6 +25,7 @@
           // 로그인 성공하면 socket.io 생성 
           alarm.initSocketIO(); 
           
+          pubsub.publish('login');
           $location.path('/');
         })
         .catch( function(err) {
