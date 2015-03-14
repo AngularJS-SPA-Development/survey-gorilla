@@ -7,7 +7,7 @@
     .controller('SignupCtrl', SignupCtrl);
 
   /* @ngInject */
-  function SignupCtrl($scope, Auth, $location, $window) {
+  function SignupCtrl($scope, Auth, $location, $window, pubsub) {
     $scope.user = {};
     $scope.errors = {};
 
@@ -24,6 +24,7 @@
           password: $scope.user.password
         })
         .then( function() {
+          pubsub.publish('login');
           // Account created, redirect to home
           $location.path('/');
         })
