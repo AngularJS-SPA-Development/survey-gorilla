@@ -4,6 +4,7 @@ var jwt = require('jsonwebtoken'),
     compose = require('composable-middleware'),
     config = localrequire.config(),
     errors = localrequire.config('errors'),
+    UserService = localrequire.UserService(),
     preloading = require('./preloading');
 
 /* MOVE FROM HERE */
@@ -22,7 +23,7 @@ exports.sign = function(user) {
 };
 
 exports.verify = function(token, callback) {
-  jwt.verify(token, config.secrets.session, {}, function(err, login) {
+  jwt.verify(token, config.secrets.session, function(err, login) {
     if (err) {
       if (err.message === 'jwt expired') {
         return callback(new errors.TokenExpiredError());
@@ -30,9 +31,18 @@ exports.verify = function(token, callback) {
         return callback(new errors.TokenInvalidError());
       }
     }
-    console.log('authentication verify : ', login);
-    
-    callback(login);
+
+    // find User for login._id (This is userId)
+    // console.log('authentication verify : ', login);
+    UserService
+      .me(login._id)
+      .then(function(user) {
+        callback(user);
+      })
+      .catch(function(err) {
+        return callback(new errors.TokenInvalidError());
+      });
+
   });
 };
 

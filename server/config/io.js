@@ -44,6 +44,8 @@ module.exports = exports = function(app) {
     };
 
     socket.on('login', function(token) {
+      console.log('socket.io user token : ', token);
+
       if (token) {
         authentication.verify(token, login);
       }
@@ -54,6 +56,7 @@ module.exports = exports = function(app) {
     socket.on('disconnect', logout);
   });
 
+  //console.log('io.js is io object : ', io);
   return server;
 };
 

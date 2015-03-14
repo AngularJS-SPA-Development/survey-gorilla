@@ -40,9 +40,6 @@ GLOBAL.localrequire = {
   Alarm: function() {
     return require('../../api/v1/alarm/alarm.model');
   },
-  IO: function() {
-    return require('../../config/io');
-  },
   AuthService: function() {
     return require('../../auth/auth.service');
   },

@@ -24,6 +24,7 @@ if(config.seedDB) { require('./config/seed'); }
 // Setup server
 var app = express();
 require('./config/express')(app);
+require('./routes')(app);
 
 // var server = require('http').createServer(app);
 // var socketio = require('socket.io').listen(server);
@@ -31,11 +32,10 @@ require('./config/express')(app);
 // 
 // set io.js instead of socketio.js
 var server = require('./config/io')(app);
-require('./routes')(app);
 
 // Start server
 server.listen(config.port, config.ip, function () {
-  console.log('Express server listening on %d, in %s mode', config.port, app.get('env'));
+  console.log('Express server listening on %s:%d, in %s mode', config.ip, config.port, app.get('env'));
 });
 
 // Expose app

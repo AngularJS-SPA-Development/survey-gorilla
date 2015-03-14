@@ -6,7 +6,7 @@ var Q = require('q'),
     mongoose = require('mongoose'),
     Alarm = localrequire.Alarm(),
     common = localrequire.common(),
-    io = localrequire.IO();
+    io = require('../../../config/io');
 
 exports.list = list;
 exports.preload = preload;
@@ -177,7 +177,7 @@ var createGroupAlarm = function(target, type, group, user) {
 
 // for Group
 function groupUpdated(group) {
-  console.log('group updated : ', group);
+  //console.log('group updated : ', group);
 
   var alarms = _.chain(group.members).filter(function(member) {
     console.log('member : ', member);
@@ -186,21 +186,22 @@ function groupUpdated(group) {
     return createGroupAlarm(member.member, 'GROUP_UPDATED', group);
   }).value();
 
-  console.log('group updated alarm : ', alarms);
+  //console.log('group updated alarm : ', alarms);
 
   Alarm.create(alarms)
     .then(function() {
-      // console.log('group updated alarm create : ', arguments);
+      console.log('group updated - arguments : ', arguments);
       
       _.forEach(arguments, function(alarm) {
-        console.log('group updated alarm create : ', alarm);
+        console.log('group updated - alarm send : ', alarm);
+        console.log('group updated - io : ', io);
         io.send(alarm.for, 'alarm', alarm);
       });
     });
 }
 
 function groupRemoved(group) {
-  console.log('group removed : ', group);
+  //console.log('group removed : ', group);
  
   var alarms = _.chain(group.members).filter(function(member) {
     console.log('member : ', member);
@@ -209,11 +210,11 @@ function groupRemoved(group) {
     return createGroupAlarm(member.member, 'GROUP_REMOVED', group);
   }).value();
 
-  console.log('group removed alarm : ', alarms);
+  //console.log('group removed alarm : ', alarms);
 
   Alarm.create(alarms)
     .then(function() {
-      console.log('group removed alarm create : ', arguments);
+      //console.log('group removed alarm create : ', arguments);
 
       _.forEach(arguments, function(alarm) {
         io.send(alarm.for, 'alarm', alarm);
