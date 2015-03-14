@@ -5,6 +5,7 @@ var _ = require('lodash'),
     Card = localrequire.Card(),
     Group = localrequire.Group(),
     errors = localrequire.errors(),
+    AlarmService = localrequire.AlarmService(),
     mongoose = require('mongoose');
     //alarm = require('./alarm');
 
@@ -151,7 +152,7 @@ function create(contents, user) {
     card.populate('group responses.member', function(err, card) {
       if (err) return deferred.reject(err);
 
-      //alarm.cardPublished(card, user);
+      AlarmService.cardPublished(card, user);
 
       // Adds 'viewer' property for json rendering
       card.viewer = user.id;
@@ -195,7 +196,7 @@ function respond(card, response, user) {
 
     card.populate('group', function(err, card) {
       if (!err) {
-        //alarm.cardResponded(card, user);
+        AlarmService.cardResponded(card, user);
       }
     });
 
@@ -253,7 +254,7 @@ function complete(card, auto) {
 
     card.populate('group', function(err, card) {
       if (!err) {
-        //alarm.cardCompleted(card, auto);
+        AlarmService.cardCompleted(card, auto);
       }
     });
 

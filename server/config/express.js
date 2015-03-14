@@ -4,20 +4,22 @@
 
 'use strict';
 
-var express = require('express');
-var favicon = require('static-favicon');
-var morgan = require('morgan');
-var compression = require('compression');
-var bodyParser = require('body-parser');
-var methodOverride = require('method-override');
-var cookieParser = require('cookie-parser');
-var errorHandler = require('errorhandler');
-var path = require('path');
-var config = require('./environment');
-var passport = require('passport');
-var session = require('express-session');
-var mongoStore = require('connect-mongo')(session);
-var mongoose = require('mongoose');
+var express = require('express'),
+    favicon = require('static-favicon'),
+    morgan = require('morgan'),
+    compression = require('compression'),
+    bodyParser = require('body-parser'),
+    methodOverride = require('method-override'),
+    cookieParser = require('cookie-parser'),
+    errorHandler = require('errorhandler'),
+    path = require('path'),
+    config = require('./environment'),
+    passport = require('passport'),
+    multer = require('multer'),
+    cors = require('cors'),
+    session = require('express-session'),
+    mongoStore = require('connect-mongo')(session),
+    mongoose = require('mongoose');
 
 module.exports = function(app) {
   var env = app.get('env');
@@ -28,6 +30,15 @@ module.exports = function(app) {
   app.use(compression());
   app.use(bodyParser.urlencoded({ extended: false }));
   app.use(bodyParser.json());
+  app.use(multer({
+    dest: './.tmp/',
+    limits: {
+      files: 1,
+      fileSize: 2 * 1024 * 1024,
+      fields: 1,
+      fieldSize: 1024
+    }
+  }));
   app.use(methodOverride());
   app.use(cookieParser());
   app.use(passport.initialize());
@@ -54,6 +65,17 @@ module.exports = function(app) {
     app.use(express.static(path.join(config.root, 'client')));
     app.set('appPath', 'client');
     app.use(morgan('dev'));
-    app.use(errorHandler()); // Error handler - has to be last
   }
+
+  // add cors
+  app.route('/api/*')
+    .all(cors({
+      origin: true,
+      allowedHeaders: ['Content-Type', 'Authorization'],
+      exposedHeaders: ['Auth-Token'],
+      credentials: true,
+      maxAge: 86400
+    }));
+
+  app.use(errorHandler()); // Error handler - has to be last
 };

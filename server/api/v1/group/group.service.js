@@ -2,6 +2,7 @@
 
 var _ = require('lodash'),
     Q = require('q'),
+    AlarmService = localrequire.AlarmService(),
     Group = require('./group.model');
 
 exports.list = list;
@@ -99,6 +100,7 @@ function create(params, user) {
 
     group.populate('owner members.member', function(err, group) {
       if (err) return deferred.reject(err);
+
       deferred.resolve(group);
     });
   });
@@ -119,6 +121,9 @@ function update(id, params) {
     );
 
     group.owner = params.owner.id;
+
+    AlarmService.groupUpdated(group);
+
     delete params.owner;
     
     var updated = _.merge(group, params);
@@ -142,6 +147,8 @@ function destroy(id) {
         message: 'Group: ' + id + ' is not found.'
       })
     );
+
+    AlarmService.groupRemoved(group);
 
     group.remove(function(err) {
       if(err) { return deferred.reject(err); }

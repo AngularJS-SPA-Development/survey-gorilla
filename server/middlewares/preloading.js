@@ -2,8 +2,8 @@
 
 var UserService = localrequire.UserService(),
     GroupService = localrequire.GroupService(),
-    CardService = localrequire.CardService();
-    // Alarm = localrequire.service('alarm');
+    CardService = localrequire.CardService(),
+    AlarmService = localrequire.AlarmService();
 
 exports.requiresMe = function(req, res, next) {
   UserService
@@ -94,13 +94,14 @@ exports.requiresCard = function(req, res, next) {
     });
 };
 
-// exports.requiresAlarm = function(req, res, next) {
-//   Alarm.preload(req.params.alarm)
-//   .then(function(alarm) {
-//     req.alarm = alarm;
-//     next();
-//   })
-//   .catch(function(err) {
-//     next(err);
-//   });
-// };
+exports.requiresAlarm = function(req, res, next) {
+  AlarmService
+    .preload(req.params.alarm)
+    .then(function(alarm) {
+      req.alarm = alarm;
+      next();
+    })
+    .catch(function(err) {
+      next(err);
+    });
+};

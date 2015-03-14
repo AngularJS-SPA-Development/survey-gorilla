@@ -18,6 +18,7 @@ function onConnect(socket) {
   });
 
   // Insert sockets below
+  require('../api/alarm/alarm.socket').register(socket);
   require('../api/v1/card/card.socket').register(socket);
   require('../api/v1/group/group.socket').register(socket);
 }

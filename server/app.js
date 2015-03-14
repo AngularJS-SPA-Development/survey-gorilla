@@ -13,12 +13,7 @@ require('./components/utilities/requires');
 
 var express = require('express'),
     mongoose = require('mongoose'),
-    config = require('./config/environment'),
-    compression = require('compression'),
-    bodyParser = require('body-parser'),
-    multer = require('multer'),
-    methodOverride = require('method-override'),
-    cors = require('cors');
+    config = require('./config/environment');
 
 // Connect to database
 mongoose.connect(config.mongo.uri, config.mongo.options);
@@ -29,33 +24,13 @@ if(config.seedDB) { require('./config/seed'); }
 // Setup server
 var app = express();
 var server = require('http').createServer(app);
-var socketio = require('socket.io').listen(server);
-require('./config/socketio')(socketio);
+
+// var socketio = require('socket.io').listen(server);
+// require('./config/socketio')(socketio);
+// 
+// set io.js instead of socketio.js
+require('./config/io')(app);
 require('./config/express')(app);
-
-// add multer
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
-app.use(multer({
-  dest: './.tmp/',
-  limits: {
-    files: 1,
-    fileSize: 10 * 1024 * 1024,
-    fields: 1,
-    fieldSize: 1024
-  }
-}));
-app.use(methodOverride());
-// add cors
-app.route('/api/*')
-  .all(cors({
-    origin: true,
-    allowedHeaders: ['Content-Type', 'Authorization'],
-    exposedHeaders: ['Auth-Token'],
-    credentials: true,
-    maxAge: 86400
-  }));
-
 require('./routes')(app);
 
 

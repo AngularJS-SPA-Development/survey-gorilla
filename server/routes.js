@@ -47,6 +47,7 @@ module.exports = function(app) {
 
 
   // Insert routes below
+  app.use(apiv1('/alarms'), require('./api/v1/alarm'));
   app.use(apiv1('/groups'), require('./api/v1/group'));
   app.use(apiv1('/cards'), require('./api/v1/card'));
   app.use(apiv1('/users'), require('./api/v1/user'));

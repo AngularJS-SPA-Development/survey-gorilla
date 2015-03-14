@@ -34,6 +34,15 @@ GLOBAL.localrequire = {
   Card: function() {
     return require('../../api/v1/card/card.model');
   },
+  AlarmService: function() {
+    return require('../../api/v1/alarm/alarm.service');
+  },
+  Alarm: function() {
+    return require('../../api/v1/alarm/alarm.model');
+  },
+  IO: function() {
+    return require('../../config/io');
+  },
   AuthService: function() {
     return require('../../auth/auth.service');
   },
