@@ -7,7 +7,7 @@
     .controller('LoginCtrl', LoginCtrl);
 
   /* @ngInject */
-  function LoginCtrl($scope, Auth, $location, $window) {
+  function LoginCtrl($scope, Auth, $location, $window, pubsub) {
     $scope.user = {};
     $scope.errors = {};
     $scope.login = login;
@@ -22,6 +22,7 @@
           password: $scope.user.password
         })
         .then( function() {
+          pubsub.publish('login');
           $location.path('/');
         })
         .catch( function(err) {
