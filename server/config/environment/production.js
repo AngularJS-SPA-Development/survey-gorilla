@@ -19,5 +19,10 @@ module.exports = {
             process.env.MONGOHQ_URL ||
             process.env.OPENSHIFT_MONGODB_DB_URL+process.env.OPENSHIFT_APP_NAME ||
             'mongodb://localhost/surveygorilla'
-  }
+  },
+
+  secrets: {
+    session: process.env.TOKEN_SECRET || 'surV$yGoril&a.s2cr2t',
+    expiresInMinutes: 60 * 24 * 365
+  },
 };

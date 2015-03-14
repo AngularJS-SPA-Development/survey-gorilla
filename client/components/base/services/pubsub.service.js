@@ -7,7 +7,7 @@
     .service('pubsub', pubsub);
 
   /* @ngInject */
-  function pubsub() {
+  function pubsub(logger) {
     this.init = init;
     this.subscribe = subscribe;
     this.publish = publish;
@@ -38,6 +38,7 @@
     }
 
     function publish(eventName, params) {
+      logger.info('pubsub:publish : ' + eventName + ' : ', params);
       root.$broadcast(eventName, params);
     }
 

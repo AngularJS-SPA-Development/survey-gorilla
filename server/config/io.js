@@ -1,13 +1,8 @@
 'use strict';
 
 var jwt = require('jsonwebtoken'),
-    config = localrequire.config();
-
-var verify = function(token, callback) {
-  jwt.verify(token, config.token.secret, {}, function(err, login) {
-    if (!err) callback(login);
-  });
-};
+    config = localrequire.config(),
+    authentication = localrequire.middleware('authentication');
 
 // FOR TEST
 // var verify = function(user, callback) {
@@ -24,7 +19,6 @@ module.exports = exports = function(app) {
     // Enables passing events between nodes.
     // Using socket.io-adapter specifically, socket.io-redis.
     var redis = require('socket.io-redis');
-    var config = loquire.config();
     io.adapter(redis({ host: config.redis.ip, port: config.redis.port }));
   }
 
@@ -51,7 +45,7 @@ module.exports = exports = function(app) {
 
     socket.on('login', function(token) {
       if (token) {
-        verify(token, login);
+        authentication.verify(token, login);
       }
     });
 

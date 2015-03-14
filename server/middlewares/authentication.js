@@ -2,9 +2,8 @@
 
 var jwt = require('jsonwebtoken'),
     compose = require('composable-middleware'),
-    config = loquire.config(),
-    errors = loquire.config('errors'),
-    otp = loquire.config('otp'),
+    config = localrequire.config(),
+    errors = localrequire.config('errors'),
     preloading = require('./preloading');
 
 /* MOVE FROM HERE */
@@ -15,15 +14,15 @@ exports.sign = function(user) {
       id: user.id,
       email: user.email
     },
-    config.token.secret,
+    config.secrets.session,
     {
-      expiresInMinutes: config.token.expiresInMinutes
+      expiresInMinutes: config.secrets.expiresInMinutes
     }
   );
 };
 
 exports.verify = function(token, callback) {
-  jwt.verify(token, config.token.secret, {}, function(err, login) {
+  jwt.verify(token, config.secrets.session, {}, function(err, login) {
     if (err) {
       if (err.message === 'jwt expired') {
         return callback(new errors.TokenExpiredError());
@@ -31,8 +30,9 @@ exports.verify = function(token, callback) {
         return callback(new errors.TokenInvalidError());
       }
     }
-
-    callback(null, login);
+    console.log('authentication verify : ', login);
+    
+    callback(login);
   });
 };
 

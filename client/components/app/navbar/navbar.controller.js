@@ -6,7 +6,7 @@
     .controller('NavbarCtrl', NavbarCtrl);
 
   /* @ngInject */
-  function NavbarCtrl($scope, $location, Auth) {
+  function NavbarCtrl($scope, $location, Auth, alarm) {
     $scope.menu = [];
     // [{
     //   'title': 'Home',
@@ -19,6 +19,9 @@
     $scope.getCurrentUser = Auth.getCurrentUser;
 
     $scope.logout = function() {
+      // socket.io 연결을 끊음 
+      alarm.disconnectSocketIO();
+      
       Auth.logout();
       $location.path('/login');
     };

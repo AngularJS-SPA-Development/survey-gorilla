@@ -41,6 +41,11 @@ var all = {
     }
   },
 
+  redis: {
+    ip: process.env.REDIS_IP || 'localhost',
+    port: process.env.REDIS_PORT || 6379
+  },
+
   facebook: {
     clientID:     process.env.FACEBOOK_ID || 'id',
     clientSecret: process.env.FACEBOOK_SECRET || 'secret',

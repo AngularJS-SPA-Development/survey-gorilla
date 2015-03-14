@@ -21,7 +21,12 @@
   }
 
   /* @ngInject */
-  function run($rootScope, $location, Auth, gettextCatalog) {
+  function run($rootScope, $location, Auth, alarm, gettextCatalog) {
+    // socket.io 생성 
+    if(Auth.getToken()) {
+      alarm.initSocketIO(); 
+    }
+
     // gettext
     $rootScope.setLang = function(lang) {
       if(lang) {

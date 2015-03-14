@@ -7,7 +7,7 @@
     .controller('SignupCtrl', SignupCtrl);
 
   /* @ngInject */
-  function SignupCtrl($scope, Auth, $location, $window) {
+  function SignupCtrl($scope, Auth, $location, $window, alarm) {
     $scope.user = {};
     $scope.errors = {};
 
@@ -24,6 +24,9 @@
           password: $scope.user.password
         })
         .then( function() {
+          // 로그인 성공하면 socket.io 생성 
+          alarm.initSocketIO(); 
+          
           // Account created, redirect to home
           $location.path('/');
         })

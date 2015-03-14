@@ -23,16 +23,15 @@ if(config.seedDB) { require('./config/seed'); }
 
 // Setup server
 var app = express();
-var server = require('http').createServer(app);
+require('./config/express')(app);
 
+// var server = require('http').createServer(app);
 // var socketio = require('socket.io').listen(server);
 // require('./config/socketio')(socketio);
 // 
 // set io.js instead of socketio.js
-require('./config/io')(app);
-require('./config/express')(app);
+var server = require('./config/io')(app);
 require('./routes')(app);
-
 
 // Start server
 server.listen(config.port, config.ip, function () {
