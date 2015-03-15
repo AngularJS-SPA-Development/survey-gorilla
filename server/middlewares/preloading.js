@@ -96,7 +96,7 @@ exports.requiresCard = function(req, res, next) {
 
 exports.requiresAlarm = function(req, res, next) {
   AlarmService
-    .preload(req.params.alarm)
+    .preload(req.params.id)
     .then(function(alarm) {
       req.alarm = alarm;
       next();

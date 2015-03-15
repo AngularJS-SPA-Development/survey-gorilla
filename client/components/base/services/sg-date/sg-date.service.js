@@ -22,6 +22,10 @@
     this.thisMonth = function() {
       return moment().format('MM');
     };
+
+    this.fromNow = function(date) {
+      return moment(date).fromNow();
+    }
   }
 
 })();

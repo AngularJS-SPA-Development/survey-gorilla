@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  
 Alaram API 
@@ -64,10 +62,18 @@ Alaram API
 - SURVEY
  */
 
-angular.module('sg.app')
-  .service('alarm', function (pubsub, socket, card, group, logger) {
+(function() {
+  'use strict';
+  
+  angular
+    .module('surveyGorillaApp')
+    .service('alarm', alarm);
+
+  function alarm(pubsub, socket, card, group, Alarms, logger) {
     this.initSocketIO = initSocketIO;
     this.disconnectSocketIO = disconnectSocketIO;
+    this.getAlarms = getAlarms;
+    this.readAlarm = readAlarm;
 
     // first time, when login
     // anther time when reload browser
@@ -92,7 +98,7 @@ angular.module('sg.app')
 
     function _registerHandler(evt, alarm) {
       // for header
-      // pubsub.publish('alarm:header', alarm);
+      pubsub.publish('alarm:header', alarm);
 
       // for CARD - survey, rating, notice
       if(alarm.type === 'CARD_PUBLISHED'
@@ -107,8 +113,17 @@ angular.module('sg.app')
 
       } 
 
-    };
+    }
 
-  });
+    function getAlarms() {
+      return Alarms.customGET('', {read: 'UNREAD', sort: '-CREATED'});
+    }
+
+    function readAlarm(id) {
+      return Alarms.one(id).customOperation('post', 'read');
+    }
+
+  }
+})();
 
 

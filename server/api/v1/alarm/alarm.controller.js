@@ -53,10 +53,8 @@ exports.list = function(req, res, next) {
         gte: req.query.gte
       },
       limit: req.query.limit
-    }, req.user).then(function(groups) {
-      res.finish({
-        data: groups
-      });
+    }, req.user).then(function(alarms) {
+      res.finish(200, alarms);
     }).catch(function(err) {
       next(err);
     });
@@ -66,9 +64,7 @@ exports.read = function(req, res, next) {
   AlarmService
     .read(req.alarm)
     .then(function(alarm) {
-      res.finish({
-        data: alarm
-      });
+      res.finish(200, alarm);
     }).catch(function(err) {
       next(err);
     });
