@@ -7,25 +7,13 @@
 
   /* @ngInject */
   function socket(socketFactory, Auth) {
-    var retryInterval = 30000;
-    var retryTimer;
-    clearInterval(retryTimer);
-
-    var socket = io.connect('', {
-      'force new connection': true,
-      'max reconnection attempts': Infinity,
-      'reconnection limit': 10 * 1000
-      // Send auth token on connection
-      // 'query': 'token=' + Auth.getToken()
-    });
-
-    retryTimer = setInterval(function () {
-      if (socket &&
-          socket.disconnected &&
-          !socket.connected) {
-        socket.connect();
-      }
-    }, retryInterval);
+    // var socket = io.connect('', {
+    //   'reconnection delay': 3000,
+    //   'reconnection limit': 3000,
+    //   'max reconnection attempts': 'Infinity'
+    // });
+    
+    var socket = io.connect();
 
     var socketFactory = socketFactory({
       ioSocket: socket,

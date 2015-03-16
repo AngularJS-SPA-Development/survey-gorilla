@@ -19,7 +19,9 @@
       vm.isLoggedIn = Auth.isLoggedIn();
       vm.isAdmin = Auth.isAdmin();
       vm.currentUser = Auth.getCurrentUser();
-      _initAlarms();
+      if(vm.isLoggedIn) {
+        _initAlarms();
+      }
     }
 
     function _initAlarms() {

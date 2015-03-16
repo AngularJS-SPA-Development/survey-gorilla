@@ -69,7 +69,7 @@ Alaram API
     .module('surveyGorillaApp')
     .service('alarm', alarm);
 
-  function alarm(pubsub, socket, card, group, Alarms, logger) {
+  function alarm(pubsub, socket, card, Alarms, logger) {
     this.initSocketIO = initSocketIO;
     this.disconnectSocketIO = disconnectSocketIO;
     this.getAlarms = getAlarms;
