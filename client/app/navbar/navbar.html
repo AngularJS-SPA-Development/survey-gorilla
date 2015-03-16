@@ -18,25 +18,6 @@
         <li ng-show="navbar.isLoggedIn && !navbar.isOAuthLogin" ng-class="{active: navbar.isActive('/settings')}"><a ui-sref="settings"><span class="glyphicon glyphicon-cog"></span></a></li>
         <li ng-show="navbar.isLoggedIn" ng-class="{active: navbar.isActive('/logout')}"><a href="" ng-click="navbar.logout()" translate>Logout</a></li>
       </ul>
-
-      <ul class="nav navbar-nav navbar-right">
-        <li class="dropdown" style="margin-right:20px;">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i> ({{navbar.alarms.length}})</a>
-          <ul ng-show="navbar.alarms.length > 0" class="dropdown-menu" role="menu">
-
-            <!-- <div ng-repeat="alarm in navbar.alarms" style="width: 300px">
-              <li ng-click="navbar.readAlarm(alarm.id)" style="padding-left: 10px; padding-top: 5px"> 
-                <i class="fa fa-check-square-o"></i>
-                <a ng-href="#/dashboard/{{alarm.group.id}}">{{alarm.group.name}}</a> 
-                <br>{{alarm.msg}} <span class="pull-right" style="color:gray; padding-right:10px;">{{alarm.created_at}} </span>
-              </li>
-              <li class="divider" ng-hide="navbar.alarms.length-1 === $index"></li>
-            </div> -->
-            <sg-alarm info="alarm" read-alarm="navbar.readAlarm(alarmId)" ng-repeat="alarm in navbar.alarms"></sg-alarm>
-
-          </ul>
-        </li>
-      </ul>
     </div>
   </div>
 </div>
