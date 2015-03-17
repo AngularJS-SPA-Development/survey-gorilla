@@ -12,7 +12,6 @@
     vm.addMoreCards = addMoreCards;
     var lastCardDate;
     var isLoadMore = true;
-    
     _init();
 
     function _init() {

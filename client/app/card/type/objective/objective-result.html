@@ -2,7 +2,7 @@
 
   <div class="objective" ng-controller="objectiveCardTypeCtrl">
     <div ng-if="card.responded && card.responses.length > 0">
-      <div ng-repeat="result in results track by $index">
+      <div ng-repeat="result in results track by $index" class="slide-left">
         <!-- objective result progress bar -->
         <span>{{result.option}} - ({{result.rate}}%)</span>
         <progressbar animate="false" value="result.rate" type="{{result.type}}"></progressbar>

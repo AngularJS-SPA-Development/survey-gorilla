@@ -6,6 +6,7 @@
       'ngResource',
       'ngSanitize',
       'ngCookies',
+      'ngAnimate',
       'ui.router',
       'ui.bootstrap',
       'angularFileUpload',
