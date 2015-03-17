@@ -42,6 +42,8 @@
         alarm.created_at = sgDate.fromNow(alarm.created_at);
         if(alarm.type === 'CARD_PUBLISHED') {
           alarm.msg = 'published card - ' + alarm.card.title;
+        } else if(alarm.type === 'CARD_RESPONDED') {
+          alarm.msg = 'responsed card - ' + alarm.card.title;
         } else if(alarm.type === 'CARD_COMPLETED') {
           alarm.msg = 'completed card - ' + alarm.card.title;
         } 
