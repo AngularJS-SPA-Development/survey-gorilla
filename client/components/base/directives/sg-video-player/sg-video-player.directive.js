@@ -5,7 +5,6 @@
    * <video-player source="youtube" url="http://youtu.be/VEUfscdqpNg"></video-player>
      <video-player source="vimeo" url="http://vimeo.com/101266603"></video-player>
      <video-player source="vine" url="https://vine.co/v/bnB77Z9QMZh"></video-player>
-     <video-player source="bitlanders" url="http://www.bitlanders.com/movie/music-concert/54514"></video-player>
    */
   angular
     .module('sg.base')
@@ -47,13 +46,6 @@
           embed: 'http://player.vimeo.com/video/@',
           index: 1
         },
-        'bitlanders': {
-          search: [
-              /bitlanders\.com\/movie\/(.+)\/(\d+)/
-          ],
-          embed: 'http://bitlanders.com/embed/M@',
-          index: 2
-        },
         'vine': {
           search: [
               /vine\.co\/v\/(.+)/
@@ -73,7 +65,6 @@
       });
 
       $scope.iframeSrc = $sce.trustAsResourceUrl(tokens.embed.replace('@', v));
-      console.log("iframeSrc:", $scope.iframeSrc);
     }
   }
 
