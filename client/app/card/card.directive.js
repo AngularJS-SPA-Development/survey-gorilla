@@ -21,7 +21,8 @@
                   '</div>' +
                   '<div class="panel-body">' +
                     '<div class="row">' +
-                      '<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">{{::card.description}}</div>' +
+                      // '<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">{{::card.description}}</div>' +
+                      '<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><parse-url info="card"></parse-url></div>' +
                       '<div ng-transclude></div>' +
                     '</div>' +
                   '</div>' +
