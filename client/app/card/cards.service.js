@@ -3,10 +3,11 @@
 
   angular
     .module('surveyGorillaApp')
-    .service('card', card);
+    .service('card', card)
+    .constant('CARD_LIMIT', {count: 5});
 
   /* @ngInject */
-  function card(Cards, Auth) {
+  function card(Cards, Auth, CARD_LIMIT) {
     this.getCard = getCard;
     this.getCards = getCards;
     this.create = create;
@@ -19,7 +20,7 @@
     }
 
     function getCards(groupId, params) {
-      var card = {group: groupId, type: 'ALL', complete: 'ALL', sort: '-CREATED'};
+      var card = {group: groupId, type: 'ALL', complete: 'ALL', sort: '-CREATED', limit: CARD_LIMIT.count};
 
       if(params) {
         params = angular.extend(card, params);

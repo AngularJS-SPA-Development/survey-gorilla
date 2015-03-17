@@ -8,7 +8,8 @@
       'ngCookies',
       'ui.router',
       'ui.bootstrap',
-      'angularFileUpload'
+      'angularFileUpload',
+      'infinite-scroll'
     ])
     .run(run);
 

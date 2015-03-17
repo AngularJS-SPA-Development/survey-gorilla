@@ -5,14 +5,19 @@
     .module('surveyGorillaApp')
     .controller('DashboardCtrl', DashboardCtrl);
 
-  function DashboardCtrl($scope, $stateParams, modal, group, card, pubsub, logger) {
+  function DashboardCtrl($scope, $stateParams, modal, group, card, pubsub, CARD_LIMIT, logger) {
     var vm = this;
     vm.addCard = addCard;
+    vm.cards = [];
+    vm.addMoreCards = addMoreCards;
+    var lastCardDate;
+    var isLoadMore = true;
+    
     _init();
 
     function _init() {
       _groupInfo();
-      _searchCards();
+      //_searchCards();
       _subscribe();
     }
 
@@ -46,16 +51,44 @@
       });
     }
 
+    function addMoreCards() {
+      if(!isLoadMore) { return; }
+
+      _cards({lt: lastCardDate});
+    }
+
     function _cards(params) {
-      // 카드를 만들어줌 
-      vm.cards = [];
       // 카드 목록 조회 
       card 
         .getCards($stateParams.id, params)
         .then(function(response) {
-          vm.cards = response.data;
+          if(!_isLoadMore(response.data)) { return; }
+
+          //vm.cards.unshift(response.data);
+          angular.forEach(response.data, function(data) {
+            // check duplicate card
+            if(_.findWhere(vm.cards, {id : data.id})) { return; }
+
+            vm.cards.push(data);
+          });
+
           logger.info('dashboard cads: ', vm.cards);
+
+          lastCardDate = vm.cards[vm.cards.length-1].created_at;
         });
+    }
+
+    function _isLoadMore(data) {
+      if(!data || data.length <= 0) { 
+        isLoadMore = false; 
+      } else {
+        if(data.length >= CARD_LIMIT.count) {
+          isLoadMore = true;
+        } else {
+          isLoadMore = false;
+        }
+      }
+      return isLoadMore;
     }
 
     function addCard() {
