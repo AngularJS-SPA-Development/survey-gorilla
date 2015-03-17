@@ -17,7 +17,9 @@
               </button>
           </div>
           <div class="panel-body">
-            <group-card info="group" show-detail="main.showGroupDetail(group, 'myGroup')" ng-repeat="group in main.myGroups"></group-card>
+            <div class="slide-top"  ng-repeat="group in main.myGroups">
+              <group-card info="group" show-detail="main.showGroupDetail(group, 'myGroup')"></group-card>
+            </div>
           </div>
         </div>
       </div>
@@ -36,7 +38,9 @@
               </div>
           </div>
           <div class="panel-body">
-            <group-card info="group" show-detail="main.showGroupDetail(group, 'otherGroup')" ng-repeat="group in main.otherGroups"></group-card>
+            <div class="slide-top" ng-repeat="group in main.otherGroups">
+              <group-card info="group" show-detail="main.showGroupDetail(group, 'otherGroup')"></group-card>
+            </div>
           </div>
         </div>
       </div>
