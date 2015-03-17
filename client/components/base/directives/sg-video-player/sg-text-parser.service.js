@@ -10,19 +10,17 @@
     var url, scope, element;
       
     function parsing(text, s, e) {
-      url = null;
       scope = s;
       element = e;
       return _innerParse(text);
     }
       
-    function _innerParse(text, target) {
+    function _innerParse(text) {
       if (!text) return text;
       var LINKY_URL_REGEXP = /((http|https?):\/\/|(mailto:)?[A-Za-z0-9._%+-]+@)\S*[^\s.;,(){}<>]/; 
       var match, i;
       var raw = text;
       while ((match = raw.match(LINKY_URL_REGEXP))) {
-        // We can not end in these as they are sometimes found at the end of the sentence
         url = match[0];
         i = match.index;
         _addText(raw.substr(0, i));
