@@ -11,8 +11,8 @@
 
     function openWindow(url) {
       var options = {
-        location: 'yes',
-        clearcache: 'yes',
+        fullscreen: 'yes',
+        resizable: 'yes',
         toolbar: 'no'
       };
 
@@ -20,7 +20,7 @@
     }
   }
 
-  function parseUrl($compile, textParser) {
+  function parseUrl(textParser) {
     var compile = function() {
       return {
         pre: function(scope, element, attrs) {
