@@ -13,11 +13,8 @@
                     '<img ng-src="{{rate.status ? \'/images/rating_active.png\' : \'/images/rating.png\'}}" ng-click="setRating($index)">' + 
                   '</div>' +
                   '<span>{{response_card.rating.rating | number:0}}</span>' + 
-                '</div>',
-      link: link
+                '</div>'
     };
-
-    function link(scope, element, attrs) {}
   }
 
 })();
