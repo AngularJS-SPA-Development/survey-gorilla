@@ -32,13 +32,8 @@
                       '<div ng-if="!card.responded" ng-click="respondCard()" class="btn btn-sm btn-default"><i class="fa fa-check"></i> Send</div>' +
                     '</small>' +
                   '</div>' +
-                '</div>',
-      link: link
+                '</div>'
     };
-
-    function link(scope, element, attrs) {
-
-    }
   }
 
   /* @ngInject */
