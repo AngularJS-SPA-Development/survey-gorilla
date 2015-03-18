@@ -52,26 +52,8 @@
       </form>
     </div>
 
-    <!-- <div class="list-group" infinite-scroll="dashboard.addMoreCards()" infinite-scroll-distance="0.2" ng-show="!isShow" class="slide-top"> -->
-    <div class="list-group" infinite-scroll="dashboard.addMoreCards()" ng-show="!isShow" class="slide-top">
-      <!-- not use -->
-      <!-- <div class="panel panel-default bootcards-summary" style="margin-left:15px; margin-right:15px;">
-        <div class="panel-heading">
-          <h3 class="panel-title">카드 제목</h3>
-        </div>
-        <div class="panel-body">
-          <div class="row">
-            <div class="col-xs-11 col-sm-11">
-                설명문 또는 평점, 단/다답형 설문               
-            </div>
-          </div>
-        </div>
-        <div class="panel-footer">
-          <small class="pull-right">
-            <div class="btn btn-sm btn-default"><i class="fa fa-check"></i> Send</div>
-          </small>
-        </div>  
-      </div> -->
+    <!-- <div class="list-group" infinite-scroll="dashboard.addMoreCards()" infinite-scroll-distance="0.2"> -->
+    <div class="list-group" infinite-scroll="dashboard.addMoreCards()">
 
       <card info="card" ng-repeat="card in dashboard.cards">
         <card-type info="card"></card-type>
