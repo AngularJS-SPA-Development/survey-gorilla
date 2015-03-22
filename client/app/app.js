@@ -1,23 +1,26 @@
 (function() {
-
   'use strict';
 
   angular
-    .module('surveyGorillaApp', [
-		  'sg.app'
-		])
+    .module('surveyGorillaApp', [ 'sg.app' ])
     .config(config)
     .factory('authInterceptor', authInterceptor)
     .run(run);
 
   /* @ngInject */
-  function config($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider, RestangularProvider, config) {
+  function config($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider, $compileProvider, RestangularProvider, config) {
     RestangularProvider.setBaseUrl(config.api_version);
     
     $urlRouterProvider.otherwise('/');
 
     $httpProvider.interceptors.push('authInterceptor');
     $httpProvider.interceptors.push('sgHttpInterceptor');
+
+    // 디버깅 정보 비활성화 
+    $compileProvider.debugInfoEnabled(false);
+
+    // $applyAsync 활성화 
+    $httpProvider.useApplyAsync(true);
   }
 
   /* @ngInject */

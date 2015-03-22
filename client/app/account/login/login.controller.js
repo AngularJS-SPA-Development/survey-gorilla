@@ -32,11 +32,11 @@
           console.log('login.controller.js : login error is ', err.message);
         });
       }
-    };
+    }
     
     function loginOauth(provider) {
       $window.location.href = '/auth/' + provider;
-    };
+    }
   }
   
 })();
