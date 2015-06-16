@@ -8,7 +8,7 @@ var errors = require('./components/errors'),
     errorHandler = require('./components/errors/errorHandler');
 
 var api = function(route) { return '/api' + route; };
-var apiv = function(route) { return '/api/v1' + route; };
+var apiv1 = function(route) { return '/api/v1' + route; };
 
 module.exports = function(app) {
 
@@ -47,8 +47,9 @@ module.exports = function(app) {
 
 
   // Insert routes below
-  app.use(apiv('/groups'), require('./api/v1/group'));
-  app.use(apiv('/users'), require('./api/v1/user'));
+  app.use(apiv1('/groups'), require('./api/v1/group'));
+  app.use(apiv1('/cards'), require('./api/v1/card'));
+  app.use(apiv1('/users'), require('./api/v1/user'));
 
   app.use(api('/auth'), require('./auth'));
   

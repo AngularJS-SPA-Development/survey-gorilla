@@ -1,0 +1,60 @@
+<script type="text/ng-template" id="create-card.html">
+  <div>
+    <div class="modal-header">
+        <h3 class="modal-title">Create Card</h3>
+    </div>
+    <div class="modal-body">
+        <form name="cardForm">
+            <div class="form-group">
+              <label for="surveyType" class="col-sm-2 control-label">설문 종류: </label>
+              <label class="radio-inline">
+                <input type="radio" name="survey" id="notice" ng-model="card.type" value="NOTICE"> 공지사항
+              </label>
+              <label class="radio-inline">
+                <input type="radio" name="survey" id="rating" ng-model="card.type" value="RATING"> 평점
+              </label>
+              <label class="radio-inline">
+                <input type="radio" name="survey" id="objective" ng-model="card.type" value="SURVEY"> 객관식
+              </label>
+            </div>
+
+            <input type="text" 
+                   name="cardName"
+                   required
+                   ng-model="card.title"
+                   ng-minlength="1"
+                   ng-maxlength="100"
+                   class="form-control" style="margin-top:20px" placeholder="Write Title">
+
+            <!-- for OBJECTIVE card --> 
+            <div style="margin-top: 20px;" ng-show="card.type === 'SURVEY'">
+              <label class="radio-inline">
+                <input type="radio" name="surveySubType" id="mo" ng-model="card.survey.type" value="MULTIPLE_OBJECTIVE"> 다답형
+              </label>
+              <label class="radio-inline">
+                <input type="radio" name="surveySubType" id="so" ng-model="card.survey.type" value="SINGLE_OBJECTIVE"> 단답형
+              </label>
+
+              <div style="margin-top: 5px;" ng-repeat="option in options">
+                <div class="form-inline">
+                  <input type="text" 
+                         ng-model="option.comment"
+                         ng-keyup="addOption(option, $index)"
+                         class="form-control" style="width:70%">
+                  <div class="btn btn-sm btn-warning" ng-click="deleteOption($index)">delete</div>
+                </div>
+              </div>
+            </div>
+
+            <textarea 
+                   ng-model="card.description"
+                   class="form-control" style="margin-top:20px" rows="3" placeholder="Write Description"></textarea>
+          </row>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="create()">Create</button>
+        <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+    </div>
+  </div>
+</script>

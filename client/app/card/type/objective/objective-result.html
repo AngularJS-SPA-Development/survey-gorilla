@@ -1,0 +1,17 @@
+<script id="objective-card-result.html" type="text/ng-template">
+
+  <div class="objective" ng-controller="objectiveCardTypeCtrl">
+    <div ng-if="card.responded && card.responses.length > 0">
+      <div ng-repeat="result in results track by $index">
+        <!-- objective result progress bar -->
+        <span>{{result.option}} - ({{result.rate}}%)</span>
+        <progressbar animate="false" value="result.rate" type="{{result.type}}"></progressbar>
+      </div>
+    </div>
+    <div ng-if="card.responded && card.responses.length === 0">
+      <i class="fa fa-exclamation"></i> 답변 대기중....
+    </div>
+  </div>
+
+</script>
+

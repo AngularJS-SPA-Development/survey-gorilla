@@ -1,0 +1,15 @@
+<script id="objective-multi-card.html" type="text/ng-template">
+
+  <div class="objective" ng-controller="objectiveCardTypeCtrl">
+    <div ng-repeat="result in results">
+      <div class="form-group">
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" ng-model="result.checked"> {{result.option}}
+          </label>
+        </div>
+      </div>
+    </div> 
+  </div>
+
+</script>

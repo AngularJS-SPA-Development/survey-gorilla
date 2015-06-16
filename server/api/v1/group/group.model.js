@@ -23,6 +23,8 @@ var MemberSchema = new Schema({
       ret.id = member.id;
       ret.email = member.email;
       ret.name = member.name;
+      ret.has_photo = member.has_photo;
+      ret.photo = common.getUserPhoto(member.id, member.has_photo);
       return ret;
     }
   }
@@ -49,7 +51,7 @@ var GroupSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'User'
   },
-  members: [MemberSchema],
+  members: [MemberSchema]
 }, {
   toJSON: {
     virtuals: true,
@@ -61,6 +63,10 @@ var GroupSchema = new Schema({
       ret.photo = common.getGroupPhoto(ret.id, ret.has_photo);
 
       if (doc.populated('owner')) {
+        delete ret.owner.description;
+        delete ret.owner.created_at;
+        delete ret.owner.groups;
+        ret.owner.photo = common.getUserPhoto(ret.owner.id, ret.owner.has_photo);
         ret.owner.role = 'OWNER';
       } else {
         delete ret.owner;
@@ -68,6 +74,7 @@ var GroupSchema = new Schema({
 
       if (doc.populated('members.member')) {
         ret.members = _.sortBy(ret.members, common.sortByRole);
+        ret.member_count = ret.members.length;
       } else {
         ret.member_count = ret.members.length;
         delete ret.members;

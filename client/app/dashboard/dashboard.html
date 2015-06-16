@@ -1,0 +1,86 @@
+<div class="col-xs-4 col-md-4 bootcards-list">
+  <div class="panel panel-default">
+    <div class="panel-body" ng-style="dashboard.backgroundImage">
+      <form>
+        <div class="row">
+          <div class="col-xs-11">
+            <h4 ng-style="dashboard.titleFont" style="text-align:center;margin-bottom:15px">{{dashboard.group.name}}</h4>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-11">
+            <div class="form-group">
+              <input type="text" ng-model="queryMember" class="form-control" placeholder="Search Member...">
+              <i class="fa fa-search"></i>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <div class="list-group">
+      <group-member info="member" ng-repeat="member in dashboard.group.members | filter:queryMember"></group-member>
+    </div>
+
+  </div>
+</div>
+
+<div class="col-xs-8 col-md-8 bootcards-list">
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <form>
+        <div class="row">
+          <div class="col-xs-8">
+            <div class="form-group">
+              <input type="text" 
+                     ng-model-options="{ debounce : { 'default' : 300, blur: 0 } }"
+                     ng-model="dashboard.cardTitle" 
+                     class="form-control" placeholder="Search Card...">
+              <i class="fa fa-search"></i>
+            </div>
+          </div>
+          <div class="col-xs-4">
+            <div ng-disabled="!dashboard.isAdmin" ng-click="dashboard.addCard()" class="btn btn-primary btn-block">
+              <i class="fa fa-plus"></i>
+              Add Card
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <div class="list-group">
+      <!-- not use -->
+      <!-- div class="panel panel-default bootcards-summary" style="margin-left:15px; margin-right:15px;">
+        <div class="panel-heading">
+          <h3 class="panel-title">Summary Card Heading</h3>
+        </div>
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-xs-11 col-sm-11">
+                data              
+            </div>
+          </div>
+        </div>
+        <div class="panel-footer">
+          <small class="pull-left">Summary Card Footer</small>
+        </div>  
+      </div -->
+
+      <card info="card" ng-repeat="card in dashboard.cards">
+        <card-type info="card"></card-type>
+      </card>
+      
+    </div>
+
+  </div>
+</div>
+
+<div ng-include="'app/card/create/create-card.html'"></div>
+<div ng-include="'app/card/type/notice/notice.html'"></div>
+<div ng-include="'app/card/type/objective/objective.html'"></div>
+<div ng-include="'app/card/type/objective/objective-multi.html'"></div>
+<div ng-include="'app/card/type/objective/objective-result.html'"></div>
+<div ng-include="'app/card/type/rating/rating.html'"></div>
+<div ng-include="'app/card/type/rating/rating-result.html'"></div>
+<div ng-include="'app/card/respond/respond-member.html'"></div>

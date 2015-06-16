@@ -66,7 +66,9 @@ function list(options) {
 function read(id) {
   var deferred = Q.defer();
 
-  Group.findById(id, function (err, group) {
+  Group
+    .findOne({ _id: id, deleted_at: { $exists: false } })
+    .populate('owner members.member').exec(function(err, group) {
     if(err) return deferred.reject(err);
     if (!group) return deferred.reject(
       Error.new({
@@ -76,6 +78,7 @@ function read(id) {
     );
     deferred.resolve(group);
   });
+
   return deferred.promise;
 }
 
@@ -196,6 +199,54 @@ exports.photo = {
 
       if (!group.has_photo || !group.photo)
         return deferred.reject(new errors.PhotoNotFoundError(id, 'Photo for group:' + id + ' is not found.'));
+
+      deferred.resolve(group);
+    });
+
+    return deferred.promise;
+  }
+};
+
+// members enroll/leave
+exports.members = {
+  enroll: function(group, user) {
+    var deferred = Q.defer(),
+        auto_approval = true,
+        role = 'MEMBER';
+
+    group.update({
+      $addToSet: {
+        members: {
+          member: user.id,
+          role: role
+        }
+      }
+    }, function(err) {
+      if (err) return deferred.reject(err);
+
+      // alarm.memberRequested(group, user);
+      // if (auto_approval) {
+      //   alarm.memberApproved(group, user);
+      // }
+
+      deferred.resolve(group);
+    });
+
+    return deferred.promise;
+  },
+  leave: function(group, user) {
+    var deferred = Q.defer();
+
+    group.update({
+      $pull: {
+        members: {
+          member: user.id
+        }
+      }
+    }, function(err) {
+      if (err) return deferred.reject(err);
+
+      // alarm.memberLeaved(group, user);
 
       deferred.resolve(group);
     });

@@ -147,7 +147,8 @@ exports.photo = {
     var photo = req.files.photo;
 
     if (photo && photo.path) {
-      photoUtils.read(photo.path, 128)
+      // 600 파일의 width 조정 
+      photoUtils.read(photo.path, 600)
         .then(function(data) {
           return GroupService.photo.upload(group, data);
         })
@@ -184,6 +185,28 @@ exports.photo = {
           });
           res.end(photo, 'base64');
         }
+      }).catch(function(err) {
+        next(err);
+      });
+  }
+};
+
+// member auto enroll
+exports.members = {
+  enroll: function (req, res, next) {
+    GroupService.members
+      .enroll(req.group, req.user)
+      .then(function() {
+        res.finish();
+      }).catch(function(err) {
+        next(err);
+      });
+  },
+  leave: function(req, res, next) {
+    GroupService.members
+      .leave(req.group, req.user)
+      .then(function() {
+        res.finish();
       }).catch(function(err) {
         next(err);
       });

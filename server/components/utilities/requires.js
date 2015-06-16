@@ -7,6 +7,9 @@ GLOBAL.localrequire = {
   config: function() {
     return require('../../config/environment');
   },
+  errors: function() {
+    return require('../errors/errors');
+  },
   common: function() {
     return require('./common');
   },
@@ -24,6 +27,12 @@ GLOBAL.localrequire = {
   },
   Group: function() {
     return require('../../api/v1/group/group.model');
+  },
+  CardService: function() {
+    return require('../../api/v1/card/card.service');
+  },
+  Card: function() {
+    return require('../../api/v1/card/card.model');
   },
   AuthService: function() {
     return require('../../auth/auth.service');

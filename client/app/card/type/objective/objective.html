@@ -1,0 +1,17 @@
+<script id="objective-card.html" type="text/ng-template">
+
+  <div class="objective" ng-controller="objectiveCardTypeCtrl">
+    <div ng-repeat="result in results">
+      
+      <div class="form-group">
+        <div class="radio">
+          <label>
+            <input type="radio" name="{{card.id}}" ng-model="card.answer" ng-value="$index"> {{result.option}}
+          </label>
+        </div>
+      </div>
+
+    </div> 
+  </div>
+
+</script>

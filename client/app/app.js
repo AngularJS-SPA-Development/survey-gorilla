@@ -12,7 +12,9 @@
     .run(run);
 
   /* @ngInject */
-  function config($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
+  function config($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider, RestangularProvider, config) {
+    RestangularProvider.setBaseUrl(config.api_version);
+    
     $urlRouterProvider.otherwise('/');
 
     $httpProvider.interceptors.push('authInterceptor');

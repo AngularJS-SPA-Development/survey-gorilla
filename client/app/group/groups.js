@@ -2,13 +2,13 @@
   'use strict';
 
   angular
-    .module('sg.app')
+    .module('surveyGorillaApp')
     .factory('Groups', Groups);
 
-  function Groups(Restangular, config) {
-    var model = Restangular.all(config.api_version + '/groups');
+  function Groups(Restangular) {
+    var model = Restangular.all('groups');
     model.one = function(id) {
-      return Restangular.one(config.api_version + '/groups', id);
+      return Restangular.one('groups', id);
     };
     return model;
   }
