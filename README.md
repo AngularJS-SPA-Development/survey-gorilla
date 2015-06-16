@@ -1,4 +1,4 @@
-Developing a SPA using AngularJS with Survey Gorilla Service
+Developing a SPA using AngularJS
 ==============
 
 ![Developing a SPA using AngularJS](https://github.com/AngularJS-SPA-Development/survey-gorilla/blob/master/angularjs-spa-book.png)
