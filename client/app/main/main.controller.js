@@ -36,6 +36,7 @@
         .open('sm', 'create-group.html', 'CreateGroupCtrl')
         .then(function(result){
           logger.info('create group result: ', result);
+          if(!vm.myGroups) { vm.myGroups = []; }
           vm.myGroups.unshift(result);
         }, function(error) {});
     }
@@ -56,6 +57,26 @@
             vm.otherGroups.unshift(result);
           }
 
+          if(result && result.update) {
+            delete result.update;
+            vm.myGroups = _.find(vm.myGroups, function(group) {
+              if(group.id === result.id) {
+                return group = result;
+              } else {
+                return group;
+              }
+            });
+          }
+
+          if(result && result.remove) {
+            delete result.remove;
+            vm.myGroups = _.find(vm.myGroups, function(group) {
+              if(group.id !== result.id) {
+                return group;
+              }
+            });
+          }
+
           logger.info('read group result: ', result);
         }, function(error) {});
     }
@@ -67,7 +88,7 @@
     });
 
     $scope.$watch(function() { 
-      return this.otherGroupName; 
+      return vm.otherGroupName; 
     }, function(newVal, oldVal) {
       _groups(false, {name: vm.otherGroupName});
     });

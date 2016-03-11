@@ -3,6 +3,7 @@
 
   angular
     .module('sg.app', [
+      'sg.base',
       'btford.socket-io',
       'gettext',
       'sg.translation',

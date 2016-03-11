@@ -29,11 +29,6 @@
       });
     }
 
-    //----------------------------------------
-    //
-    // Send response card
-    //
-    //----------------------------------------
     function _response() {
       var response_card = {
         survey : {
@@ -41,7 +36,7 @@
         }
       };
 
-      cardCondition
+      card
         .responseCard($scope.card.id, response_card)
         .then(function(response) {
           _publish(response.data);

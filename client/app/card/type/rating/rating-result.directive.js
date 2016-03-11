@@ -13,12 +13,8 @@
                     '<img ng-src="{{rating > $index ? \'/images/rating_active.png\' : \'/images/rating.png\'}}">' +
                   '</div>' + 
                   '<span class="scale-fade">{{rating | number:1}}</span>' + 
-                '</div>',
-      link: link
+                '</div>'
     };
-
-    function link(scope, element, attrs) {
-    }
   }
 
 })();

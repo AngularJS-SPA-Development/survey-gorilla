@@ -6,7 +6,7 @@
     .controller('ratingCardTypeCtrl', ratingCardTypeCtrl);
 
   /* @ngInject */
-  function ratingCardTypeCtrl($scope, cardCondition, pubsub, logger) {
+  function ratingCardTypeCtrl($scope, card, cardCondition, pubsub, logger) {
     $scope.setRating = setRating;
     _init();
 
@@ -41,11 +41,8 @@
       });
     }
 
-    /**
-     * Send response card
-     */
     function _response() {
-      cardCondition
+      card
         .responseCard($scope.card.id, $scope.response_card)
         .then(function(response) {
           _publish(response.data);

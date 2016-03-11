@@ -6,7 +6,7 @@
     .controller('noticeCardTypeCtrl', noticeCardTypeCtrl);
 
   /* @ngInject */
-  function noticeCardTypeCtrl($scope, modal, cardCondition, pubsub, logger) {
+  function noticeCardTypeCtrl($scope, modal, card, pubsub, logger) {
     _init();
 
     function _init() {
@@ -20,11 +20,8 @@
       });
     }
 
-    /**
-     * Send response card
-     */
     function _response() {
-      cardCondition
+      card
         .responseCard($scope.card.id, {})
         .then(function(response) {
           _publish(response.data);

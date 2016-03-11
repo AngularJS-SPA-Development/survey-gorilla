@@ -12,7 +12,7 @@
     this.create = create;
     this.remove = remove;
     this.update = update;
-    this.isCardOwner = isCardOwner;
+    this.responseCard = responseCard;
 
     function getCard(cardId) {
       return Cards.one(cardId).get();
@@ -41,13 +41,9 @@
     function update(cardId, params) {
       return Cards.one(cardId).customPUT(params);
     }
-
-    function isCardOwner(card) {
-      // if(card && card.owner && Auth.isLoggedIn()) {
-      //   return card.owner.id === Auth.getCurrentUser().id;
-      // } else {
-      //   return false;
-      // }
+    
+    function responseCard(cardId, params) {
+      return Cards.one(cardId).customPOST(params, 'respond');
     }
   }
 })();

@@ -6,13 +6,8 @@
     .service('cardCondition', cardCondition);
 
   /* @ngInject */
-  function cardCondition(Cards, sgFormatter) {
-    this.responseCard = responseCard;
+  function cardCondition(sgFormatter) {
     this.calcResult = calcResult;
-
-    function responseCard(cardId, params) {
-      return Cards.one(cardId).customPOST(params, 'respond');
-    }
 
     function calcResult(card) {
       if(card.type === 'RATING') {
